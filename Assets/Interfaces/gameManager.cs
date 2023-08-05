@@ -9,6 +9,7 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerState playerScript;
 
+    public GameObject activeMenu;
     public GameObject pauseMenu;
 
     bool isPaused;
@@ -23,9 +24,28 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
-            isPaused = !isPaused;
+            statePaused();
+            activeMenu = pauseMenu;
+            pauseMenu.SetActive(isPaused);
         }
+    }
+    public void statePaused()
+    {
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        isPaused = !isPaused;
+
+    }
+    public void stateUnpaused()
+    {
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        isPaused = !isPaused;
+        activeMenu.SetActive(false);
+        activeMenu = null;
     }
 }
