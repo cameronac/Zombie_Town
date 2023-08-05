@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using static IPickup;
 
-public class playerInventory : MonoBehaviour, IPickup
+public class playerState : MonoBehaviour, IPickup, IDamage
 {
+    float health = 100;
+
+    [SerializeField] bool has_pistol = false;
+    [SerializeField] bool has_knife = false;
+    
     [SerializeField] int pistol_ammo = 0;
     [SerializeField] int bandages = 0;
     [SerializeField] int first_aid_kits = 0;
@@ -14,9 +19,11 @@ public class playerInventory : MonoBehaviour, IPickup
         switch(type)
         {
             case Items.knife:
+                has_knife = true;
                 break;
 
             case Items.pistol:
+                has_pistol = true;
                 break;
         }
     }
@@ -42,6 +49,16 @@ public class playerInventory : MonoBehaviour, IPickup
             case Ammo.pistol:
                 pistol_ammo += amount;
                 break;
+        }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount; 
+
+        if (health <= 0)
+        {
+
         }
     }
 
