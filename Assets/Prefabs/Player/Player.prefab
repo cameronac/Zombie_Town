@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 2788197813576160155}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ Transform:
   m_Children:
   - {fileID: 5667039398098516498}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7927758177044136874
 MeshFilter:
@@ -256,6 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd4fb62ac642344e8b2704945bb596f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  has_pistol: 0
+  has_knife: 0
   pistol_ammo: 0
   bandages: 0
   first_aid_kits: 0
