@@ -15,13 +15,12 @@ public class enemyAI : MonoBehaviour, IDamage
     Transform endLocation;
     //public Transform player;
 
-    public float HP = 5;
+    public float HP = 20;
     public float damage = 1;
     public float distance;
 
-    Vector3 playerDirection;
-    bool playerDetected = false;
     
+
 
     //Start is called before the first frame update
     void Start()
@@ -48,7 +47,7 @@ public class enemyAI : MonoBehaviour, IDamage
     //facing/following the player
     void followPlayer()
     {
-        if(distance < enemyDistanceRun)
+        if (distance < enemyDistanceRun)
         {
             Vector3 directionToPlayer = transform.position - player.transform.position;
             Vector3 newPosition = transform.position - directionToPlayer;
