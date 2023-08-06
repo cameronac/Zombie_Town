@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using IPickup;
+using static IPickup;
 
-public class AmmoPickup : MonoBehaviour, IPickup
+public class AmmoPickup : MonoBehaviour
 {
     
 }
