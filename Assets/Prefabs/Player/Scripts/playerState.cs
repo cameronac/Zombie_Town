@@ -6,6 +6,7 @@ using static IPickup;
 public class playerState : MonoBehaviour, IPickup, IDamage
 {
     float health = 100;
+    float healthMax = 100;
 
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_knife = false;
@@ -63,7 +64,14 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
     public void TakeDamage(float amount)
     {
-        health -= amount; 
+        health -= amount;
+
+        if (health <= 0)
+        {
+            gameManager.instance.SetHealth(0);
+        } else {
+            gameManager.instance.SetHealth(health / healthMax);
+        }
 
         if (health <= 0)
         {

@@ -20,6 +20,12 @@ public class playerMovement : MonoBehaviour
     private bool isSprinting = false;
     private bool isJumping = false;
     private bool isMoving = false;
+
+    //Stamina
+    private float stamina = 1;
+    private float stamina_max = 1;
+    private float stamina_decrease = 1f;
+    private float stamina_increase = 1f;
     //---------------------------------
 
     //Main Methods---------------------
@@ -54,7 +60,15 @@ public class playerMovement : MonoBehaviour
         if (isJumping && controller.isGrounded) { playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue); }
 
         //Sprinting
-        if (isSprinting) { currentSpeed = currentSpeed * sprintMod; }
+        if (isSprinting && isMoving && stamina > 0) { 
+            currentSpeed = currentSpeed * sprintMod;
+            stamina -= stamina_decrease * Time.deltaTime;
+        } else {
+            stamina += stamina_increase * Time.deltaTime;
+        }
+
+        stamina = Mathf.Clamp(stamina, 0f, 1f);
+        gameManager.instance.SetStamina(stamina);
 
         //Apply Gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -64,6 +78,13 @@ public class playerMovement : MonoBehaviour
 
         //Move
         controller.Move((move_dir + playerVelocity) * Time.deltaTime);
+
+        if (move_dir.magnitude > 0)
+        {
+            isMoving = true;
+        } else {
+            isMoving = false;
+        }
     }
     //---------------------------------
 }
