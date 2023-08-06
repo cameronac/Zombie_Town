@@ -10,9 +10,15 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_knife = false;
     
-    [SerializeField] int pistol_ammo = 0;
     [SerializeField] int bandages = 0;
     [SerializeField] int first_aid_kits = 0;
+
+    private playerShoot pShoot;
+   
+    void Start()
+    {
+        pShoot = GetComponent<playerShoot>();
+    }
 
     public void PickupItem(Items type)
     {
@@ -47,7 +53,10 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         switch(type)
         {
             case Ammo.pistol:
-                pistol_ammo += amount;
+                if (pShoot != null)
+                {
+                    pShoot.AddAmmo(amount);
+                }
                 break;
         }
     }

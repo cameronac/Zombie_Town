@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class gameManager : MonoBehaviour
 
     public GameObject activeMenu;
     public GameObject pauseMenu;
+    public TextMeshProUGUI ammoTextMesh;
+    public Image healthImage;
+    public Image staminaImage;
 
     bool isPaused;
     // Start is called before the first frame update
@@ -47,5 +52,27 @@ public class gameManager : MonoBehaviour
         isPaused = !isPaused;
         activeMenu.SetActive(false);
         activeMenu = null;
+    }
+
+    //Update User Interface
+    public void SetAmmo(int magazine, int ammo)
+    {
+        ammoTextMesh.SetText(magazine.ToString() + " | " + ammo.ToString());
+    }
+
+    public void SetHealth(float health)
+    {
+        healthImage.fillAmount = health;
+    }
+
+    public void SetStamina(float stamina)
+    {
+        staminaImage.fillAmount = stamina;
+    }
+
+    //Getters
+    public bool isGamePaused()
+    {
+        return isPaused;
     }
 }

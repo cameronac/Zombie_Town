@@ -6,85 +6,80 @@ using UnityEngine.AI;
 public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
+    private NavMeshAgent enemyMob;
+    public GameObject player;
 
-    [SerializeField] float maxHP;
-    [SerializeField] int speed;
-    [SerializeField] int facePlayerSpeed;
+    public float enemyDistanceRun = 4f;
+    public float faceSpeed = 120f;
 
-    bool playerSeen;
-    Transform enemyTarget;
+    Transform endLocation;
+    //public Transform player;
 
+    public float HP = 5;
+    public float damage = 1;
+    public float distance;
 
     Vector3 playerDirection;
+    bool playerDetected = false;
+    
 
     //Start is called before the first frame update
     void Start()
     {
-        enemySpawn();
+        enemyMob = GetComponent<NavMeshAgent>();
     }
 
     //Update is called once per frame
     void Update()
     {
-        //check to see if player is around, if so chase & attempt to kill, otherwise remain idle or wander
+        distance = Vector3.Distance(transform.position, player.transform.position);
+
+        followPlayer();
     }
 
-    //spawn in enemies
-    void enemySpawn()
-    {
-        //spawn
-
-
-
-    }
-
-    //enemy idles & wanders
+    //wandering around       
     void stagnantEnemy()
     {
-        //idle - not moving
-
-
-        //wandering around
-
-
-
+        //wandering around code
+        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        //agent.destination = endLocation.position;
     }
 
-    void huntingPlayer()
+    //facing/following the player
+    void followPlayer()
     {
+        if(distance < enemyDistanceRun)
+        {
+            Vector3 directionToPlayer = transform.position - player.transform.position;
+            Vector3 newPosition = transform.position - directionToPlayer;
 
+            enemyMob.SetDestination(newPosition);
+        }
     }
 
-    //enemy chases rotates & chases player - trigger/collision
-    void enemyContact()
+    //attacking the player
+    void playerAttack()
     {
-        //collision detected
-        if(playerSeen)
-        {
-            //triggered rotation
-            Quaternion rot = Quaternion.LookRotation(playerDirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
-
-            //chase player
-            huntingPlayer();
-        }
-        else if(!playerSeen)
-        {
-            stagnantEnemy();
-        }
-
+        //not yet implemented
     }
 
     //enemy takes damage & apparates(for now)
     public void TakeDamage(float damage)
     {
-        maxHP -= damage;
+        HP -= damage;
 
-        if (maxHP <= 0)
+        if (HP <= 0)
         {
+            flashDamage();
             Destroy(gameObject);
         }
     }
 
+    //to show damage(temp)
+    IEnumerator flashDamage()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = Color.white;
+    }
 }

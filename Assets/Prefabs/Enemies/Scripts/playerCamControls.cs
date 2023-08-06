@@ -4,39 +4,41 @@ using UnityEngine;
 
 public class playerCamControls : MonoBehaviour
 {
-    int sensitivity = 2;
-    int lockVertMin = -90;
-    int lockVertMax = 90;
+    [SerializeField] int sensitivity;
 
-    [SerializeField] bool invertY = false;
+    //how far the camera can rotate - usually 90/90
+    [SerializeField] int lockVertMin;
+    [SerializeField] int lockVertMax;
+
+    [SerializeField] bool invertY;
 
     float xRotation;
 
-    // Start is called before the first frame update
     void Start()
     {
+        //turn cursor off and lock to where it won't move
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        //get input
+        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
 
         if (invertY)
-        {
             xRotation += mouseY;
-        }
         else
-        {
-            xRotation -= mouseY;
-        }
+            xRotation -= mouseX;
 
+        //clamp the camera rotation on the x-axis
         xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
 
+        //rotate the camera on the x-axis
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+        //rotate the player on the y-axis
         transform.parent.Rotate(Vector3.up * mouseX);
     }
 }
