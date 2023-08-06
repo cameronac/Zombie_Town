@@ -86,12 +86,14 @@ public class playerShoot : MonoBehaviour
         isReloading = false;
 
         //Reload 
-        if (ammo > magazine_size)
+        int needed_ammo = magazine_size - magazine;
+
+        if (ammo > needed_ammo)
         {
             magazine = magazine_size;
-            ammo -= magazine_size;
+            ammo -= needed_ammo;
         } else {
-            magazine = ammo;
+            magazine += needed_ammo;
             ammo = 0;
         }
 
