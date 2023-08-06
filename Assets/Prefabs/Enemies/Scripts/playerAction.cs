@@ -2,68 +2,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerAction : MonoBehaviour
+public class playerController : MonoBehaviour
 {
-    //Properties-----------------------
-    private CharacterController controller;
+    [SerializeField] CharacterController controller;
 
-    [SerializeField] float sprintMod;
+    [SerializeField] int HP;
     [SerializeField] float playerSpeed;
+    [SerializeField] float sprintMod;
+    [SerializeField] int jumpMax;
     [SerializeField] float jumpHeight;
-    private float gravityValue = -9.8f;
+    [SerializeField] float gravityValue;
+
+    [SerializeField] float shootRate;
+    [SerializeField] int shootDamage;
+    [SerializeField] int shootDist;
 
     private bool groundedPlayer;
+    private Vector3 move;
     private Vector3 playerVelocity;
-    private Vector3 move_dir;
+    private int jumpCount;
+    private bool isSprinting;
 
-    //Movement Conditions
-    private bool isSprinting = false;
-    private bool isJumping = false;
-    private bool isMoving = false;
-    //---------------------------------
-
-    //Main Methods---------------------
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
+
     }
 
     void Update()
     {
-        UpdateInput();
-        Move();
-    }
-    //---------------------------------
-
-    //Custom Methods-------------------
-    private void UpdateInput()
-    {
-        isSprinting = Input.GetButton("Sprint");    //Sprint
-        isJumping = Input.GetButton("Jump");    //Jump
-        move_dir = Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward;
+        movement();
+        sprint();
     }
 
-    private void Move()
+    void movement()
     {
-        float currentSpeed = playerSpeed;
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+            jumpCount = 0;
+        }
 
-        //Reset Gravity
-        if (controller.isGrounded) { playerVelocity.y = 0f; }
+        move = (Input.GetAxis("Horizontal") * transform.right) + (Input.GetAxis("Vertical") * transform.forward);
+        controller.Move(move * Time.deltaTime * playerSpeed);
 
-        //Jumping
-        if (isJumping && controller.isGrounded) { playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue); }
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        {
+            playerVelocity.y = jumpHeight;
+            jumpCount++;
+        }
 
-        //Sprinting
-        if (isSprinting) { currentSpeed = currentSpeed * sprintMod; }
-
-        //Apply Gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
-
-        //Apply Move Speed
-        move_dir = move_dir * currentSpeed;
-
-        //Move
-        controller.Move((move_dir + playerVelocity) * Time.deltaTime);
+        controller.Move(playerVelocity * Time.deltaTime);
     }
-    //---------------------------------
+
+    void sprint()
+    {
+        if (Input.GetButtonDown("Sprint"))
+        {
+            isSprinting = true;
+            playerSpeed *= sprintMod;
+        }
+        else if (Input.GetButtonUp("Sprint"))
+        {
+            isSprinting = false;
+            playerSpeed /= sprintMod;
+        }
+    }
 }
