@@ -4,43 +4,27 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
-using static enemyAI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
-    [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
+    [SerializeField] Renderer flashingModel;
+    NavMeshAgent agent;
+    public Transform endLocation;
 
-    [SerializeField] float HP;
+    [SerializeField] int HP;
     [SerializeField] int enemySpeed;
-    [SerializeField] int faceSpeed;
 
-    public Transform playerPosition;
-    public float playerDistance;
-
-    private Transform player;
-    bool playerDetected;
-    UnityEngine.Vector3 playerDirection;
-
-    public int totalEnemies = 20;
-    public bool enemySpawned = true;
-
-
+    public int damage = 1;
+    
 
     //Start is called before the first frame update
     void Start()
     {
-        //agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.destination = endLocation.position;
 
-        playerDetected = false;
-        player = GameObject.FindWithTag("Player").transform;
 
-        agent = GetComponent<NavMeshAgent>();
-        if (agent == null)
-        {
-            Destroy(gameObject);
-        }
+        
             
     }
 
@@ -48,29 +32,32 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         //collision detected - missing detection area 
-        if (playerDetected)
-        {
 
-            //call function to face the player
-            agent.isStopped = true;
-            facingPlayer();
-
-            //call function to chase player
-            huntingPlayer();
-        }
-        else if (!playerDetected)
-        {
-            //call function to wander/idle
-            agent.isStopped = false;
-            stagnantEnemy();
-        }
     }
 
     //wandering around       
     void stagnantEnemy()
     {
         //wandering around code
-        agent.SetDestination(player.position);
+        //navmesh - path(get/set curr path)
+        //navmesh - angularSpeed(max turning speed in degrees while following the path)
+        //navmesh - autoBraking(should the agent brake auto to avoid overshooting the destination point?)
+        //navmesh - destination(gets/attemps to set the destination of agent in world-space units)
+        //navmesh - nextPosition(gets/sets the sim pos of the agent)
+        //navmesh bool - updatePosition(get/set the transform pos is sync w simulated agent pos, default is true)
+
+        //CalculatePath() - calculates path to a specified point & stores the resulting path
+        //Move() - applies relative movement to current position
+        //Raycast() - trace a straight path toward a target pos in the NavMesh without moving the agent
+        //ResetPath() - clears current path
+        //SetDestination() - set/updates the destination thus triggering the calculation for a new path
+        //Warp() - warps the agent to provided position
+        //NavMeshPath() - NavMeshPath constructor
+        //HighQualityObstacleAvoidance() - enable highest precision, highest performance impact
+
+        //transform - the Transform attached to the GameObject
+        //Instantiate - clones the object original & returns the clone itself
+
     }
 
 
@@ -78,7 +65,6 @@ public class enemyAI : MonoBehaviour, IDamage
     void huntingPlayer()
     {
         //chase after the player code
-        agent.destination = playerPosition.position;
     }
 
     //attacking the player
@@ -86,16 +72,19 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         //not yet implemented
 
-        //agent.stoppingDistance = playerDistance;
-
     }
 
-    //facing the player
-    void facingPlayer()
+    //facing/follwoing the player
+    void followPlayer()
     {
         //triggered rotation
         UnityEngine.Quaternion rot = UnityEngine.Quaternion.LookRotation(playerDirection);
         transform.rotation = UnityEngine.Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceSpeed);
+
+        //updating position to follow player
+        UnityEngine.Vector3 lookAtPlayer = player.position;
+        lookAtPlayer.y = transform.position.y;
+        transform.LookAt(lookAtPlayer);
     }
 
     //enemy takes damage & apparates(for now)
@@ -118,4 +107,11 @@ public class enemyAI : MonoBehaviour, IDamage
         model.material.color = Color.white;
     }
 
+    float speed = 10;
+    public LayerMask collisionMask;
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 }
