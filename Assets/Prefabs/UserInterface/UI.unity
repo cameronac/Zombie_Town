@@ -123,41 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1028868847 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3748811080315215382, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
-  m_PrefabInstance: {fileID: 2375767587652103347}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1028868854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028868847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cd4da448b241cc40ad610c08d71256d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
-  points: []
-  spawnWeight: 0
---- !u!114 &1028868855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028868847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cd4da448b241cc40ad610c08d71256d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
-  points: []
-  spawnWeight: 0
 --- !u!1 &1042017622
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,11 +382,5 @@ PrefabInstance:
     - {fileID: 7777855675053657750, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3748811080315215382, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1028868855}
-    - targetCorrespondingSourceObject: {fileID: 3748811080315215382, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 1028868854}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
