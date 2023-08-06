@@ -414,6 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6851705501432596802}
   - component: {fileID: 3094238539915816623}
+  - component: {fileID: 7777855675053657750}
   - component: {fileID: 7443344011516168053}
   - component: {fileID: 5417886717707531687}
   - component: {fileID: 4529313838530588474}
@@ -440,7 +441,7 @@ RectTransform:
   - {fileID: 3713274078000278097}
   - {fileID: 4098630059138962571}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -463,6 +464,20 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   activeMenu: {fileID: 0}
   pauseMenu: {fileID: 6368630665392042054}
+--- !u!114 &7777855675053657750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3748811080315215382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc13fd342c812f4da0b4a11add122da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieprefab: {fileID: 0}
+  zombieInterval: 0
 --- !u!114 &7443344011516168053
 MonoBehaviour:
   m_ObjectHideFlags: 0
