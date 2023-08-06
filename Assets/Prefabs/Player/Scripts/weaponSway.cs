@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class weaponSway : MonoBehaviour
 {
-    float hIntensity = 8.0f;
-    float vIntensity = 15.0f;
+    float hIntensity = 10.0f;
+    float vIntensity = 10.0f;
     float smoothing = 15f;
     Quaternion restRotation;
 
@@ -21,8 +21,9 @@ public class weaponSway : MonoBehaviour
 
         Quaternion xAxis = Quaternion.AngleAxis(hIntensity * mouseX, Vector3.up);
         Quaternion yAxis = Quaternion.AngleAxis(vIntensity * mouseY, Vector3.right);
+
         Quaternion newRotation = restRotation * xAxis * yAxis;
 
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, newRotation, Time.deltaTime * smoothing);
+        //transform.localRotation = Quaternion.Lerp(transform.localRotation, newRotation, Time.deltaTime * smoothing);
     }
 }

@@ -9,7 +9,7 @@ public class playerShoot : MonoBehaviour
     int ammo = 24;
 
     float distance = 50;
-    int damage;
+    int damage = 50;
     float firerate = 0.1f;
     float reloadTime = 3f;
 
@@ -37,11 +37,6 @@ public class playerShoot : MonoBehaviour
             {
                 StartCoroutine(reload());
             }
-        }
-
-        if (Input.GetButtonDown("Toggle Flashlight"))
-        {
-
         }
     }
 
