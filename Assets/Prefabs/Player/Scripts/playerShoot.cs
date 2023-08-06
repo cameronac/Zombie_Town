@@ -38,6 +38,11 @@ public class playerShoot : MonoBehaviour
                 StartCoroutine(reload());
             }
         }
+
+        if (Input.GetButtonDown("Toggle Flashlight"))
+        {
+
+        }
     }
 
     public void AddAmmo(int amount)

@@ -465,6 +465,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   activeMenu: {fileID: 0}
   pauseMenu: {fileID: 6368630665392042054}
+  ammoTextMesh: {fileID: 4350867549782867964}
 --- !u!114 &7443344011516168053
 MonoBehaviour:
   m_ObjectHideFlags: 0
