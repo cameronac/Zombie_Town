@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using static IPickup;
 
-public class AmmoPickup : MonoBehaviour
+public class MedpackPickup : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out IPickup isPickup))
         {
-            isPickup.PickupAmmo(Ammo.pistol, 20);
+            isPickup.PickupFirstAid(FirstAid.first_aid_kit, 1);
             Destroy(gameObject);
         }
     }
