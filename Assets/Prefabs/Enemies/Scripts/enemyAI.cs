@@ -1,58 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static enemyAI;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-
     [SerializeField] float maxHP;
     [SerializeField] int speed;
     [SerializeField] int facePlayerSpeed;
 
     bool playerSeen;
     Transform enemyTarget;
-
-
     Vector3 playerDirection;
+    public int totalEnemies = 20;
+    public bool enemySpawned = true;
+
 
     //Start is called before the first frame update
     void Start()
     {
-        enemySpawn();
+
     }
 
     //Update is called once per frame
     void Update()
     {
-        //check to see if player is around, if so chase & attempt to kill, otherwise remain idle or wander
-    }
-
-    //spawn in enemies
-    void enemySpawn()
-    {
-        //spawn
-
-
+        //check to see if player is around - collision detection, if so chase & attempt to kill, otherwise wander
 
     }
 
-    //enemy idles & wanders
+    //wandering around       
     void stagnantEnemy()
     {
-        //idle - not moving
-
-
-        //wandering around
-
-
-
+        //wandering around code
+        
     }
 
+    //chasing the player
     void huntingPlayer()
     {
+        //chase player code
 
     }
 
@@ -66,7 +57,7 @@ public class enemyAI : MonoBehaviour, IDamage
             Quaternion rot = Quaternion.LookRotation(playerDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
 
-            //chase player
+            //call function to chase player
             huntingPlayer();
         }
         else if(!playerSeen)
