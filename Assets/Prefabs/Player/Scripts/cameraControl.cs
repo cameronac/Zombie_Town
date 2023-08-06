@@ -36,7 +36,9 @@ public class cameraControl : MonoBehaviour
 
         xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        transform.parent.Rotate(Vector3.up * mouseX);
+        if (!gameManager.instance.isGamePaused()) {
+            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            transform.parent.Rotate(Vector3.up * mouseX);
+        }
     }
 }
