@@ -22,10 +22,12 @@ public class playerMovement : MonoBehaviour
     private bool isMoving = false;
 
     //Stamina
+    private bool canRun = true;
     private float stamina = 1;
-    private float stamina_max = 1;
-    private float stamina_decrease = 1f;
-    private float stamina_increase = 1f;
+    private float staminaMax = 1;
+    private float staminaDecrease = 0.3f;
+    private float staminaIncrease = 0.2f;
+    private float staminaRefreshTime = 1.5f;
     //---------------------------------
 
     //Main Methods---------------------
@@ -44,7 +46,18 @@ public class playerMovement : MonoBehaviour
     //Custom Methods-------------------
     private void UpdateInput()
     {
-        isSprinting = Input.GetButton("Sprint");    //Sprint
+        if (canRun) {
+            if (Input.GetButtonDown("Sprint"))
+            {
+                isSprinting = true;
+            } 
+
+            if (Input.GetButtonUp("Sprint"))
+            {
+                isSprinting = false;
+            }
+        }
+
         isJumping = Input.GetButton("Jump");    //Jump
         move_dir = Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward;
     }
@@ -60,14 +73,19 @@ public class playerMovement : MonoBehaviour
         if (isJumping && controller.isGrounded) { playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue); }
 
         //Sprinting
-        if (isSprinting && isMoving && stamina > 0) { 
-            currentSpeed = currentSpeed * sprintMod;
-            stamina -= stamina_decrease * Time.deltaTime;
-        } else {
-            stamina += stamina_increase * Time.deltaTime;
+        if (canRun) {
+            if (stamina <= 0) { StartCoroutine(staminaRecharge()); }
+
+            if (isSprinting && isMoving) { 
+                currentSpeed = currentSpeed * sprintMod;
+                stamina -= staminaDecrease * Time.deltaTime;
+            } else {
+                isSprinting = false;
+                stamina += staminaIncrease * Time.deltaTime;
+            }
         }
 
-        stamina = Mathf.Clamp(stamina, 0f, 1f);
+        stamina = Mathf.Clamp(stamina, 0f, staminaMax);
         gameManager.instance.SetStamina(stamina);
 
         //Apply Gravity
@@ -85,6 +103,16 @@ public class playerMovement : MonoBehaviour
         } else {
             isMoving = false;
         }
+    }
+    //---------------------------------
+
+    //Enumerators----------------------
+    IEnumerator staminaRecharge()
+    {
+        isSprinting = false;
+        canRun = false;
+        yield return new WaitForSeconds(staminaRefreshTime);
+        canRun = true;
     }
     //---------------------------------
 }
