@@ -13,41 +13,77 @@ public class enemyAI : MonoBehaviour, IDamage
     public float faceSpeed = 120f;
 
     Transform endLocation;
-    //public Transform player;
 
-    public float HP = 20;
+    [SerializeField] float HP, maxHealth = 20f;
     public float damage = 1;
-    public float distance;
+    public float distanceToPlayer;
 
-    
+    //patrolling enemy
+    Vector3 target;
+    int wayPointIndex;
+    public Transform[] wayPoints;
 
 
     //Start is called before the first frame update
     void Start()
     {
+        //starts enemy at maxHealth;
+        HP = maxHealth;
+
         enemyMob = GetComponent<NavMeshAgent>();
+
+        UpdateDestinations();
     }
 
     //Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(transform.position, player.transform.position);
+        //checks to see if distance from target is less than 1m
+        if(Vector3.Distance(transform.position, target) < 1)
+        {
+            //call functions to wander
+            IterateWayPointIndex();
+            UpdateDestinations();
+        }
 
+        //chase player
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        
         followPlayer();
     }
 
-    //wandering around       
-    void stagnantEnemy()
+    //wandering around methods
+    void UpdateDestinations()
     {
-        //wandering around code
-        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        //agent.destination = endLocation.position;
+        //sets target to current waypoint
+        target = wayPoints[wayPointIndex].position;
+
+        //sets navmesh destination to the target
+        enemyMob.SetDestination(target);
+    }
+
+    void IterateWayPointIndex()
+    {
+        //increase index by 1
+        wayPointIndex++;
+
+        //if wayPoint is equal to # of waypoints in map, it sets equal to 0
+        if(wayPointIndex == wayPoints.Length)
+        {
+            wayPointIndex = 0;
+        }
+    }
+
+    void PauseEnemy()
+    {
+        enemyMob.isStopped = true;
+        enemyMob.speed = 0;
     }
 
     //facing/following the player
     void followPlayer()
     {
-        if (distance < enemyDistanceRun)
+        if (distanceToPlayer < enemyDistanceRun)
         {
             Vector3 directionToPlayer = transform.position - player.transform.position;
             Vector3 newPosition = transform.position - directionToPlayer;
@@ -74,7 +110,7 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    //to show damage(temp)
+    //to show damage(for now)
     IEnumerator flashDamage()
     {
         model.material.color = Color.red;
