@@ -20,6 +20,14 @@ public class playerMovement : MonoBehaviour
     private bool isSprinting = false;
     private bool isJumping = false;
     private bool isMoving = false;
+
+    //Stamina
+    private bool canRun = true;
+    private float stamina = 1;
+    private float staminaMax = 1;
+    private float staminaDecrease = 0.3f;
+    private float staminaIncrease = 0.2f;
+    private float staminaRefreshTime = 1.5f;
     //---------------------------------
 
     //Main Methods---------------------
@@ -38,7 +46,18 @@ public class playerMovement : MonoBehaviour
     //Custom Methods-------------------
     private void UpdateInput()
     {
-        isSprinting = Input.GetButton("Sprint");    //Sprint
+        if (canRun) {
+            if (Input.GetButtonDown("Sprint"))
+            {
+                isSprinting = true;
+            } 
+
+            if (Input.GetButtonUp("Sprint"))
+            {
+                isSprinting = false;
+            }
+        }
+
         isJumping = Input.GetButton("Jump");    //Jump
         move_dir = Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward;
     }
@@ -54,7 +73,20 @@ public class playerMovement : MonoBehaviour
         if (isJumping && controller.isGrounded) { playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue); }
 
         //Sprinting
-        if (isSprinting) { currentSpeed = currentSpeed * sprintMod; }
+        if (canRun) {
+            if (stamina <= 0) { StartCoroutine(staminaRecharge()); }
+
+            if (isSprinting && isMoving) { 
+                currentSpeed = currentSpeed * sprintMod;
+                stamina -= staminaDecrease * Time.deltaTime;
+            } else {
+                isSprinting = false;
+                stamina += staminaIncrease * Time.deltaTime;
+            }
+        }
+
+        stamina = Mathf.Clamp(stamina, 0f, staminaMax);
+        gameManager.instance.SetStamina(stamina);
 
         //Apply Gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -64,6 +96,23 @@ public class playerMovement : MonoBehaviour
 
         //Move
         controller.Move((move_dir + playerVelocity) * Time.deltaTime);
+
+        if (move_dir.magnitude > 0)
+        {
+            isMoving = true;
+        } else {
+            isMoving = false;
+        }
+    }
+    //---------------------------------
+
+    //Enumerators----------------------
+    IEnumerator staminaRecharge()
+    {
+        isSprinting = false;
+        canRun = false;
+        yield return new WaitForSeconds(staminaRefreshTime);
+        canRun = true;
     }
     //---------------------------------
 }
