@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
+    enum STATE { roam, chase }
+
+    STATE currentState = STATE.roam;
+
     [SerializeField] Renderer model;
     private NavMeshAgent enemyMob;
     public GameObject player;
@@ -14,6 +18,7 @@ public class enemyAI : MonoBehaviour, IDamage
     public float faceSpeed = 120f;
 
     [SerializeField] float HP, maxHealth = 20f;
+    [SerializeField] float distance = 25f;
     public float damage = 1;
     public float distanceToPlayer;
 
@@ -23,8 +28,8 @@ public class enemyAI : MonoBehaviour, IDamage
     public Transform[] wayPoints;
 
 
-    //Start is called before the first frame update
-    void Start()
+    //Main Methods---------------------
+    void Start()    //called before first frame update
     {
         //starts enemy at maxHealth;
         HP = maxHealth;
@@ -33,13 +38,26 @@ public class enemyAI : MonoBehaviour, IDamage
         UpdateDestinations();
     }
 
-    //Update is called once per frame
-    void Update()
+    void Update()   //Updates Every Frame
     {
         //need to have both patrol and chase player 
+        switch(currentState)
+        {
+            case STATE.chase:
+                FollowPlayer();
+                break;
 
+            case STATE.roam:
+                PatrolTheArea();
+                break;
+        }
+
+        UpdateState();
     }
+    //---------------------------------
 
+
+    //States: Main Methods-------------
     void PatrolTheArea()
     {
         //checks to see if distance from target is less than 1m
@@ -50,6 +68,51 @@ public class enemyAI : MonoBehaviour, IDamage
             UpdateDestinations();
         }
     }
+
+    void FollowPlayer()
+    {
+        //distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+        //Vector3 directionToPlayer = transform.position - player.transform.position;
+        //Vector3 newPosition = transform.position - directionToPlayer;
+
+        enemyMob.SetDestination(gameManager.instance.player.transform.position);
+    }
+
+    //---------------------------------
+
+    //Updates State of AI--------------
+    void UpdateState()
+    {
+        RaycastHit hit;
+        Vector3 direction = (gameManager.instance.player.transform.position - transform.position).normalized;
+        Ray ray = new Ray(transform.position, direction);
+        
+        bool isHit = Physics.Raycast(ray, out hit, distance);
+        bool canSeePlayer = false;
+
+        //Check if the player is Seen
+        if (isHit)
+        {
+            if (hit.transform.tag == "Player")
+            {
+                canSeePlayer = true;
+            }
+        }
+
+        //Change AI State
+        if (canSeePlayer)
+        {
+            currentState = STATE.chase;
+        } else {
+            currentState = STATE.roam;
+        }
+
+    }
+    //---------------------------------
+
+
+    //Helper Methods
 
     //wandering around methods
     void UpdateDestinations()
@@ -80,18 +143,6 @@ public class enemyAI : MonoBehaviour, IDamage
     //}
 
     //facing/following the player
-    void FollowPlayer()
-    {
-        //distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-        if (distanceToPlayer < enemyDistanceRun)
-        {
-            Vector3 directionToPlayer = transform.position - player.transform.position;
-            Vector3 newPosition = transform.position - directionToPlayer;
-
-            enemyMob.SetDestination(newPosition);
-        }
-    }
 
     //attacking the player
     void playerAttack()
