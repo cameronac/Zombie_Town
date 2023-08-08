@@ -86,7 +86,10 @@ public class playerMovement : MonoBehaviour
         }
 
         stamina = Mathf.Clamp(stamina, 0f, staminaMax);
-        gameManager.instance.SetStamina(stamina);
+
+        if (gameManager.instance != null) {
+            gameManager.instance.SetStamina(stamina);
+        }
 
         //Apply Gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
