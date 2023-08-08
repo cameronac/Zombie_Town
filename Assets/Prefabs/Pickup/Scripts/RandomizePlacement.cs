@@ -28,6 +28,6 @@ public class RandomizePlacement : MonoBehaviour
 					actualAmount++;
 				}
 			}
-		}  while(actualAmount <= minAmount || minAmount == -1);
+		}  while(actualAmount <= minAmount && minAmount != -1);
 	}
 }
