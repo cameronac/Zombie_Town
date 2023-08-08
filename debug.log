@@ -1,2 +1,20 @@
 [0806/122432.282:ERROR:component_installer.cc(298)] Failed to verify installation for Widevine Content Decryption Module (C:\Users\Eli\AppData\Local\CEF\User Data\WidevineCdm\4.10.2557.0).: The system cannot find the path specified. (0x3)
 [0806/122632.524:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0807/182336.924:ERROR:component_installer.cc(298)] Failed to verify installation for Widevine Content Decryption Module (C:\Users\Eli\AppData\Local\CEF\User Data\WidevineCdm\4.10.2557.0).: The system cannot find the path specified. (0x3)
+[0807/182537.218:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0807/184412.319:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/184412.328:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/185213.318:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0807/185743.781:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/185743.782:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/201326.596:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0807/202112.207:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/202112.227:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/202649.737:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/202649.745:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
+[0807/203621.646:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0808/154018.770:ERROR:component_installer.cc(298)] Failed to verify installation for Widevine Content Decryption Module (C:\Users\Eli\AppData\Local\CEF\User Data\WidevineCdm\4.10.2557.0).: The system cannot find the path specified. (0x3)
+[0808/154219.177:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0808/170204.354:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0808/170258.940:WARNING:value_store_frontend.cc(47)] Reading mhjfbmdgcfjbbpaeojofohoefgiehjai.alarms from  failed: IO error: .../LOCK: File currently in use. (ChromeMethodBFE: 15::LockFile::2)
+[0808/170457.188:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
