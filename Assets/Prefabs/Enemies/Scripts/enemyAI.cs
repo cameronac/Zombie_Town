@@ -8,11 +8,10 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     private NavMeshAgent enemyMob;
     public GameObject player;
+    public Collider collision;
 
     public float enemyDistanceRun = 4f;
     public float faceSpeed = 120f;
-
-    Transform endLocation;
 
     [SerializeField] float HP, maxHealth = 20f;
     public float damage = 1;
@@ -29,33 +28,33 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         //starts enemy at maxHealth;
         HP = maxHealth;
-
+        
         enemyMob = GetComponent<NavMeshAgent>();
-
         UpdateDestinations();
     }
 
     //Update is called once per frame
     void Update()
     {
+        //need to have both patrol and chase player 
+
+    }
+
+    void PatrolTheArea()
+    {
         //checks to see if distance from target is less than 1m
-        if(Vector3.Distance(transform.position, target) < 1)
+        if (Vector3.Distance(transform.position, target) < 1)
         {
             //call functions to wander
             IterateWayPointIndex();
             UpdateDestinations();
         }
-
-        //chase player
-        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        
-        followPlayer();
     }
 
     //wandering around methods
     void UpdateDestinations()
     {
-        //sets target to current waypoint
+        //get position of current waypoint sets equal to target
         target = wayPoints[wayPointIndex].position;
 
         //sets navmesh destination to the target
@@ -67,22 +66,24 @@ public class enemyAI : MonoBehaviour, IDamage
         //increase index by 1
         wayPointIndex++;
 
-        //if wayPoint is equal to # of waypoints in map, it sets equal to 0
+        //once last waypoint is reached, it will revert back to first one
         if(wayPointIndex == wayPoints.Length)
         {
             wayPointIndex = 0;
         }
     }
 
-    void PauseEnemy()
-    {
-        enemyMob.isStopped = true;
-        enemyMob.speed = 0;
-    }
+    //void facePlayer()
+    //{
+    //    Quaternion rot = Quaternion.LookRotation(playerDirection);
+    //    transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceSpeed);
+    //}
 
     //facing/following the player
-    void followPlayer()
+    void FollowPlayer()
     {
+        //distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
         if (distanceToPlayer < enemyDistanceRun)
         {
             Vector3 directionToPlayer = transform.position - player.transform.position;
@@ -95,17 +96,17 @@ public class enemyAI : MonoBehaviour, IDamage
     //attacking the player
     void playerAttack()
     {
-        //not yet implemented
+       //not yet implemented
     }
 
     //enemy takes damage & apparates(for now)
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        StartCoroutine(flashDamage());
 
         if (HP <= 0)
         {
-            flashDamage();
             Destroy(gameObject);
         }
     }
