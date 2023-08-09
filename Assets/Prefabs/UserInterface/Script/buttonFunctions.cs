@@ -21,5 +21,11 @@ public class buttonFunctions : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void playerRespawn()
+    {
+        gameManager.instance.stateUnpaused();
+        gameManager.instance.playerScript.Respawn();
+    }
    
 }
