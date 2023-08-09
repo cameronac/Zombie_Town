@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
+    public GameObject playerSpawnPos;
 
     public GameObject player;
     public playerState playerScript;
@@ -26,6 +27,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerState>();
+        playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
