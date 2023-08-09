@@ -8,18 +8,26 @@ public class RandomizePlacement : MonoBehaviour
 	[SerializeField] GameObject[] points;
 	//needs to be between 1 - 100
 	[SerializeField] int spawnWeight;
+
+	[SerializeField] int minAmount;
 	
 	void Start()
 	{
-		for(int i = 0; i < points.Length; i++)
+		bool[] isThere = new bool[points.Length];
+		int actualAmount = 0;
+		do 
 		{
-			//random number 1-100
-			int check = Random.Range(1,101);
-			//if we fall within range, then spawn the object. Higher number == higher chance of spawning
-			if(check <= spawnWeight) {
-				Instantiate(spawn, points[i].transform.position,Quaternion.identity);
+			for(int i = 0; i < points.Length; i++)
+			{
+				//random number 1-100
+				int check = Random.Range(1,101);
+				//if we fall within range, then spawn the object. Higher number == higher chance of spawning
+				if(check <= spawnWeight && isThere[i] != true) {
+					Instantiate(spawn, points[i].transform.position,Quaternion.identity);
+					isThere[i] = true;
+					actualAmount++;
+				}
 			}
-		}
-		
+		}  while(actualAmount <= minAmount && minAmount != -1);
 	}
 }

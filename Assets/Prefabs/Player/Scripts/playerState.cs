@@ -19,6 +19,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     void Start()
     {
         pShoot = GetComponent<playerShoot>();
+        
     }
 
     public void PickupItem(Items type)
@@ -75,8 +76,9 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
         if (health <= 0)
         {
-
+            gameManager.instance.youLose();
         }
     }
-
+    
+  
 }

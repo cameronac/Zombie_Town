@@ -48,7 +48,9 @@ public class playerShoot : MonoBehaviour
 
     private void UpdateAmmoUI()
     {
-        gameManager.instance.SetAmmo(magazine, ammo);
+        if (gameManager.instance != null) {
+            gameManager.instance.SetAmmo(magazine, ammo);
+        }
     }
 
     //IEnumerators-----------------------

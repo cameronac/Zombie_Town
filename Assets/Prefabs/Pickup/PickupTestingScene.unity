@@ -5411,7 +5411,16 @@ MonoBehaviour:
   spawn: {fileID: 1246178187161843712, guid: d849c5b000dbeaa4bae763234ec29295, type: 3}
   points:
   - {fileID: 367160514}
+  - {fileID: 823268550}
+  - {fileID: 2062655729}
+  - {fileID: 605432009}
+  - {fileID: 578865804}
+  - {fileID: 1437844346}
+  - {fileID: 1960136079}
+  - {fileID: 501444195}
+  - {fileID: 884502423}
   spawnWeight: 50
+  minAmount: -1
 --- !u!4 &1912215482
 Transform:
   m_ObjectHideFlags: 0
