@@ -14,6 +14,7 @@ public class gameManager : MonoBehaviour
     public GameObject activeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
+    public GameObject loseMenu;
     public TextMeshProUGUI ammoTextMesh;
     public Image healthImage;
     public Image staminaImage;
@@ -61,6 +62,13 @@ public class gameManager : MonoBehaviour
     {
         statePaused();
         activeMenu = winMenu;
+        activeMenu.SetActive(true);
+    }
+
+    public void youLose()
+    {
+        statePaused();
+        activeMenu = loseMenu;
         activeMenu.SetActive(true);
     }
 
