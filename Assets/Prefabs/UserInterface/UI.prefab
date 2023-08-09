@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 8065120762984950077}
   - component: {fileID: 4052537537793421755}
   m_Layer: 5
-  m_Name: Continue
+  m_Name: Respawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 1604328805250685830}
   - component: {fileID: 958324847213870070}
   m_Layer: 5
-  m_Name: 'Pause '
+  m_Name: txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pause Menu
+  m_text: You Died
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1473,11 +1473,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cffddcd0f116642b92aee81243d75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpawnPos: {fileID: 0}
   player: {fileID: 0}
   playerScript: {fileID: 0}
   activeMenu: {fileID: 0}
   pauseMenu: {fileID: 6368630665392042054}
   winMenu: {fileID: 7568227145107767866}
+  loseMenu: {fileID: 3825798303047191463}
   ammoTextMesh: {fileID: 5459911282537957780}
   healthImage: {fileID: 7551260947660167122}
   staminaImage: {fileID: 5222887824195161586}
@@ -1568,7 +1570,7 @@ GameObject:
   - component: {fileID: 4162765574223208208}
   - component: {fileID: 1988126264037948320}
   m_Layer: 5
-  m_Name: Pause Menu (1)
+  m_Name: Lose Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2799,7 +2801,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: Respawn
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

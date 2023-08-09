@@ -24,7 +24,8 @@ public class buttonFunctions : MonoBehaviour
 
     public void playerRespawn()
     {
-
+        gameManager.instance.stateUnpaused();
+        gameManager.instance.playerScript.Respawn();
     }
    
 }

@@ -19,6 +19,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     void Start()
     {
         pShoot = GetComponent<playerShoot>();
+        Respawn();
         
     }
 
@@ -65,20 +66,28 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
     public void TakeDamage(float amount)
     {
+        bool isDead = false;
         health -= amount;
 
         if (health <= 0)
         {
-            gameManager.instance.SetHealth(0);
-        } else {
-            gameManager.instance.SetHealth(health / healthMax);
+            isDead = true;
         }
 
-        if (health <= 0)
+        if (isDead)
         {
+            gameManager.instance.SetHealth(0);
             gameManager.instance.youLose();
         }
+        else
+        {
+            gameManager.instance.SetHealth(health / healthMax);
+        }
     }
-    
-  
+   
+    public void Respawn()
+    {
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        health = healthMax;
+    }
 }
