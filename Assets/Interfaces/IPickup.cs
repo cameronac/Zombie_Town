@@ -11,5 +11,6 @@ public interface IPickup
     public void PickupItem(Items type);
     public void PickupFirstAid(FirstAid type, int amount);
     public void PickupAmmo(Ammo type, int amount);
+    public void PickupKeyItem(int ID);
 
 }

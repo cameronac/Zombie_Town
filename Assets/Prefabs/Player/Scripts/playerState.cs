@@ -15,6 +15,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] int first_aid_kits = 0;
 
     private playerShoot pShoot;
+    private List<int> KeyItems = new List<int>();
    
     void Start()
     {
@@ -64,6 +65,11 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         }
     }
 
+    public void PickupKeyItem(int ID) 
+    {
+        KeyItems.Add(ID);
+    }
+
     public void TakeDamage(float amount)
     {
         bool isDead = false;
@@ -87,7 +93,10 @@ public class playerState : MonoBehaviour, IPickup, IDamage
    
     public void Respawn()
     {
-        transform.position = gameManager.instance.playerSpawnPos.transform.position;
-        health = healthMax;
+        if(gameManager.instance != null) 
+        {
+            transform.position = gameManager.instance.playerSpawnPos.transform.position;
+            health = healthMax;
+        } 
     }
 }
