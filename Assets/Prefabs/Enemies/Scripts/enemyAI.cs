@@ -1,34 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UIElements;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
-    enum STATE { roam, chase }
+    enum STATE { roam, chase, death }
 
     STATE currentState = STATE.roam;
 
     [SerializeField] Renderer model;
+    [SerializeField] float HP, maxHealth = 10f;
+    [SerializeField] float distance = 10f;
     private NavMeshAgent enemyMob;
+    RaycastHit hit;
+
+    //collider/trigger
+    bool playerInRange;
+
     public GameObject player;
-    public Collider collision;
-
-    public float enemyDistanceRun = 4f;
-    public float faceSpeed = 120f;
-
-    [SerializeField] float HP, maxHealth = 20f;
-    [SerializeField] float distance = 25f;
     public float damage = 1;
-    public float distanceToPlayer;
+    public float enemyDistanceRun = 4f;
+    public float faceSpeed = 300f;
+    public float waitTime = 3;
 
     //patrolling enemy
-    Vector3 target;
-    int wayPointIndex;
+    public float distanceToPlayer;
     public Transform[] wayPoints;
+    int wayPointIndex;
+    Vector3 target;
 
+    //-----------------Main Methods-----------------//
 
-    //Main Methods---------------------
     void Start()    //called before first frame update
     {
         //starts enemy at maxHealth;
@@ -40,19 +46,25 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()   //Updates Every Frame
     {
-        //need to have both patrol and chase player 
-        switch(currentState)
-        {
-            case STATE.chase:
-                FollowPlayer();
-                break;
+            switch (currentState)
+            {
+                //roam - default state
+                case STATE.roam:
+                    PatrolTheArea();
+                    break;
 
-            case STATE.roam:
-                PatrolTheArea();
-                break;
+                //if enemy damaged - chase
+                case STATE.chase:
+                    if (playerInRange) //possibly needs to be changed
+                    {
+                        FollowPlayer();
+                        //AttackPlayer(); -- when placed here player health depletes when enemy looks/collision happens
+                    }
+                    break;
+
         }
 
-        UpdateState();
+            UpdateState();
     }
     //---------------------------------
 
@@ -71,12 +83,20 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void FollowPlayer()
     {
-        //distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-        //Vector3 directionToPlayer = transform.position - player.transform.position;
-        //Vector3 newPosition = transform.position - directionToPlayer;
-
         enemyMob.SetDestination(gameManager.instance.player.transform.position);
+    }
+
+    void AttackPlayer()
+    {
+        if (hit.collider.tag == "Player")
+        {
+            IDamage iDamage = hit.collider.GetComponent<IDamage>();
+
+            if (iDamage != null)
+            {
+                iDamage.TakeDamage(damage);
+            }
+        }
     }
 
     //---------------------------------
@@ -84,7 +104,6 @@ public class enemyAI : MonoBehaviour, IDamage
     //Updates State of AI--------------
     void UpdateState()
     {
-        RaycastHit hit;
         Vector3 direction = (gameManager.instance.player.transform.position - transform.position).normalized;
         Ray ray = new Ray(transform.position, direction);
         
@@ -104,17 +123,41 @@ public class enemyAI : MonoBehaviour, IDamage
         if (canSeePlayer)
         {
             currentState = STATE.chase;
-        } else {
+            //AttackPlayer(); -- when placed here player's health depletes on game load
+        }
+        else if(!canSeePlayer)
+        {
+            WaitingPeriod(waitTime); //wait 3 seconds(roughly)
+
+            //possibly something here to reset the enemy to start patrolling from last stored point on the path
+
             currentState = STATE.roam;
         }
 
     }
     //---------------------------------
 
+    //Sphere Collider/Trigger-----------
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
 
-    //Helper Methods
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+    //---------------------------------
 
-    //wandering around methods
+
+    //----Helper Methods-----//
+
     void UpdateDestinations()
     {
         //get position of current waypoint sets equal to target
@@ -135,23 +178,15 @@ public class enemyAI : MonoBehaviour, IDamage
             wayPointIndex = 0;
         }
     }
+    //---------------------
 
-    //void facePlayer()
-    //{
-    //    Quaternion rot = Quaternion.LookRotation(playerDirection);
-    //    transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceSpeed);
-    //}
-
-    //facing/following the player
-
-    //attacking the player
-    void playerAttack()
+    IEnumerator WaitingPeriod(float waitTime)
     {
-       //not yet implemented
+        yield return new WaitForSeconds(waitTime);
     }
 
-    //enemy takes damage & apparates(for now)
-    public void TakeDamage(float damage)
+    //Taking Damage-------------------
+    public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         HP -= damage;
         StartCoroutine(flashDamage());
@@ -162,11 +197,12 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    //to show damage(for now)
-    IEnumerator flashDamage()
+    
+    IEnumerator flashDamage() //to show damage(for now)
     {
-        model.material.color = Color.red;
+        model.material.color = UnityEngine.Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        model.material.color = UnityEngine.Color.white;
     }
+    //--------------------------------
 }

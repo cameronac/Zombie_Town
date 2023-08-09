@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 39361312}
   - component: {fileID: 39361311}
   - component: {fileID: 39361310}
+  - component: {fileID: 39361307}
+  - component: {fileID: 39361313}
   - component: {fileID: 39361309}
   - component: {fileID: 39361308}
-  - component: {fileID: 39361307}
   m_Layer: 0
   m_Name: tempEnemy3
   m_TagString: Untagged
@@ -228,7 +229,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 8
-  m_Acceleration: 8
+  m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 300
   m_StoppingDistance: 2
@@ -252,12 +253,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 39361308}
-  player: {fileID: 857836946}
-  enemyDistanceRun: 4
-  faceSpeed: 120
   HP: 20
   maxHealth: 20
+  distance: 25
+  player: {fileID: 857836946}
   damage: 1
+  enemyDistanceRun: 4
+  faceSpeed: 120
+  waitTime: 3
   distanceToPlayer: 0
   wayPoints:
   - {fileID: 81384486}
@@ -279,6 +282,27 @@ Transform:
   - {fileID: 2018375279}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -182.544, z: 0}
+--- !u!135 &39361313
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39361306}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &61222060
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,9 +891,10 @@ GameObject:
   - component: {fileID: 564715461}
   - component: {fileID: 564715462}
   - component: {fileID: 564715463}
+  - component: {fileID: 564715458}
+  - component: {fileID: 564715464}
   - component: {fileID: 564715460}
   - component: {fileID: 564715459}
-  - component: {fileID: 564715458}
   m_Layer: 0
   m_Name: tempEnemy
   m_TagString: Untagged
@@ -979,12 +1004,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 564715459}
-  player: {fileID: 857836946}
-  enemyDistanceRun: 4
-  faceSpeed: 120
   HP: 20
   maxHealth: 20
+  distance: 25
+  player: {fileID: 857836946}
   damage: 1
+  enemyDistanceRun: 4
+  faceSpeed: 120
+  waitTime: 3
   distanceToPlayer: 0
   wayPoints:
   - {fileID: 81384486}
@@ -1000,7 +1027,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 8
-  m_Acceleration: 8
+  m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 300
   m_StoppingDistance: 2
@@ -1011,6 +1038,27 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &564715464
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564715457}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &584946452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,9 +2220,10 @@ GameObject:
   - component: {fileID: 2017998083}
   - component: {fileID: 2017998082}
   - component: {fileID: 2017998081}
+  - component: {fileID: 2017998078}
+  - component: {fileID: 2017998084}
   - component: {fileID: 2017998080}
   - component: {fileID: 2017998079}
-  - component: {fileID: 2017998078}
   m_Layer: 0
   m_Name: tempEnemy2
   m_TagString: Untagged
@@ -2266,7 +2315,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 8
-  m_Acceleration: 8
+  m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 300
   m_StoppingDistance: 2
@@ -2290,12 +2339,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 2017998079}
-  player: {fileID: 857836946}
-  enemyDistanceRun: 4
-  faceSpeed: 120
   HP: 20
   maxHealth: 20
+  distance: 25
+  player: {fileID: 857836946}
   damage: 1
+  enemyDistanceRun: 4
+  faceSpeed: 120
+  waitTime: 3
   distanceToPlayer: 0
   wayPoints:
   - {fileID: 1576205855}
@@ -2316,6 +2367,27 @@ Transform:
   - {fileID: 1377802402}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.671, y: -201.186, z: -2.26}
+--- !u!135 &2017998084
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017998077}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 8
+  m_Center: {x: 0, y: -0.00000011920929, z: 0}
 --- !u!1 &2018375278
 GameObject:
   m_ObjectHideFlags: 0
