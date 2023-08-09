@@ -13,8 +13,9 @@ public class enemyAI : MonoBehaviour, IDamage
     STATE currentState = STATE.roam;
 
     [SerializeField] Renderer model;
-    [SerializeField] float HP, maxHealth = 10f;
+    [SerializeField] float currentHP, maxHP = 10f;
     [SerializeField] float distance = 10f;
+
     private NavMeshAgent enemyMob;
     RaycastHit hit;
 
@@ -33,12 +34,17 @@ public class enemyAI : MonoBehaviour, IDamage
     int wayPointIndex;
     Vector3 target;
 
+    //attacks
+    public float timeBetweenAttacks = .5f;
+    bool alreadyAttacked = false;
+    bool playerInAttackRange = false;
+
     //-----------------Main Methods-----------------//
 
     void Start()    //called before first frame update
     {
         //starts enemy at maxHealth;
-        HP = maxHealth;
+        currentHP = maxHP;
         
         enemyMob = GetComponent<NavMeshAgent>();
         UpdateDestinations();
@@ -46,25 +52,45 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()   //Updates Every Frame
     {
-            switch (currentState)
-            {
-                //roam - default state
-                case STATE.roam:
-                    PatrolTheArea();
-                    break;
-
-                //if enemy damaged - chase
-                case STATE.chase:
-                    if (playerInRange) //possibly needs to be changed
-                    {
-                        FollowPlayer();
-                        //AttackPlayer(); -- when placed here player health depletes when enemy looks/collision happens
-                    }
-                    break;
-
+        if (!playerInRange && !playerInAttackRange)
+        {
+            PatrolTheArea();
         }
+        else if (playerInRange && !playerInAttackRange)
+        {
+            FollowPlayer();
+            if (playerInRange && playerInAttackRange)
+            {
+                AttackPlayer();
+            }
+        }
+        UpdateState();
 
-            UpdateState();
+        //switch (currentState)
+        //{
+        //    //roam - default state
+        //    case STATE.roam:
+        //    if(!playerInRange && !playerInAttackRange)
+        //    {
+        //        PatrolTheArea();
+        //    }
+        //    break;
+
+        //    //if enemy damaged - chase
+        //    case STATE.chase:
+        //    if(playerInRange && !playerInAttackRange)
+        //    {
+        //        FollowPlayer();
+        //    }
+        //    if(playerInRange && playerInAttackRange)
+        //    {
+        //        FollowPlayer();
+        //        AttackPlayer();
+        //    }
+        //    break;
+
+        //}
+        //UpdateState();
     }
     //---------------------------------
 
@@ -92,12 +118,39 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             IDamage iDamage = hit.collider.GetComponent<IDamage>();
 
-            if (iDamage != null)
+            if (iDamage != null && !alreadyAttacked)
             {
                 iDamage.TakeDamage(damage);
             }
+            else if(alreadyAttacked)
+            {
+                ResetAttack();
+            }
         }
     }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+    }
+
+    private void enemyDamaged()
+    {
+        TakeDamage(damage);
+    }
+
+    //private void AttackThePlayer()
+    //{
+    //    enemyMob.SetDestination(transform.position);
+
+    //    if(!alreadyAttacked)
+    //    {
+    //        alreadyAttacked = true;
+    //        Invoke(nameof(ResetAttack), timeBetweenAttacks);
+    //    }
+    //}
+
+
 
     //---------------------------------
 
@@ -123,14 +176,9 @@ public class enemyAI : MonoBehaviour, IDamage
         if (canSeePlayer)
         {
             currentState = STATE.chase;
-            //AttackPlayer(); -- when placed here player's health depletes on game load
         }
         else if(!canSeePlayer)
         {
-            WaitingPeriod(waitTime); //wait 3 seconds(roughly)
-
-            //possibly something here to reset the enemy to start patrolling from last stored point on the path
-
             currentState = STATE.roam;
         }
 
@@ -180,18 +228,13 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     //---------------------
 
-    IEnumerator WaitingPeriod(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-    }
-
     //Taking Damage-------------------
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
-        HP -= damage;
+        currentHP -= damage;
         StartCoroutine(flashDamage());
 
-        if (HP <= 0)
+        if (currentHP <= 0)
         {
             Destroy(gameObject);
         }
