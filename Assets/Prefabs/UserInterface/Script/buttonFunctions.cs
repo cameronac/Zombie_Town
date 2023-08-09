@@ -21,5 +21,10 @@ public class buttonFunctions : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void playerRespawn()
+    {
+
+    }
    
 }
