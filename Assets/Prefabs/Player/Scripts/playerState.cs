@@ -15,7 +15,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] int first_aid_kits = 0;
 
     private playerShoot pShoot;
-    private List<int> KeyItems = new List<int>();
+    public List<int> KeyItems = new List<int>();
    
     void Start()
     {
