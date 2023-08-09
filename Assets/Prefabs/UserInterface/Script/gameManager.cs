@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject activeMenu;
     public GameObject pauseMenu;
+    public GameObject winMenu;
     public TextMeshProUGUI ammoTextMesh;
     public Image healthImage;
     public Image staminaImage;
@@ -53,6 +54,17 @@ public class gameManager : MonoBehaviour
         activeMenu.SetActive(false);
         activeMenu = null;
     }
+
+
+
+    public void youWin()
+    {
+        statePaused();
+        activeMenu = winMenu;
+        activeMenu.SetActive(true);
+    }
+
+
 
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)
