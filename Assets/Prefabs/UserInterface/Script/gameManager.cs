@@ -55,10 +55,7 @@ public class gameManager : MonoBehaviour
         activeMenu = null;
     }
 
-    public void updateGameGoal()
-    {
-     
-    }
+
 
     public void youWin()
     {
