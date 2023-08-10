@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -24,9 +25,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public GameObject player;
     public float damage = 1;
-    public float enemyDistanceRun = 4f;
-    public float faceSpeed = 300f;
-    public float waitTime = 3;
+    float enemyDistanceRun = 4f;
+    float faceSpeed = 300f;
+    float waitTime = 3;
+    bool canSeePlayer = false;
 
     //patrolling enemy
     public float distanceToPlayer;
@@ -35,9 +37,9 @@ public class enemyAI : MonoBehaviour, IDamage
     Vector3 target;
 
     //attacks
-    public float timeBetweenAttacks = .5f;
-    bool alreadyAttacked = false;
-    bool playerInAttackRange = false;
+    float timeBetweenAttacks = 1.5f;
+    bool attacking;
+    bool playerInAttackRange;
 
     //-----------------Main Methods-----------------//
 
@@ -52,45 +54,44 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()   //Updates Every Frame
     {
-        if (!playerInRange && !playerInAttackRange)
-        {
-            PatrolTheArea();
-        }
-        else if (playerInRange && !playerInAttackRange)
-        {
-            FollowPlayer();
-            if (playerInRange && playerInAttackRange)
-            {
-                AttackPlayer();
-            }
-        }
-        UpdateState();
-
-        //switch (currentState)
+        //PatrolTheArea();
+        //if (!playerInRange && !playerInAttackRange)
         //{
-        //    //roam - default state
-        //    case STATE.roam:
-        //    if(!playerInRange && !playerInAttackRange)
-        //    {
-        //        PatrolTheArea();
-        //    }
-        //    break;
+        //    enemyMob.isStopped = false;
+        //    //needs to return back to patrolling
+        //}
+        //else if (playerInRange && !playerInAttackRange)
+        //{
+        //    FollowPlayer();
 
-        //    //if enemy damaged - chase
-        //    case STATE.chase:
-        //    if(playerInRange && !playerInAttackRange)
+        //    if (playerInRange && playerInAttackRange)
         //    {
-        //        FollowPlayer();
-        //    }
-        //    if(playerInRange && playerInAttackRange)
-        //    {
-        //        FollowPlayer();
         //        AttackPlayer();
         //    }
-        //    break;
-
         //}
         //UpdateState();
+
+        switch (currentState)
+        {
+            //roam - default state
+            case STATE.roam:
+                PatrolTheArea();
+                if (!playerInRange)
+                {
+                    IterateWayPointIndex();
+                }
+                break;
+
+            //if enemy damaged - chase
+            case STATE.chase:
+                if (playerInRange)
+                {
+                    FollowPlayer();
+                    AttackPlayer();
+                }
+                break;
+        }
+        UpdateState();
     }
     //---------------------------------
 
@@ -101,7 +102,6 @@ public class enemyAI : MonoBehaviour, IDamage
         //checks to see if distance from target is less than 1m
         if (Vector3.Distance(transform.position, target) < 1)
         {
-            //call functions to wander
             IterateWayPointIndex();
             UpdateDestinations();
         }
@@ -118,39 +118,12 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             IDamage iDamage = hit.collider.GetComponent<IDamage>();
 
-            if (iDamage != null && !alreadyAttacked)
+            if (iDamage != null)
             {
                 iDamage.TakeDamage(damage);
             }
-            else if(alreadyAttacked)
-            {
-                ResetAttack();
-            }
         }
     }
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
-    private void enemyDamaged()
-    {
-        TakeDamage(damage);
-    }
-
-    //private void AttackThePlayer()
-    //{
-    //    enemyMob.SetDestination(transform.position);
-
-    //    if(!alreadyAttacked)
-    //    {
-    //        alreadyAttacked = true;
-    //        Invoke(nameof(ResetAttack), timeBetweenAttacks);
-    //    }
-    //}
-
-
 
     //---------------------------------
 
@@ -161,7 +134,7 @@ public class enemyAI : MonoBehaviour, IDamage
         Ray ray = new Ray(transform.position, direction);
         
         bool isHit = Physics.Raycast(ray, out hit, distance);
-        bool canSeePlayer = false;
+        
 
         //Check if the player is Seen
         if (isHit)
@@ -239,7 +212,6 @@ public class enemyAI : MonoBehaviour, IDamage
             Destroy(gameObject);
         }
     }
-
     
     IEnumerator flashDamage() //to show damage(for now)
     {
