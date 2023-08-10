@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -15,7 +16,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] Renderer model;
     [SerializeField] float currentHP, maxHP = 10f;
-    [SerializeField] float distance = 10f;
+    float distance = 10f;
 
     private NavMeshAgent enemyMob;
     RaycastHit hit;
@@ -25,21 +26,15 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public GameObject player;
     public float damage = 1;
-    float enemyDistanceRun = 4f;
-    float faceSpeed = 300f;
-    float waitTime = 3;
     bool canSeePlayer = false;
+    int playerFaceSpeed = 120;
+    Vector3 playerDirection;
 
     //patrolling enemy
     public float distanceToPlayer;
     public Transform[] wayPoints;
     int wayPointIndex;
     Vector3 target;
-
-    //attacks
-    float timeBetweenAttacks = 1.5f;
-    bool attacking;
-    bool playerInAttackRange;
 
     //-----------------Main Methods-----------------//
 
@@ -52,46 +47,40 @@ public class enemyAI : MonoBehaviour, IDamage
         UpdateDestinations();
     }
 
-    void Update()   //Updates Every Frame
+    void Update()   //updates Every Frame
     {
-        //PatrolTheArea();
-        //if (!playerInRange && !playerInAttackRange)
-        //{
-        //    enemyMob.isStopped = false;
-        //    //needs to return back to patrolling
-        //}
-        //else if (playerInRange && !playerInAttackRange)
-        //{
-        //    FollowPlayer();
-
-        //    if (playerInRange && playerInAttackRange)
-        //    {
-        //        AttackPlayer();
-        //    }
-        //}
-        //UpdateState();
-
-        switch (currentState)
+        if(playerInRange)
         {
-            //roam - default state
-            case STATE.roam:
-                PatrolTheArea();
-                if (!playerInRange)
-                {
-                    IterateWayPointIndex();
-                }
-                break;
-
-            //if enemy damaged - chase
-            case STATE.chase:
-                if (playerInRange)
-                {
-                    FollowPlayer();
-                    AttackPlayer();
-                }
-                break;
+            FollowPlayer();
+            AttackPlayer();
+        }
+        else if(!playerInRange)
+        {
+            PatrolTheArea();
         }
         UpdateState();
+
+        //switch (currentState)
+        //{
+        //    //roam - default state
+        //    case STATE.roam:
+        //        PatrolTheArea();
+        //        //if (!playerInRange)
+        //        //{
+        //        //    IterateWayPointIndex();
+        //        //}
+        //        break;
+
+        //    //if enemy damaged - chase
+        //    case STATE.chase:
+        //        if (playerInRange)
+        //        {
+        //            FollowPlayer();
+        //            AttackPlayer();
+        //        }
+        //        break;
+        //}
+        //UpdateState();
     }
     //---------------------------------
 
@@ -109,11 +98,16 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void FollowPlayer()
     {
+        ////rotate enemy to follow
+        //Quaternion rot = Quaternion.LookRotation(playerDirection);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+
         enemyMob.SetDestination(gameManager.instance.player.transform.position);
     }
 
     void AttackPlayer()
     {
+        //if collider hit player - attack
         if (hit.collider.tag == "Player")
         {
             IDamage iDamage = hit.collider.GetComponent<IDamage>();
@@ -136,7 +130,7 @@ public class enemyAI : MonoBehaviour, IDamage
         bool isHit = Physics.Raycast(ray, out hit, distance);
         
 
-        //Check if the player is Seen
+        //check if the player is Seen
         if (isHit)
         {
             if (hit.transform.tag == "Player")
@@ -145,7 +139,7 @@ public class enemyAI : MonoBehaviour, IDamage
             }
         }
 
-        //Change AI State
+        //change AI State
         if (canSeePlayer)
         {
             currentState = STATE.chase;
@@ -183,7 +177,8 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         if (wayPoints.Length > 0) {
 
-            if (wayPoints[wayPointIndex] != null) {
+            if (wayPoints[wayPointIndex] != null) 
+            {
                 //get position of current waypoint sets equal to target
                 target = wayPoints[wayPointIndex].position;
             
@@ -195,7 +190,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void IterateWayPointIndex()
     {
-        if (wayPoints.Length > 0) {
+        if (wayPoints.Length > 0) 
+        {
             //increase index by 1
             wayPointIndex++;
 
