@@ -74,7 +74,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -169,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5128962160109611427}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -277,6 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b9c185fc19d834dab4eebea034c720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 4
+  firerate: 0.1
 --- !u!114 &7327705366493102580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +295,7 @@ MonoBehaviour:
   has_knife: 0
   bandages: 0
   first_aid_kits: 0
+  KeyItems: 
 --- !u!1 &5545217444218538424
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +392,6 @@ GameObject:
   - component: {fileID: 8331089431469755852}
   - component: {fileID: 4907592144890571302}
   - component: {fileID: 65758359033758989}
-  - component: {fileID: 8035489913223455260}
   m_Layer: 3
   m_Name: Gun
   m_TagString: Untagged
@@ -483,15 +485,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8035489913223455260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9083696856309070559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42ff099e6db9cca428d0897ee0ac8f41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -53,7 +53,7 @@ public class enemyAI : MonoBehaviour, IDamage
         currentHP = maxHP;
         
         enemyMob = GetComponent<NavMeshAgent>();
-        UpdateDestinations();
+        //UpdateDestinations();
     }
 
     void Update()   //updates Every Frame
@@ -169,7 +169,7 @@ public class enemyAI : MonoBehaviour, IDamage
         //target = wayPoints[wayPointIndex].position;
             
         //sets navmesh destination to the target
-        enemyMob.SetDestination(target);
+        //enemyMob.SetDestination(target);
     }
 
     void IterateWayPointIndex()
