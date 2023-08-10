@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1289974058580702179}
   - component: {fileID: 401466462285115544}
   - component: {fileID: 8590739734950064554}
-  - component: {fileID: 7228658927370309276}
   m_Layer: 0
   m_Name: eyes (2)
   m_TagString: Untagged
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7228658927370309276
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6035303767303502117}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6336359231388180332
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +98,7 @@ GameObject:
   - component: {fileID: 1543067690432115887}
   - component: {fileID: 9204754567526813678}
   - component: {fileID: 7469190590504175315}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,10 +134,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 7469190590504175315}
-  currentHP: 5
+  currentHP: 10
   maxHP: 10
+  patrolSpd: 1
+  chaseSpd: 3.5
   player: {fileID: 0}
-  damage: 1
+  damage: 20
   distanceToPlayer: 0
   wayPoints:
   - {fileID: 0}
@@ -174,13 +154,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 3
-  m_Acceleration: 1
+  m_Speed: 3.5
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
@@ -228,7 +208,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &9204754567526813678
 MeshFilter:

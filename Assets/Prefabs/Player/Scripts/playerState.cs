@@ -14,13 +14,17 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] int bandages = 0;
     [SerializeField] int first_aid_kits = 0;
 
+    private Vector3 startPosition;
     private playerShoot pShoot;
+    private CharacterController characterController;
     public List<int> KeyItems = new List<int>();
    
     void Start()
     {
+        startPosition = transform.position;
         pShoot = GetComponent<playerShoot>();
-        Respawn();   
+        characterController = GetComponent<CharacterController>();
+        Respawn();  
     }
 
     public void PickupItem(Items type)
@@ -103,13 +107,25 @@ public class playerState : MonoBehaviour, IPickup, IDamage
    
     public void Respawn()
     {
-        if(gameManager.instance != null) 
+        characterController.enabled = false;
+        if (gameManager.instance != null)
         {
-            if (gameManager.instance.playerSpawnPos != null) {
+            if (gameManager.instance.playerSpawnPos != null)
+            {
                 transform.position = gameManager.instance.playerSpawnPos.transform.position;
+            }
+            else
+            {
+                transform.position = startPosition;
             }
 
             health = healthMax;
-        } 
+            gameManager.instance.SetHealth(1);
+
+        } else {
+            transform.position = startPosition;
+        }
+
+        characterController.enabled = true;
     }
 }

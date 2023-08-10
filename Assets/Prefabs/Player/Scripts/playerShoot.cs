@@ -9,8 +9,8 @@ public class playerShoot : MonoBehaviour
     int ammo = 24;
 
     float distance = 50;
-    int damage = 50;
-    float firerate = 0.1f;
+    [SerializeField] int damage = 4;
+    [SerializeField] float firerate = 0.1f;
     float reloadTime = 3f;
 
     bool isShooting = false;
