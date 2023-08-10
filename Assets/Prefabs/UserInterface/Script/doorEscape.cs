@@ -6,6 +6,7 @@ public class doorEscape : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        
         gameManager.instance.youWin();
     }
 }
