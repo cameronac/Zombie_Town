@@ -14,6 +14,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] int bandages = 0;
     [SerializeField] int first_aid_kits = 0;
 
+    public static playerState instance;
     private Vector3 startPosition;
     private playerShoot pShoot;
     private CharacterController characterController;
@@ -21,6 +22,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
    
     void Start()
     {
+        instance = this;
         startPosition = transform.position;
         pShoot = GetComponent<playerShoot>();
         characterController = GetComponent<CharacterController>();
