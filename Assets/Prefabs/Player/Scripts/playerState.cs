@@ -48,6 +48,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             case FirstAid.bandage:
                 if (gameManager.instance != null)
                 {
+                    health += 40;
                     gameManager.instance.SetHealth(0.4f);
                 }
                 break;
@@ -55,6 +56,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             case FirstAid.first_aid_kit:
                 if (gameManager.instance != null)
                 {
+                    health = 100;
                     gameManager.instance.SetHealth(1);
                 }
 
