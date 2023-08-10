@@ -20,8 +20,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     void Start()
     {
         pShoot = GetComponent<playerShoot>();
-        Respawn();
-        
+        Respawn();   
     }
 
     public void PickupItem(Items type)
@@ -43,11 +42,18 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         switch(type)
         {
             case FirstAid.bandage:
-                bandages += amount;
+                if (gameManager.instance != null)
+                {
+                    gameManager.instance.SetHealth(0.4f);
+                }
                 break;
 
             case FirstAid.first_aid_kit:
-                first_aid_kits += amount;
+                if (gameManager.instance != null)
+                {
+                    gameManager.instance.SetHealth(1);
+                }
+
                 break;
         }
     }
@@ -82,12 +88,16 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
         if (isDead)
         {
-            gameManager.instance.SetHealth(0);
-            gameManager.instance.youLose();
+            if (gameManager.instance != null) {
+                gameManager.instance.SetHealth(0);
+                gameManager.instance.youLose();
+            }
         }
         else
         {
-            gameManager.instance.SetHealth(health / healthMax);
+            if (gameManager.instance != null) {
+                gameManager.instance.SetHealth(health / healthMax);
+            }
         }
     }
    
@@ -95,7 +105,10 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     {
         if(gameManager.instance != null) 
         {
-            transform.position = gameManager.instance.playerSpawnPos.transform.position;
+            if (gameManager.instance.playerSpawnPos != null) {
+                transform.position = gameManager.instance.playerSpawnPos.transform.position;
+            }
+
             health = healthMax;
         } 
     }

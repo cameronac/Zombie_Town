@@ -8,10 +8,7 @@ public class DoorLock : MonoBehaviour
     [SerializeField] int ID;
      void OnTriggerEnter(Collider other)
     {
-        if()
-        {
 
-        }
     }
 
 }

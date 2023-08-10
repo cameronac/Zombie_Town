@@ -181,22 +181,29 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void UpdateDestinations()
     {
-        //get position of current waypoint sets equal to target
-        target = wayPoints[wayPointIndex].position;
+        if (wayPoints.Length > 0) {
 
-        //sets navmesh destination to the target
-        enemyMob.SetDestination(target);
+            if (wayPoints[wayPointIndex] != null) {
+                //get position of current waypoint sets equal to target
+                target = wayPoints[wayPointIndex].position;
+            
+                //sets navmesh destination to the target
+                enemyMob.SetDestination(target);
+            }
+        }
     }
 
     void IterateWayPointIndex()
     {
-        //increase index by 1
-        wayPointIndex++;
+        if (wayPoints.Length > 0) {
+            //increase index by 1
+            wayPointIndex++;
 
-        //once last waypoint is reached, it will revert back to first one
-        if(wayPointIndex == wayPoints.Length)
-        {
-            wayPointIndex = 0;
+            //once last waypoint is reached, it will revert back to first one
+            if(wayPointIndex == wayPoints.Length)
+            {
+                wayPointIndex = 0;
+            }
         }
     }
     //---------------------

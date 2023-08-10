@@ -13,7 +13,7 @@ public class RandomizePlacement : MonoBehaviour
 	
 	void Start()
 	{
-		bool[] isThere = new bool[points.Length];
+		/*bool[] isThere = new bool[points.Length];
 		int actualAmount = 0;
 		do 
 		{
@@ -28,6 +28,6 @@ public class RandomizePlacement : MonoBehaviour
 					actualAmount++;
 				}
 			}
-		}  while(actualAmount <= minAmount && minAmount != -1);
+		}  while(actualAmount <= minAmount && minAmount != -1);*/
 	}
 }
