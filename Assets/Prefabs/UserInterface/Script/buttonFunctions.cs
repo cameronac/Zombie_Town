@@ -27,5 +27,10 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpaused();
         gameManager.instance.playerScript.Respawn();
     }
-   
+
+    public void playButton()
+    {
+        SceneManager.LoadScene(1);
+    }
+
 }
