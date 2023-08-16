@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7389458545315012673
+--- !u!1001 &2235103929211556450
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.451669
+      value: 25.958103
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.243593
+      value: -10.673894
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 22bbcbf8c2fec6e409847775ebaa0ff5, type: 2}
     - target: {fileID: 919132149155446097, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       propertyPath: m_Name
-      value: Meds
+      value: Meds 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74,50 +74,50 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6212246772430419442}
+      addedObject: {fileID: 4733274204204773367}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7002400732576010217}
+      addedObject: {fileID: 5175931176403920088}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 655127745989029773}
+      addedObject: {fileID: 8161493899676659773}
   m_SourcePrefab: {fileID: 100100000, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
---- !u!1 &7659999219867245840 stripped
+--- !u!1 &1424763658280447795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a03c06f86ca43c47a046fc20ad23481, type: 3}
-  m_PrefabInstance: {fileID: 7389458545315012673}
+  m_PrefabInstance: {fileID: 2235103929211556450}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6212246772430419442
+--- !u!114 &4733274204204773367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7659999219867245840}
+  m_GameObject: {fileID: 1424763658280447795}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50840319a6f4f9d4b9a3d96b5c59e936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7002400732576010217
+--- !u!114 &5175931176403920088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7659999219867245840}
+  m_GameObject: {fileID: 1424763658280447795}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 030db32ecfe7dc34d9f5b61302fcbd65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &655127745989029773
-SphereCollider:
+--- !u!65 &8161493899676659773
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7659999219867245840}
+  m_GameObject: {fileID: 1424763658280447795}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -130,5 +130,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.3080218, y: 0.49592304, z: 2.012586}
+  m_Center: {x: 0.009268522, y: 0.25203848, z: 0.003651937}
