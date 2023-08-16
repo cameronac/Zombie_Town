@@ -291,10 +291,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd4fb62ac642344e8b2704945bb596f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interact_distance: 1.5
   has_pistol: 0
   has_knife: 0
   bandages: 0
   first_aid_kits: 0
+  pistol: {fileID: 9083696856309070559}
   KeyItems: 
 --- !u!1 &5545217444218538424
 GameObject:

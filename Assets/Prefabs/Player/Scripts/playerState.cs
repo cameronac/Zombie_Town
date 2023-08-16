@@ -16,10 +16,13 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] int bandages = 0;
     [SerializeField] int first_aid_kits = 0;
 
-    public static playerState instance;
-    private Vector3 startPosition;
+    [SerializeField] GameObject pistol;
     private playerShoot pShoot;
     private CharacterController characterController;
+    public static playerState instance;
+
+    private Vector3 startPosition;
+    
     public List<int> KeyItems = new List<int>();
    
     void Start()
@@ -40,13 +43,27 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             
             if (isHit)
             {
-                if (interactHit.collider.tag == "Interact")
+                if (interactHit.collider)
                 {
                     IInteract iInteract = interactHit.collider.GetComponent<IInteract>();
-                    iInteract.pressed();
+
+                    if (iInteract != null) {
+                        iInteract.pressed();
+                    }
                 }
             }
         }
+
+        if (!has_pistol)
+        {
+            pShoot.enabled = false;
+            pistol.SetActive(false);
+        } else {
+            pShoot.enabled = true;
+            pistol.SetActive(true);
+        }
+
+
     }
 
     public void PickupItem(Items type)
