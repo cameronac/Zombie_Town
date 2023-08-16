@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using static IPickup;
 
@@ -8,6 +9,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     float health = 100;
     float healthMax = 100;
 
+    [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_knife = false;
     
@@ -27,6 +29,24 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         pShoot = GetComponent<playerShoot>();
         characterController = GetComponent<CharacterController>();
         Respawn();  
+    }
+    
+    void Update()
+    {
+        if (Input.GetButtonDown("Interact"))
+        {
+            RaycastHit interactHit;
+            bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
+            
+            if (isHit)
+            {
+                if (interactHit.collider.tag == "Interact")
+                {
+                    IInteract iInteract = interactHit.collider.GetComponent<IInteract>();
+                    iInteract.pressed();
+                }
+            }
+        }
     }
 
     public void PickupItem(Items type)
