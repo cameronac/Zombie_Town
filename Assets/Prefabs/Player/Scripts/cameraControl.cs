@@ -10,7 +10,7 @@ public class cameraControl : MonoBehaviour
 
     [SerializeField] bool invertY = false;
 
-    float xRotation;
+    //float xRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +20,11 @@ public class cameraControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         bool isPaused = false;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
         float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float xRotation = transform.localRotation.y;
 
         if (invertY)
         {
@@ -48,7 +48,7 @@ public class cameraControl : MonoBehaviour
 
         if (!isPaused)
         {
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            transform.localRotation *= Quaternion.Euler(xRotation, 0, 0);
             transform.parent.Rotate(Vector3.up * mouseX);
         }
     }

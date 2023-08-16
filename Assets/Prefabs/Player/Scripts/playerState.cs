@@ -12,11 +12,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_knife = false;
-    
-    [SerializeField] int bandages = 0;
-    [SerializeField] int first_aid_kits = 0;
 
-    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject weaponHolder;
     private playerShoot pShoot;
     private CharacterController characterController;
     public static playerState instance;
@@ -57,13 +54,11 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         if (!has_pistol)
         {
             pShoot.enabled = false;
-            pistol.SetActive(false);
+            weaponHolder.SetActive(false);
         } else {
             pShoot.enabled = true;
-            pistol.SetActive(true);
+            weaponHolder.SetActive(true);
         }
-
-
     }
 
     public void PickupItem(Items type)

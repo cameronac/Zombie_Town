@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class playerShoot : MonoBehaviour
@@ -7,6 +8,7 @@ public class playerShoot : MonoBehaviour
     int magazine = 0;
     int magazine_size = 12;
     int ammo = 24;
+    float recoil = 1.5f;
 
     float distance = 50;
     [SerializeField] int damage = 4;
@@ -56,6 +58,8 @@ public class playerShoot : MonoBehaviour
     //IEnumerators-----------------------
     IEnumerator shoot()
     {
+        Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-recoil, 0, 0));
+
         magazine -= 1;
         UpdateAmmoUI();
 
