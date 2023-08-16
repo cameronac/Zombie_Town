@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class playerShoot : MonoBehaviour
 {
+    [SerializeField] ParticleSystem particleSystem;
     int magazine = 0;
     int magazine_size = 12;
     int ammo = 24;
@@ -58,6 +59,7 @@ public class playerShoot : MonoBehaviour
     //IEnumerators-----------------------
     IEnumerator shoot()
     {
+        particleSystem.Play();
         Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-recoil, 0, 0));
 
         magazine -= 1;
