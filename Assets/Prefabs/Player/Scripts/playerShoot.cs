@@ -101,7 +101,7 @@ public class playerShoot : MonoBehaviour
             magazine = magazine_size;
             ammo -= needed_ammo;
         } else {
-            magazine += needed_ammo;
+            magazine += ammo;
             ammo = 0;
         }
 
