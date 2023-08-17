@@ -164,4 +164,13 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
         characterController.enabled = true;
     }
+
+    public bool has_key(int ID)
+    {
+        if(KeyItems.Contains(ID))
+        {
+            return true;
+        }
+        return false;
+    }
 }
