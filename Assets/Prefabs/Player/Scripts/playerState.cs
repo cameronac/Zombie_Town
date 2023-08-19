@@ -9,6 +9,11 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     float health = 100;
     float healthMax = 100;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audio_source;
+    [SerializeField] AudioClip[] player_hurt_audio;
+
+    [Header("Other")]
     [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_knife = false;
@@ -33,11 +38,12 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     
     void Update()
     {
+        RaycastHit interactHit;
+        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
+        gameManager.instance.ToggleInteract(isHit);
+
         if (Input.GetButtonDown("Interact"))
         {
-            RaycastHit interactHit;
-            bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
-            
             if (isHit)
             {
                 if (interactHit.collider)
@@ -120,6 +126,9 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     {
         bool isDead = false;
         health -= amount;
+
+        audio_source.clip = player_hurt_audio[Random.Range(0, player_hurt_audio.Length - 1)];
+        audio_source.Play();
 
         if (health <= 0)
         {

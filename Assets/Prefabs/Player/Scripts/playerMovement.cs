@@ -1,3 +1,4 @@
+using Autodesk.Fbx;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,17 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     //Properties-----------------------
+
+
+    [Header("Audio")]
+    [SerializeField] AudioSource audio_source;
+    [SerializeField] AudioClip[] footstep_audio;
+    [SerializeField] AudioClip[] jump_audio;
+
+    private float footstep_time = 2.5f;
+
+    private float footstep_current = 0f;
+
     private CharacterController controller;
 
     private float sprintMod = 2f;
@@ -20,6 +32,7 @@ public class playerMovement : MonoBehaviour
     private bool isSprinting = false;
     private bool isJumping = false;
     private bool isMoving = false;
+    private bool inAir = false;
 
     //Stamina
     private bool canRun = true;
@@ -60,6 +73,8 @@ public class playerMovement : MonoBehaviour
 
         isJumping = Input.GetButton("Jump");    //Jump
         move_dir = Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward;
+        
+        if (!controller.isGrounded) { inAir = true; }
     }
 
     private void Move()
@@ -70,7 +85,11 @@ public class playerMovement : MonoBehaviour
         if (controller.isGrounded) { playerVelocity.y = 0f; }
 
         //Jumping
-        if (isJumping && controller.isGrounded) { playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue); }
+        if (isJumping && controller.isGrounded) { 
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            audio_source.clip = jump_audio[Random.Range(0, jump_audio.Length - 1)];
+            audio_source.Play();
+        }
 
         //Sprinting
         if (canRun) {
@@ -96,6 +115,21 @@ public class playerMovement : MonoBehaviour
         
         //Apply Move Speed
         move_dir = move_dir * currentSpeed;
+        Vector3 current_speed = (move_dir + playerVelocity) * Time.deltaTime;
+
+        //Grounded
+        if (controller.isGrounded)
+        {
+            footstep_current += current_speed.magnitude;
+
+            if (footstep_current > footstep_time || inAir)
+            {
+                inAir = false;
+                audio_source.clip = footstep_audio[Random.Range(0, footstep_audio.Length - 1)];
+                audio_source.Play();
+                footstep_current = 0f;
+            }
+        }
 
         //Move
         controller.Move((move_dir + playerVelocity) * Time.deltaTime);

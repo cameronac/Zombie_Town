@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class playerShoot : MonoBehaviour
 {
+    [Header("Audio")]
+    [SerializeField] AudioSource audio_source;
+    [SerializeField] AudioClip shoot_audio;
+    [SerializeField] AudioClip reload_audio;
+
+    [Header("Other")]
     [SerializeField] ParticleSystem particleSystem;
     int magazine = 0;
     int magazine_size = 12;
@@ -14,7 +20,7 @@ public class playerShoot : MonoBehaviour
     float distance = 50;
     [SerializeField] int damage = 4;
     [SerializeField] float firerate = 0.1f;
-    float reloadTime = 3f;
+    float reloadTime = 1.5f;
 
     bool isShooting = false;
     bool isReloading = false;
@@ -62,6 +68,9 @@ public class playerShoot : MonoBehaviour
         particleSystem.Play();
         Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-recoil, 0, 0));
 
+        audio_source.clip = shoot_audio;
+        audio_source.Play();
+
         magazine -= 1;
         UpdateAmmoUI();
 
@@ -89,6 +98,9 @@ public class playerShoot : MonoBehaviour
    
     IEnumerator reload()
     {
+        audio_source.clip = reload_audio;
+        audio_source.Play();
+
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
