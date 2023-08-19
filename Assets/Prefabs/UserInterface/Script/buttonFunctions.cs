@@ -34,6 +34,7 @@ public class buttonFunctions : MonoBehaviour
     }
     public void LoadLevel()
     {
+        gameManager.instance.stateUnpaused();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
