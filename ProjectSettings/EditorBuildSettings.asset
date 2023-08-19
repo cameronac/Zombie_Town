@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/House.unity
     guid: 6b554c660f2adf6459de6effe696f968
   - enabled: 1
+    path: Assets/Prefabs/Pickup/PickupTestingScene.unity
+    guid: 1814e4be7cc49d5449ef48416ceb422c
+  - enabled: 0
     path: Assets/Scenes/New Scene.unity
     guid: aecbb86db30a64b428bc3100c59d3e41
   m_configObjects: {}
