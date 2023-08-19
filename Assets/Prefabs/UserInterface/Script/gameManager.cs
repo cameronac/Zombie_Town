@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI ammoTextMesh;
     public Image healthImage;
     public Image staminaImage;
+    public TextMeshProUGUI interactText;
 
     bool isPaused;
     // Start is called before the first frame update
@@ -90,6 +91,11 @@ public class gameManager : MonoBehaviour
     public void SetStamina(float stamina)
     {
         staminaImage.fillAmount = stamina;
+    }
+
+    public void ToggleInteract(bool toggle)
+    {
+        interactText.enabled = toggle;
     }
 
     //Getters
