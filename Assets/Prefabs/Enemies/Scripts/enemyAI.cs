@@ -1,110 +1,115 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
-using Unity.Burst.CompilerServices;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
-    enum STATE { roam, chase, death }
+    private enum STATE
+    { roam, chase, death }
 
-    STATE currentState = STATE.roam;
+    private STATE currentState = STATE.roam;
+    
+    private Color startColor = Color.white;
 
-    [SerializeField] Renderer model;
-    [SerializeField] float currentHP, maxHP = 10f;
-    [SerializeField] float patrolSpd;
-    [SerializeField] float chaseSpd;
-    float distance = 10f;
-    float hitRate = 0.5f;
+    [Header("----- Components -----")]
+    [SerializeField] private Renderer model;
+    [SerializeField] NavMeshAgent enemyMob;
+    [SerializeField] Animator anim;
+    private bool canSeePlayer = false;
+    private int playerFaceSpeed = 120;
+    private Vector3 playerDirection;
 
-    private NavMeshAgent enemyMob;
-    Color startColor = Color.white;
+    [Header("----- Enemy Stats -----")]
+    [Range(1, 20)][SerializeField] private float currentHP;
+    [Range(1, 20)][SerializeField] private float maxHP;
+    [Range(1, 20)][SerializeField] public float damage;
+    [Range(1, 10)][SerializeField] private float patrolSpd;
+    [Range(1, 10)][SerializeField] private float chaseSpd;
+    [SerializeField] int animChangeSpeed;
+    private float distance = 10f;
+    private float hitRate = 0.5f;
+    
+    //sphere collider/trigger - detection & attacking
+    private bool playerInRange;
+    private bool canAttack = true;
 
-    //collider/trigger
-    bool playerInRange;
-    bool canAttack = true;
-
-    public GameObject player;
-    public float damage = 20;
-    bool canSeePlayer = false;
-    int playerFaceSpeed = 120;
-    Vector3 playerDirection;
+    //enemy spawner
+    public enemySpawner whereISpawned;
 
     //patrolling enemy
     private Vector3 startPos;
-    float pointRange = 10;
-    bool isPatrolTimer = false;
+    private float pointRange = 10;
+    private bool isPatrolTimer = false;
     public float distanceToPlayer;
     public Transform[] wayPoints;
-    int wayPointIndex;
-    Vector3 target;
+    private int wayPointIndex;
+    private Vector3 target;
 
     //-----------------Main Methods-----------------//
 
-    void Start()    //called before first frame update
+    private void Start()    //called before first frame update
     {
         startPos = transform.position;
         startColor = GetComponent<MeshRenderer>().sharedMaterial.color;
+
         //starts enemy at maxHealth;
         currentHP = maxHP;
-        
+
         enemyMob = GetComponent<NavMeshAgent>();
-        //UpdateDestinations();
+        anim = GetComponentInChildren<Animator>();
     }
 
-    void Update()   //updates Every Frame
+    private void Update()   //updates Every Frame
     {
-        if(playerInRange)
+        //animation
+        float agentVel = enemyMob.velocity.normalized.magnitude;
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentVel, Time.deltaTime * animChangeSpeed));
+
+        if (playerInRange)
         {
-            FollowPlayer();
-            AttackPlayer();
+            ChaseandAttack();
         }
-        else if(!playerInRange)
+        else if (!playerInRange)
         {
             PatrolTheArea();
         }
-
         UpdateState();
     }
+
     //---------------------------------
 
-
     //States: Main Methods-------------
-    void PatrolTheArea()
+    private void PatrolTheArea()
     {
         enemyMob.speed = patrolSpd;
         if (!isPatrolTimer)
         {
+            anim.SetBool("isPatrolling", true);
+            anim.SetBool("chasingPlayer", false);
+            anim.SetBool("attackingPlayer", false);
             StartCoroutine(GetRandomPatrolPoint());
         }
-        //checks to see if distance from target is less than 1m
-        /*if (Vector3.Distance(transform.position, target) < 1)
-        {
-            IterateWayPointIndex();
-            UpdateDestinations();
-        }*/
     }
 
-    void FollowPlayer()
+    private void ChaseandAttack()
     {
         enemyMob.speed = chaseSpd;
 
-        if (gameManager.instance != null) {
+        if (gameManager.instance != null)
+        {
+            //face player
             Quaternion rot = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
 
             enemyMob.SetDestination(gameManager.instance.player.transform.position);
+            anim.SetBool("chasingPlayer", true);
+            anim.SetBool("isPatrolling", false);
+            
         }
-    }
 
-    void AttackPlayer()
-    {
         if (canAttack)
         {
+            anim.SetBool("attackingPlayer", true);
             StartCoroutine(attack());
         }
     }
@@ -112,14 +117,13 @@ public class enemyAI : MonoBehaviour, IDamage
     //---------------------------------
 
     //Updates State of AI--------------
-    void UpdateState()
+    private void UpdateState()
     {
         RaycastHit hit;
         Vector3 direction = (gameManager.instance.player.transform.position - transform.position).normalized;
         Ray ray = new Ray(transform.position, direction);
-        
+
         bool isHit = Physics.Raycast(ray, out hit, distance);
-        
 
         //check if the player is Seen
         if (isHit)
@@ -135,16 +139,16 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             currentState = STATE.chase;
         }
-        else if(!canSeePlayer)
+        else if (!canSeePlayer)
         {
             currentState = STATE.roam;
         }
-
     }
+
     //---------------------------------
 
     //Sphere Collider/Trigger-----------
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -152,57 +156,37 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            enemyMob.stoppingDistance = 0;
         }
     }
     //---------------------------------
-
-
-    //----Helper Methods-----//
-    void UpdateDestinations()
-    {
-        //get position of current waypoint sets equal to target
-        //target = wayPoints[wayPointIndex].position;
-            
-        //sets navmesh destination to the target
-        //enemyMob.SetDestination(target);
-    }
-
-    void IterateWayPointIndex()
-    {
-        if (wayPoints.Length > 0) 
-        {
-            //increase index by 1
-            wayPointIndex++;
-
-            //once last waypoint is reached, it will revert back to first one
-            if(wayPointIndex == wayPoints.Length)
-            {
-                wayPointIndex = 0;
-            }
-        }
-    }
-    //---------------------
 
     //Taking Damage-------------------
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
+        enemyMob.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
-        
+
         if (currentHP <= 0)
         {
+            whereISpawned.heyIdied();
+            anim.SetBool("healthDepleted", true);
             Destroy(gameObject);
+        }
+        else
+        {
+            anim.SetBool("healthDepleted", false);
         }
     }
 
-
     //IEnumerators--------------------
-    IEnumerator GetRandomPatrolPoint()
+    private IEnumerator GetRandomPatrolPoint()
     {
         isPatrolTimer = true;
         yield return new WaitForSeconds(Random.Range(5, 10));
@@ -214,7 +198,7 @@ public class enemyAI : MonoBehaviour, IDamage
         enemyMob.SetDestination(target);
     }
 
-    IEnumerator attack()
+    private IEnumerator attack()
     {
         canAttack = false;
         yield return new WaitForSeconds(hitRate);
@@ -225,7 +209,6 @@ public class enemyAI : MonoBehaviour, IDamage
             RaycastHit hit;
             Vector3 playerPos = gameManager.instance.player.transform.position;
             Vector3 direction = (playerPos - transform.position).normalized;
-            //Use For hit detection once fixed -> //bool isHit = Physics.BoxCast(transform.position, new Vector3(0.25f, 0.25f, 0.25f), (playerPos - transform.position).normalized, out hit);
             bool isHit = Physics.Raycast(new Ray(transform.position, direction), out hit, 2f);
 
             //if collider hit player - attack
@@ -244,7 +227,7 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashDamage() //to show damage(for now)
+    private IEnumerator flashDamage() //to show damage(for now)
     {
         model.material.color = UnityEngine.Color.red;
         yield return new WaitForSeconds(0.1f);
