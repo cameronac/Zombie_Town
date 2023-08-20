@@ -12,6 +12,7 @@ public class playerShoot : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] Light muzzleFlash;
     int magazine = 0;
     int magazine_size = 12;
     int ammo = 24;
@@ -29,6 +30,7 @@ public class playerShoot : MonoBehaviour
     private void Start()
     {
         UpdateAmmoUI();
+        muzzleFlash.enabled = false;
     }
 
     void Update()
@@ -71,6 +73,7 @@ public class playerShoot : MonoBehaviour
         audio_source.clip = shoot_audio;
         audio_source.Play();
 
+        StartCoroutine(eMuzzleFlash());
         magazine -= 1;
         UpdateAmmoUI();
 
@@ -118,6 +121,13 @@ public class playerShoot : MonoBehaviour
         }
 
         UpdateAmmoUI();
+    }
+    
+    IEnumerator eMuzzleFlash()
+    {
+        muzzleFlash.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        muzzleFlash.enabled = false;
     }
     //---------------------------------
 }
