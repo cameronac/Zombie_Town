@@ -36,8 +36,8 @@ public class playerMovement : MonoBehaviour
 
     //Stamina
     private bool canRun = true;
-    private float stamina = 1;
-    private float staminaMax = 1;
+    private float stamina = 5;
+    private float staminaMax = 5;
     private float staminaDecrease = 0.3f;
     private float staminaIncrease = 0.2f;
     private float staminaRefreshTime = 1.5f;
@@ -122,7 +122,7 @@ public class playerMovement : MonoBehaviour
         {
             footstep_current += current_speed.magnitude;
 
-            if (footstep_current > footstep_time || inAir)
+            if (footstep_current > footstep_time)
             {
                 inAir = false;
                 audio_source.clip = footstep_audio[Random.Range(0, footstep_audio.Length - 1)];

@@ -44,7 +44,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 3
   m_Range: 15
   m_SpotAngle: 80
   m_InnerSpotAngle: 4
@@ -877,6 +877,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1d955897a62b1f34b9536a927382bdfa, type: 3}
   - {fileID: 8300000, guid: a03816d0f02101244a7043dab2ea1bec, type: 3}
   - {fileID: 8300000, guid: 6a962345b87c91240a48234b8af59bad, type: 3}
+  flash_light: {fileID: 1451313053445656013}
   interact_distance: 1.5
   has_pistol: 0
   has_knife: 0
@@ -6268,7 +6269,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.5694699, b: 0, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 2
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

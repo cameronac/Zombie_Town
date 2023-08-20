@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using static IPickup;
 
 public class playerState : MonoBehaviour, IPickup, IDamage
@@ -14,6 +15,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] AudioClip[] player_hurt_audio;
 
     [Header("Other")]
+    [SerializeField] GameObject flash_light;
     [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_knife = false;
@@ -41,6 +43,12 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         RaycastHit interactHit;
         bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
         gameManager.instance.ToggleInteract(isHit);
+
+
+        if (Input.GetButtonDown("Toggle Flashlight"))
+        {
+            flash_light.SetActive(!flash_light.activeSelf);
+        }
 
         if (Input.GetButtonDown("Interact"))
         {
