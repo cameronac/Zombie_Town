@@ -37,5 +37,9 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpaused();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }
