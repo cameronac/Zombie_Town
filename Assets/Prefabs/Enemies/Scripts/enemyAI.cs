@@ -67,7 +67,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (playerInRange)
         {
-            ChaseandAttack();
+            ChaseAndAttack();
         }
         else if (!playerInRange)
         {
@@ -75,7 +75,6 @@ public class enemyAI : MonoBehaviour, IDamage
         }
         UpdateState();
     }
-
     //---------------------------------
 
     //States: Main Methods-------------
@@ -84,14 +83,11 @@ public class enemyAI : MonoBehaviour, IDamage
         enemyMob.speed = patrolSpd;
         if (!isPatrolTimer)
         {
-            anim.SetBool("isPatrolling", true);
-            anim.SetBool("chasingPlayer", false);
-            anim.SetBool("attackingPlayer", false);
             StartCoroutine(GetRandomPatrolPoint());
         }
     }
 
-    private void ChaseandAttack()
+    private void ChaseAndAttack()
     {
         enemyMob.speed = chaseSpd;
 
@@ -100,16 +96,12 @@ public class enemyAI : MonoBehaviour, IDamage
             //face player
             Quaternion rot = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
-
+           
             enemyMob.SetDestination(gameManager.instance.player.transform.position);
-            anim.SetBool("chasingPlayer", true);
-            anim.SetBool("isPatrolling", false);
-            
         }
 
         if (canAttack)
         {
-            anim.SetBool("attackingPlayer", true);
             StartCoroutine(attack());
         }
     }
@@ -176,12 +168,7 @@ public class enemyAI : MonoBehaviour, IDamage
         if (currentHP <= 0)
         {
             whereISpawned.heyIdied();
-            anim.SetBool("healthDepleted", true);
             Destroy(gameObject);
-        }
-        else
-        {
-            anim.SetBool("healthDepleted", false);
         }
     }
 

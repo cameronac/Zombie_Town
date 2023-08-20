@@ -1195,6 +1195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1960164139262880143, guid: 682dc20f6983d804bbbe75ee7bddc0b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7717512433989221700, guid: 682dc20f6983d804bbbe75ee7bddc0b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20
@@ -4874,7 +4878,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -4899,7 +4903,7 @@ MonoBehaviour:
   anim: {fileID: 3050438459934280796}
   currentHP: 10
   maxHP: 10
-  damage: 2
+  damage: 5
   patrolSpd: 3
   chaseSpd: 2
   animChangeSpeed: 5
@@ -5007,6 +5011,10 @@ PrefabInstance:
     - target: {fileID: 8285130161317477221, guid: 1fb7d0ffc6522e4468ffd3526ec1e7d8, type: 3}
       propertyPath: m_Name
       value: enemy spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285130161317477221, guid: 1fb7d0ffc6522e4468ffd3526ec1e7d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
