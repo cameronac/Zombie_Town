@@ -23,8 +23,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 20)][SerializeField] private float currentHP;
     [Range(1, 20)][SerializeField] private float maxHP;
     [Range(1, 20)][SerializeField] public float damage;
-    [Range(1, 10)][SerializeField] private float patrolSpd;
-    [Range(1, 10)][SerializeField] private float chaseSpd;
+    [Range(1, 10)][SerializeField] private float patrolSpeed;
+    [Range(1, 10)][SerializeField] private float chaseSpeed;
+    [Range(1, 10)][SerializeField] private float moveSpeed;
     [SerializeField] int animChangeSpeed;
     private float distance = 10f;
     private float hitRate = 0.5f;
@@ -80,7 +81,7 @@ public class enemyAI : MonoBehaviour, IDamage
     //States: Main Methods-------------
     private void PatrolTheArea()
     {
-        enemyMob.speed = patrolSpd;
+        enemyMob.speed = patrolSpeed;
         if (!isPatrolTimer)
         {
             StartCoroutine(GetRandomPatrolPoint());
@@ -89,7 +90,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void ChaseAndAttack()
     {
-        enemyMob.speed = chaseSpd;
+        enemyMob.speed = chaseSpeed;
 
         if (gameManager.instance != null)
         {
@@ -98,15 +99,28 @@ public class enemyAI : MonoBehaviour, IDamage
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
            
             enemyMob.SetDestination(gameManager.instance.player.transform.position);
+
+            if(distanceToPlayer <= enemyMob.stoppingDistance && canAttack)
+            {
+                anim.SetFloat("Speed", 0f);
+                AttackPlayer();
+            }
         }
 
+        
+    }
+
+    private void AttackPlayer()
+    {
         if (canAttack)
         {
+            anim.SetTrigger("Attack");
             StartCoroutine(attack());
         }
     }
-
     //---------------------------------
+
+
 
     //Updates State of AI--------------
     private void UpdateState()
@@ -176,8 +190,9 @@ public class enemyAI : MonoBehaviour, IDamage
     private IEnumerator GetRandomPatrolPoint()
     {
         isPatrolTimer = true;
-        yield return new WaitForSeconds(Random.Range(5, 10));
+        yield return new WaitForSeconds(Random.Range(3, 8));
         isPatrolTimer = false;
+
         float newX = Random.Range(-pointRange, pointRange);
         float newZ = Random.Range(-pointRange, pointRange);
 

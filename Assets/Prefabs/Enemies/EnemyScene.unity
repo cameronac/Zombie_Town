@@ -4792,8 +4792,9 @@ GameObject:
   - component: {fileID: 8251737491020763961}
   - component: {fileID: 8251737491020763960}
   - component: {fileID: 3050438459934280796}
-  - component: {fileID: 8251737491020763959}
   - component: {fileID: 8251737491020763958}
+  - component: {fileID: 8251737491020763962}
+  - component: {fileID: 8251737491020763959}
   m_Layer: 0
   m_Name: Zombie1
   m_TagString: Untagged
@@ -4904,12 +4905,40 @@ MonoBehaviour:
   currentHP: 10
   maxHP: 10
   damage: 5
-  patrolSpd: 3
-  chaseSpd: 2
-  animChangeSpeed: 5
+  patrolSpeed: 0
+  chaseSpeed: 0
+  moveSpeed: 0
+  animChangeSpeed: 9
   whereISpawned: {fileID: 0}
   distanceToPlayer: 0
   wayPoints: []
+--- !u!54 &8251737491020763962
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251737491020763957}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &8327980294231846121
 Transform:
   m_ObjectHideFlags: 0
