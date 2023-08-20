@@ -72,7 +72,7 @@ public class enemySpawner : MonoBehaviour
         }
     }
 
-    public void heyIdied()
+    public void enemiesDead()
     {
         numberToSpawn--;
     }

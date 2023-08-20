@@ -25,7 +25,6 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 20)][SerializeField] public float damage;
     [Range(1, 10)][SerializeField] private float patrolSpeed;
     [Range(1, 10)][SerializeField] private float chaseSpeed;
-    [Range(1, 10)][SerializeField] private float moveSpeed;
     [SerializeField] int animChangeSpeed;
     private float distance = 10f;
     private float hitRate = 0.5f;
@@ -68,7 +67,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (playerInRange)
         {
-            ChaseAndAttack();
+            ChasePlayer();
+            AttackPlayer();
         }
         else if (!playerInRange)
         {
@@ -82,45 +82,43 @@ public class enemyAI : MonoBehaviour, IDamage
     private void PatrolTheArea()
     {
         enemyMob.speed = patrolSpeed;
+
         if (!isPatrolTimer)
         {
+            anim.SetTrigger("playerNotSeen");
+            anim.SetBool("isPatrolling", true);
+
             StartCoroutine(GetRandomPatrolPoint());
         }
     }
 
-    private void ChaseAndAttack()
+    private void ChasePlayer()
     {
         enemyMob.speed = chaseSpeed;
 
         if (gameManager.instance != null)
         {
+            anim.SetTrigger("playerSeen");
+            anim.SetBool("isPatrolling", false);
+
             //face player
             Quaternion rot = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
            
             enemyMob.SetDestination(gameManager.instance.player.transform.position);
-
-            if(distanceToPlayer <= enemyMob.stoppingDistance && canAttack)
-            {
-                anim.SetFloat("Speed", 0f);
-                AttackPlayer();
-            }
         }
-
-        
     }
 
     private void AttackPlayer()
     {
         if (canAttack)
         {
-            anim.SetTrigger("Attack");
+            anim.SetTrigger("attackPlayer");
+            anim.SetBool("isPatrolling", false);
             StartCoroutine(attack());
         }
     }
     //---------------------------------
-
-
 
     //Updates State of AI--------------
     private void UpdateState()
@@ -176,12 +174,14 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
+
         enemyMob.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
 
         if (currentHP <= 0)
         {
-            whereISpawned.heyIdied();
+            anim.SetTrigger("enemyDeath");
+            whereISpawned.enemiesDead();
             Destroy(gameObject);
         }
     }
@@ -190,13 +190,16 @@ public class enemyAI : MonoBehaviour, IDamage
     private IEnumerator GetRandomPatrolPoint()
     {
         isPatrolTimer = true;
+        anim.SetBool("isPatrolling", true);
         yield return new WaitForSeconds(Random.Range(3, 8));
+        anim.SetBool("isPatrolling", false);
         isPatrolTimer = false;
 
         float newX = Random.Range(-pointRange, pointRange);
         float newZ = Random.Range(-pointRange, pointRange);
 
         target = new Vector3(newX + startPos.x, startPos.y, newZ + startPos.z);
+        
         enemyMob.SetDestination(target);
     }
 
