@@ -102,7 +102,7 @@ public class gameManager : MonoBehaviour
     }
     public void updateObjective(string txt)
     {
-        objectiveText.SetText("Objective:" + txt);
+        objectiveText.SetText("Objective: " + txt);
 
     }
 
