@@ -181,7 +181,7 @@ public class enemyAI : MonoBehaviour, IDamage
         if (currentHP <= 0)
         {
             anim.SetTrigger("enemyDeath");
-            whereISpawned.enemiesDead();
+            //whereISpawned.enemiesDead();
             Destroy(gameObject);
         }
     }
