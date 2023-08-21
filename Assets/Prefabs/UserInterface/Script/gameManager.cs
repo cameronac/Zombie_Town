@@ -20,7 +20,10 @@ public class gameManager : MonoBehaviour
     public Image healthImage;
     public Image staminaImage;
     public TextMeshProUGUI interactText;
+    public TextMeshProUGUI objectiveText;
+    public TextMeshProUGUI Escape;
 
+    int key;
     bool isPaused;
     // Start is called before the first frame update
     void Awake()
@@ -96,6 +99,17 @@ public class gameManager : MonoBehaviour
     public void ToggleInteract(bool toggle)
     {
         interactText.enabled = toggle;
+    }
+    public void updateObjective(int amount)
+    {
+        key += amount;
+        objectiveText.text = key.ToString("0");
+
+        if(key == 1)
+        {
+
+        }
+
     }
 
     //Getters
