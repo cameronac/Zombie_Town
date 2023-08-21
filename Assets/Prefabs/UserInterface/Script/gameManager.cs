@@ -21,9 +21,9 @@ public class gameManager : MonoBehaviour
     public Image staminaImage;
     public TextMeshProUGUI interactText;
     public TextMeshProUGUI objectiveText;
-    public TextMeshProUGUI Escape;
+    
 
-    int key;
+    
     bool isPaused;
     // Start is called before the first frame update
     void Awake()
@@ -100,15 +100,9 @@ public class gameManager : MonoBehaviour
     {
         interactText.enabled = toggle;
     }
-    public void updateObjective(int amount)
+    public void updateObjective(string txt)
     {
-        key += amount;
-        objectiveText.text = key.ToString("0");
-
-        if(key == 1)
-        {
-
-        }
+        objectiveText.SetText("Object:" + txt);
 
     }
 

@@ -11,6 +11,7 @@ public class PickKeyPickup : MonoBehaviour
         if (other.gameObject.TryGetComponent(out IPickup isPickup))
         {
             isPickup.PickupKeyItem(ID);
+            gameManager.instance.updateObjective("Escape!");
             Destroy(gameObject);
         }
     }
