@@ -62,19 +62,21 @@ public class enemyAI : MonoBehaviour, IDamage
     private void Update()   //updates Every Frame
     {
         //animation
-        float agentVel = enemyMob.velocity.normalized.magnitude;
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentVel, Time.deltaTime * animChangeSpeed));
-
-        if (playerInRange)
+        //float agentVel = enemyMob.velocity.normalized.magnitude;
+        //anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentVel, Time.deltaTime * animChangeSpeed));
+        if(currentState != STATE.death)
         {
-            ChasePlayer();
-            AttackPlayer();
+            if (playerInRange)
+            {
+                ChasePlayer();
+                AttackPlayer();
+            }
+            else if (!playerInRange)
+            {
+                PatrolTheArea();
+            }
+            UpdateState();
         }
-        else if (!playerInRange)
-        {
-            PatrolTheArea();
-        }
-        UpdateState();
     }
     //---------------------------------
 
@@ -180,9 +182,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (currentHP <= 0)
         {
-            anim.SetTrigger("enemyDeath");
-            //whereISpawned.enemiesDead();
-            Destroy(gameObject);
+            StartCoroutine(isDead());
         }
     }
 
@@ -237,6 +237,15 @@ public class enemyAI : MonoBehaviour, IDamage
         model.material.color = UnityEngine.Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = startColor;
+    }
+
+    private IEnumerator isDead()
+    {
+        anim.SetTrigger("enemyDeath");
+        currentState = STATE.death;
+        whereISpawned.enemiesDead();
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
     //--------------------------------
 }
