@@ -42,27 +42,27 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     {
         RaycastHit interactHit;
         bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
-        gameManager.instance.ToggleInteract(isHit);
+       
+        if (isHit)
+        {
+            if (interactHit.collider)
+            {
+                IInteract iInteract = interactHit.collider.GetComponent<IInteract>();
+
+                if (iInteract != null) {
+                    gameManager.instance.ToggleInteract(isHit);
+                    if (Input.GetButtonDown("Interact"))
+                        iInteract.pressed();
+                }
+            }
+        }
+        else
+            gameManager.instance.ToggleInteract(false);
 
 
         if (Input.GetButtonDown("Toggle Flashlight"))
         {
             flash_light.SetActive(!flash_light.activeSelf);
-        }
-
-        if (Input.GetButtonDown("Interact"))
-        {
-            if (isHit)
-            {
-                if (interactHit.collider)
-                {
-                    IInteract iInteract = interactHit.collider.GetComponent<IInteract>();
-
-                    if (iInteract != null) {
-                        iInteract.pressed();
-                    }
-                }
-            }
         }
 
         if (!has_pistol)

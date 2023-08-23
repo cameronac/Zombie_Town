@@ -40,6 +40,7 @@ public class enemySpawner : MonoBehaviour
         {
             objectSpawned.GetComponent<enemyAI>().whereISpawned = this;
         }
+
         objectList.Add(objectSpawned);
         numberSpawned++;
 
@@ -63,7 +64,10 @@ public class enemySpawner : MonoBehaviour
 
             for (int i = 0; i < objectList.Count; i++)
             {
-                Destroy(objectList[i]);
+                if (objectList[i] != null)
+                {
+                    Destroy(objectList[i]);
+                }
             }
 
             objectList.Clear();

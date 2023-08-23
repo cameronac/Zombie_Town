@@ -26,6 +26,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] private float patrolSpeed;
     [Range(1, 10)][SerializeField] private float chaseSpeed;
     [SerializeField] int animChangeSpeed;
+    private float hitDistance = 2.5f;
     private float distance = 10f;
     private float hitRate = 0.5f;
     
@@ -61,10 +62,15 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void Update()   //updates Every Frame
     {
-        //animation
-        //float agentVel = enemyMob.velocity.normalized.magnitude;
-        //anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentVel, Time.deltaTime * animChangeSpeed));
-        if(currentState != STATE.death)
+        float agentVel = 0;
+        if (enemyMob.velocity.magnitude > 0)
+        {
+            agentVel = enemyMob.velocity.magnitude / chaseSpeed;
+        }
+
+        anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
+
+        if (currentState != STATE.death)
         {
             if (playerInRange)
             {
@@ -87,9 +93,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (!isPatrolTimer)
         {
-            anim.SetTrigger("playerNotSeen");
-            anim.SetBool("isPatrolling", true);
-
             StartCoroutine(GetRandomPatrolPoint());
         }
     }
@@ -100,9 +103,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (gameManager.instance != null)
         {
-            anim.SetTrigger("playerSeen");
-            anim.SetBool("isPatrolling", false);
-
             //face player
             Quaternion rot = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
@@ -113,10 +113,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void AttackPlayer()
     {
-        if (canAttack)
+        if (canAttack && Vector3.Distance(gameManager.instance.player.transform.position, transform.position) <= hitDistance)
         {
-            anim.SetTrigger("attackPlayer");
-            anim.SetBool("isPatrolling", false);
             StartCoroutine(attack());
         }
     }
@@ -176,12 +174,13 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
-
         enemyMob.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
 
         if (currentHP <= 0)
         {
+            StopAllCoroutines();
+            GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(isDead());
         }
     }
@@ -190,9 +189,7 @@ public class enemyAI : MonoBehaviour, IDamage
     private IEnumerator GetRandomPatrolPoint()
     {
         isPatrolTimer = true;
-        anim.SetBool("isPatrolling", true);
         yield return new WaitForSeconds(Random.Range(3, 8));
-        anim.SetBool("isPatrolling", false);
         isPatrolTimer = false;
 
         float newX = Random.Range(-pointRange, pointRange);
@@ -215,6 +212,8 @@ public class enemyAI : MonoBehaviour, IDamage
             Vector3 playerPos = gameManager.instance.player.transform.position;
             Vector3 direction = (playerPos - transform.position).normalized;
             bool isHit = Physics.Raycast(new Ray(transform.position, direction), out hit, 2f);
+
+            anim.SetTrigger("attackPlayer");
 
             //if collider hit player - attack
             if (isHit)
@@ -243,7 +242,12 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         anim.SetTrigger("enemyDeath");
         currentState = STATE.death;
-        whereISpawned.enemiesDead();
+        enemyMob.enabled = false;
+
+        if (whereISpawned != null) {
+            whereISpawned.enemiesDead();
+        }
+
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);
     }
