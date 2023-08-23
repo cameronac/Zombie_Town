@@ -100,7 +100,10 @@ public class playerMovement : MonoBehaviour
                 stamina -= staminaDecrease * Time.deltaTime;
             } else {
                 isSprinting = false;
-                stamina += staminaIncrease * Time.deltaTime;
+                if(stamina <= staminaMax)
+                {
+                    stamina += staminaIncrease * Time.deltaTime;
+                }
             }
         }
 
