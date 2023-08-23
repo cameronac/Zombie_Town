@@ -31,7 +31,10 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<playerState>();
+        if (player != null)
+        {
+            playerScript = player.GetComponent<playerState>();
+        }
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
 
@@ -59,7 +62,10 @@ public class gameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         isPaused = !isPaused;
-        activeMenu.SetActive(false);
+        if(activeMenu != null)
+        {
+            activeMenu.SetActive(false);
+        }
         activeMenu = null;
     }
 

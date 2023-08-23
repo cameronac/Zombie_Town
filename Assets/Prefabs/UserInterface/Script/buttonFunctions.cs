@@ -30,6 +30,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void playButton()
     {
+        gameManager.instance.stateUnpaused();
         SceneManager.LoadScene(1);
     }
     public void LoadLevel()
