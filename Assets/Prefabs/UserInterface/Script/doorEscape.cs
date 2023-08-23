@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class doorEscape : MonoBehaviour
+public class doorEscape : MonoBehaviour, IInteract
 {
     [SerializeField] int ID;
     [SerializeField] bool locked;
-    private void OnTriggerEnter(Collider other)
+    public void pressed()
     {
         if(locked){
             if(playerState.instance.has_key(ID))
