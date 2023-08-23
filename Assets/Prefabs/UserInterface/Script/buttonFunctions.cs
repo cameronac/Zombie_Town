@@ -39,8 +39,8 @@ public class buttonFunctions : MonoBehaviour
     }
     public void MainMenu()
     {
-        gameManager.instance.stateUnpaused();
         SceneManager.LoadScene(0);
+        gameManager.instance.statePaused();
     }
 
 }

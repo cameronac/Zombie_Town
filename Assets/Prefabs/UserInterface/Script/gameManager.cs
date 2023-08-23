@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
+    public GameObject mainMenu;
     public TextMeshProUGUI ammoTextMesh;
     public Image healthImage;
     public Image staminaImage;
