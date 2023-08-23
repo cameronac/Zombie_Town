@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class enemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject objectToSpawn;
+    [SerializeField] GameObject zombiePrefab;
     [SerializeField] Transform[] spawnPos;
     [SerializeField] int numberToSpawn;
     [SerializeField] float timeBetweenSpawn;
@@ -14,12 +14,6 @@ public class enemySpawner : MonoBehaviour
     bool isSpawning;
     bool startSpawning;
     bool despawn;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //possibly put number of enemies left? - not sure
-    }
 
     // Update is called once per frame
     private void Update()
@@ -34,7 +28,7 @@ public class enemySpawner : MonoBehaviour
     {
         isSpawning = true;
 
-        GameObject objectSpawned = Instantiate(objectToSpawn, spawnPos[Random.Range(0, spawnPos.Length)].position, objectToSpawn.transform.rotation);
+        GameObject objectSpawned = Instantiate(zombiePrefab, spawnPos[Random.Range(0, spawnPos.Length)].position, zombiePrefab.transform.rotation);
 
         if (objectSpawned.GetComponent<enemyAI>())
         {

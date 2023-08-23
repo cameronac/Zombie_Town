@@ -51,13 +51,15 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
                 if (iInteract != null) {
                     gameManager.instance.ToggleInteract(isHit);
+
                     if (Input.GetButtonDown("Interact"))
                         iInteract.pressed();
                 }
             }
         }
-        else
+        else {
             gameManager.instance.ToggleInteract(false);
+        }
 
 
         if (Input.GetButtonDown("Toggle Flashlight"))
