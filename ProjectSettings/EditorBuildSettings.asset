@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/House.unity
     guid: 6b554c660f2adf6459de6effe696f968
   - enabled: 1
-    path: Assets/Prefabs/Map/Simple Map/terrain map.unity
+    path: Assets/Scenes/terrain map.unity
     guid: 8ad66485e237b2440908aac9614258fc
   - enabled: 0
     path: Assets/Prefabs/Pickup/PickupTestingScene.unity
