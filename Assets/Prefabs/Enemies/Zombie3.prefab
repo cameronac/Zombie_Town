@@ -309,7 +309,7 @@ MonoBehaviour:
   maxHP: 10
   damage: 5
   patrolSpeed: 2
-  chaseSpeed: 3
+  chaseSpeed: 5
   animChangeSpeed: 9
   whereISpawned: {fileID: 0}
   distanceToPlayer: 0

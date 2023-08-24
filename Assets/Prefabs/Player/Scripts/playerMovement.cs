@@ -36,8 +36,8 @@ public class playerMovement : MonoBehaviour
 
     //Stamina
     private bool canRun = true;
-    private float stamina = 5;
-    private float staminaMax = 5;
+    private float stamina = 2;
+    private float staminaMax = 2;
     private float staminaDecrease = 0.3f;
     private float staminaIncrease = 0.2f;
     private float staminaRefreshTime = 1.5f;
@@ -110,7 +110,11 @@ public class playerMovement : MonoBehaviour
         stamina = Mathf.Clamp(stamina, 0f, staminaMax);
 
         if (gameManager.instance != null) {
-            gameManager.instance.SetStamina(stamina);
+            if (stamina == 0) {
+                gameManager.instance.SetStamina(0);
+            } else {
+                gameManager.instance.SetStamina(stamina / staminaMax);
+            }
         }
 
         //Apply Gravity
