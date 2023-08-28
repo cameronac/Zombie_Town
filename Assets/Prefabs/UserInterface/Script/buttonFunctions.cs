@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+    [SerializeField] string txt;
 
     public void resume()
     {
@@ -43,5 +44,7 @@ public class buttonFunctions : MonoBehaviour
         SceneManager.LoadScene(0);
         gameManager.instance.statePaused();
     }
+
+  
 
 }

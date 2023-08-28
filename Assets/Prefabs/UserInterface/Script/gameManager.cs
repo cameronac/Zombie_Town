@@ -22,7 +22,9 @@ public class gameManager : MonoBehaviour
     public Image staminaImage;
     public TextMeshProUGUI interactText;
     public TextMeshProUGUI objectiveText;
-    
+
+
+
 
     
     bool isPaused;
@@ -109,9 +111,11 @@ public class gameManager : MonoBehaviour
     }
     public void updateObjective(string txt)
     {
-        objectiveText.SetText("Objective: " + txt);
-
+       
+            objectiveText.SetText("Objective: " + txt);
+        
     }
+       
 
     //Getters
     public bool isGamePaused()
