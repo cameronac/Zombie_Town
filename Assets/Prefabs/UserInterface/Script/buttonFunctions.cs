@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
-    [SerializeField] string txt;
+    
 
     public void resume()
     {

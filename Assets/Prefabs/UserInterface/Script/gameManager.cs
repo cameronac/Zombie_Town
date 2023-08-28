@@ -21,11 +21,11 @@ public class gameManager : MonoBehaviour
     public Image healthImage;
     public Image staminaImage;
     public TextMeshProUGUI interactText;
-    public TextMeshProUGUI objectiveText;
+    [SerializeField] TextMeshProUGUI objectiveText;
 
 
 
-
+    
     
     bool isPaused;
     // Start is called before the first frame update
@@ -111,9 +111,8 @@ public class gameManager : MonoBehaviour
     }
     public void updateObjective(string txt)
     {
-       
-            objectiveText.SetText("Objective: " + txt);
         
+            objectiveText.SetText("Objective: " + txt);
     }
        
 
