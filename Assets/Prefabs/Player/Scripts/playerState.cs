@@ -26,11 +26,16 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     public static playerState instance;
 
     private Vector3 startPosition;
+
     
+    [SerializeField] int meds;
     public List<int> KeyItems = new List<int>();
-   
+    
+    public enum heldItems {pistol = 0, shotgun, knife, meds}
+    public heldItems currItem;
     void Start()
     {
+        currItem = 0;
         instance = this;
         startPosition = transform.position;
         pShoot = GetComponent<playerShoot>();
@@ -65,6 +70,15 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         if (Input.GetButtonDown("Toggle Flashlight"))
         {
             flash_light.SetActive(!flash_light.activeSelf);
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            ToggleItem(true);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            ToggleItem(false);
         }
 
         if (!has_pistol)
@@ -184,6 +198,13 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         characterController.enabled = true;
     }
 
+    public void ToggleItem(bool move)
+    {
+        if(!move && currItem == 0)
+        {
+            
+        }
+    }
     public bool has_key(int ID)
     {
         if(KeyItems.Contains(ID))
