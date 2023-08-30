@@ -24,9 +24,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI objectiveText;
 
 
-
-    
-    
     bool isPaused;
     // Start is called before the first frame update
     void Awake()
