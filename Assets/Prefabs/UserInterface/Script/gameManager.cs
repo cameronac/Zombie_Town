@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
@@ -23,11 +24,8 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI interactText;
     [SerializeField] TextMeshProUGUI objectiveText;
 
-
-
-    
-    
     bool isPaused;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -43,6 +41,20 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name) {
+            mainMenu.SetActive(true);
+            ammoTextMesh.enabled = false;
+            healthImage.enabled = false;
+            staminaImage.enabled = false;
+            objectiveText.enabled = false;
+        } else {
+            mainMenu.SetActive(false);
+            ammoTextMesh.enabled = true;
+            healthImage.enabled = true;
+            staminaImage.enabled = true;
+            objectiveText.enabled = true;
+        }
+
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             statePaused();
@@ -50,14 +62,15 @@ public class gameManager : MonoBehaviour
             pauseMenu.SetActive(isPaused);
         }
     }
+
     public void statePaused()
     {
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         isPaused = !isPaused;
-
     }
+
     public void stateUnpaused()
     {
         Time.timeScale = 1;
@@ -68,10 +81,9 @@ public class gameManager : MonoBehaviour
         {
             activeMenu.SetActive(false);
         }
+
         activeMenu = null;
     }
-
-
 
     public void youWin()
     {
@@ -86,8 +98,6 @@ public class gameManager : MonoBehaviour
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
     }
-
-
 
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)

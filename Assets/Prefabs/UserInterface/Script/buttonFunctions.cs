@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
-    
-
     public void resume()
     {
         gameManager.instance.stateUnpaused();
@@ -44,7 +42,4 @@ public class buttonFunctions : MonoBehaviour
         SceneManager.LoadScene(0);
         gameManager.instance.statePaused();
     }
-
-  
-
 }
