@@ -25,22 +25,27 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI objectiveText;
 
     bool isPaused;
+    bool fadeInObjective = false;
 
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
+
         if (player != null)
         {
             playerScript = player.GetComponent<playerState>();
         }
+
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
     void Update()
     {
+        FadeInFadeOutObjective();
+
         if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name) {
             mainMenu.SetActive(true);
             ammoTextMesh.enabled = false;
@@ -121,14 +126,36 @@ public class gameManager : MonoBehaviour
     }
     public void updateObjective(string txt)
     {
-        
-            objectiveText.SetText("Objective: " + txt);
+        objectiveText.SetText("Objective: " + txt);
+        StartCoroutine(ObjectiveFadeInFadeOut());
     }
-       
 
     //Getters
     public bool isGamePaused()
     {
         return isPaused;
     }
+
+    private void FadeInFadeOutObjective()
+    {
+        if (fadeInObjective) {
+            objectiveText.color = Color.Lerp(objectiveText.color, new Color(1, 1, 1, 1), Time.deltaTime * 5);
+        } else {
+            objectiveText.color = Color.Lerp(objectiveText.color, new Color(1, 1, 1, 0), Time.deltaTime * 5);
+        }
+    }
+
+
+    //Enumerators--------------------------------
+    IEnumerator ObjectiveFadeInFadeOut() {
+
+        //Fade In
+        fadeInObjective = true;
+        
+        yield return new WaitForSeconds(3);
+
+        //Fade Out
+        fadeInObjective = false;
+    }
+    //-------------------------------------------
 }
