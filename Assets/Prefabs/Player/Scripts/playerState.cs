@@ -14,13 +14,18 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] AudioSource audio_source;
     [SerializeField] AudioClip[] player_hurt_audio;
 
+    [Header("Weapons")]
+    [SerializeField] GameObject PistolHold;
+    [SerializeField] GameObject ShotgunHold;
+    [SerializeField] GameObject KnifeHold;
+    [SerializeField] GameObject MedsHold;
+
     [Header("Other")]
     [SerializeField] GameObject flash_light;
     [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_knife = false;
 
-    [SerializeField] GameObject weaponHolder;
     private playerShoot pShoot;
     private CharacterController characterController;
     public static playerState instance;
@@ -28,7 +33,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     private Vector3 startPosition;
 
     
-    [SerializeField] int meds;
+    [SerializeField] int medCount;
     public List<int> KeyItems = new List<int>();
     
     public enum heldItems {pistol = 0, shotgun, knife, meds}
@@ -42,7 +47,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         characterController = GetComponent<CharacterController>();
         Respawn();  
     }
-    
+     
     void Update()
     {
         RaycastHit interactHit;
@@ -81,14 +86,17 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             ToggleItem(false);
         }
 
-        if (!has_pistol)
-        {
-            pShoot.enabled = false;
-            weaponHolder.SetActive(false);
-        } else {
-            pShoot.enabled = true;
-            weaponHolder.SetActive(true);
-        }
+        //if (!has_pistol)
+        //{
+        //    pShoot.enabled = false;
+        //    weaponHolder.SetActive(false);
+        //}
+        //else
+        //{
+        //    pShoot.enabled = true;
+        //    weaponHolder.SetActive(true);
+            
+        //}
     }
 
     public void PickupItem(Items type)
@@ -200,10 +208,19 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
     public void ToggleItem(bool move)
     {
-        if(!move && currItem == 0)
-        {
-            
-        }
+        int tryMove = (int)currItem;
+        if(move)
+            tryMove++;
+        else
+            tryMove--;
+
+        if (tryMove == -1)
+            tryMove = 3;
+        else if (tryMove == 4)
+            tryMove = 0;
+      
+        currItem = (heldItems)tryMove;
+
     }
     public bool has_key(int ID)
     {
