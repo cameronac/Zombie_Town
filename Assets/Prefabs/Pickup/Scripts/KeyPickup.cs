@@ -16,5 +16,4 @@ public class PickKeyPickup : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
