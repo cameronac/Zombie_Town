@@ -24,7 +24,9 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] GameObject flash_light;
     [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
+    [SerializeField] bool has_shotgun = false;
     [SerializeField] bool has_knife = false;
+    [SerializeField] bool has_meds = false;
 
     private playerShoot pShoot;
     private CharacterController characterController;
@@ -40,6 +42,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     public heldItems currItem;
     void Start()
     {
+        
         currItem = 0;
         instance = this;
         startPosition = transform.position;
