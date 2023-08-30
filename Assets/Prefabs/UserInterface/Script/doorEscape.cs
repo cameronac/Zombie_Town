@@ -6,6 +6,7 @@ public class doorEscape : MonoBehaviour, IInteract
 {
     [SerializeField] int ID;
     [SerializeField] bool locked;
+
     public void pressed()
     {
         if(locked){

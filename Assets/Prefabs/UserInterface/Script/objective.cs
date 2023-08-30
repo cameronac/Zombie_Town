@@ -6,54 +6,13 @@ using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
-    [SerializeField] bool objective = false;
-    [SerializeField] string txt;
-    [SerializeField] int colide;
+    [SerializeField] string newObjective;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        objective = false;
-    }
-
-    
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player" && objective == false && colide == 0)
-        {
-            objective = true;
-      
-            
-
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
+    void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player")
         {
-            objective = false;
+            gameManager.instance.updateObjective(newObjective);
+            Destroy(gameObject);
         }
     }
-    void OnGUI()
-    {
-        if (objective == true)
-        {
-            gameManager.instance.updateObjective(txt);
-        }
-    }
-    void Update()
-    {
-        if (Input.GetButtonDown("objective") && colide == 1)
-        {
-            objective = true;
-          
-        }
-        else if (Input.GetButtonUp("objective") && colide == 1)
-        {
-            objective = false;
-        
-        }
-    }
-
 }
