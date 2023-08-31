@@ -13,15 +13,25 @@ public class playerShoot : MonoBehaviour
     [Header("Other")]
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] Light muzzleFlash;
+    [Header("Pistol")]
     int magazine = 0;
     int magazine_size = 12;
     int ammo = 24;
     float recoil = 1.5f;
 
+    [Header("Shotgun")]
+    int sMagazine = 0;
+    int sMagazine_size = 12;
+    int sAmmo = 24;
+    float sRecoil = 1.5f;
+
     float distance = 50;
     [SerializeField] int damage = 4;
     [SerializeField] float firerate = 0.1f;
+    [SerializeField] float healRate = 2f;
     float reloadTime = 1.5f;
+
+    playerState inst;
 
     bool isShooting = false;
     bool isReloading = false;
@@ -29,6 +39,7 @@ public class playerShoot : MonoBehaviour
 
     private void Start()
     {
+        inst = GetComponent<playerState>();
         UpdateAmmoUI();
         muzzleFlash.enabled = false;
     }
@@ -37,16 +48,44 @@ public class playerShoot : MonoBehaviour
     {
         if (Input.GetButtonDown("Shoot"))
         {
-            if (!isShooting && magazine > 0 && !isReloading) {
-                StartCoroutine(shoot());
+            switch(inst.currItem)
+            {
+                case playerState.heldItems.pistol:
+                    if (!isShooting && magazine > 0 && !isReloading)
+                    {
+                        StartCoroutine(pistolShoot());
+                    }
+                    break;
+                case playerState.heldItems.shotgun:
+                    if (!isShooting && sMagazine > 0 && !isReloading)
+                    {
+                        StartCoroutine(shotgunShoot());
+                    }
+                    break;
+                case playerState.heldItems.knife:
+                    break;
+                case playerState.heldItems.meds:
+                    StartCoroutine(Heal());
+                    break;
             }
         }
 
         if (Input.GetButtonDown("Reload"))
         {
-            if (magazine < magazine_size && ammo > 0)
+            switch (inst.currItem)
             {
-                StartCoroutine(reload());
+                case playerState.heldItems.pistol:
+                    if (magazine < magazine_size && ammo > 0)
+                    {
+                        StartCoroutine(pistolReload());
+                    }
+                    break;
+                case playerState.heldItems.shotgun:
+                    if (sMagazine < sMagazine_size && sAmmo > 0)
+                    {
+                        StartCoroutine(shotgunReload());
+                    }
+                    break;
             }
         }
     }
@@ -65,7 +104,7 @@ public class playerShoot : MonoBehaviour
     }
 
     //IEnumerators-----------------------
-    IEnumerator shoot()
+    IEnumerator pistolShoot()
     {
         particleSystem.Play();
         Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-recoil, 0, 0));
@@ -98,8 +137,23 @@ public class playerShoot : MonoBehaviour
         yield return new WaitForSeconds(firerate);
         isShooting = false;
     }
-   
-    IEnumerator reload()
+    
+    IEnumerator shotgunShoot()
+    {
+        yield return new WaitForSeconds(firerate);
+    }
+
+    IEnumerator Heal()
+    {
+        inst.medCount--;
+        isShooting = true;
+        yield return new WaitForSeconds(healRate);
+        isShooting = false;
+        inst.health = inst.health + 50 >= inst.healthMax ? inst.healthMax : inst.health + 50;
+        gameManager.instance.SetHealth(inst.health/100);
+    }
+
+    IEnumerator pistolReload()
     {
         audio_source.clip = reload_audio;
         audio_source.Play();
@@ -123,6 +177,13 @@ public class playerShoot : MonoBehaviour
         UpdateAmmoUI();
     }
     
+    IEnumerator shotgunReload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+        isReloading = false;
+    }
+
     IEnumerator eMuzzleFlash()
     {
         muzzleFlash.enabled = true;
