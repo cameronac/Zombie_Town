@@ -16,11 +16,8 @@ public class FlickeringLight : MonoBehaviour
         {
             print("Couldn't Find Light Component in FlickerLight Script!");
         }
-
-        
     }
     //-------------------------------------------
-
 
     IEnumerator FlickerLight()
     {

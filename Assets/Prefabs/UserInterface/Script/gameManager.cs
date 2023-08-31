@@ -40,6 +40,12 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
 
+
+    private void Start()
+    {
+        StartCoroutine(ObjectiveFadeInFadeOut(8));
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -49,16 +55,19 @@ public class gameManager : MonoBehaviour
         
         if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name) {
             mainMenu.SetActive(true);
-            ammoTextMesh.enabled = false;
-            healthImage.enabled = false;
-            staminaImage.enabled = false;
-            objectiveText.enabled = false;
+            ammoTextMesh.gameObject.SetActive(false);
+            healthImage.gameObject.SetActive(false);
+            staminaImage.gameObject.SetActive(false);
+            objectiveText.gameObject.SetActive(false);
+            interactText.gameObject.SetActive(false);
+
         } else {
             mainMenu.SetActive(false);
             ammoTextMesh.gameObject.SetActive(true);
             healthImage.gameObject.SetActive(true);
             staminaImage.gameObject.SetActive(true);
             objectiveText.gameObject.SetActive(true);
+            interactText.gameObject.SetActive(true);
         }
 
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
@@ -105,8 +114,6 @@ public class gameManager : MonoBehaviour
         activeMenu.SetActive(true);
     }
 
-
-
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)
     {
@@ -130,7 +137,7 @@ public class gameManager : MonoBehaviour
     public void updateObjective(string txt)
     {
         objectiveText.SetText("Objective: " + txt);
-        StartCoroutine(ObjectiveFadeInFadeOut());
+        StartCoroutine(ObjectiveFadeInFadeOut(3));
     }
 
     //Getters
@@ -150,12 +157,12 @@ public class gameManager : MonoBehaviour
 
 
     //Enumerators--------------------------------
-    IEnumerator ObjectiveFadeInFadeOut() {
+    IEnumerator ObjectiveFadeInFadeOut(int time) {
 
         //Fade In
         fadeInObjective = true;
         
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(time);
 
         //Fade Out
         fadeInObjective = false;
