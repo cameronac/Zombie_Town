@@ -162,7 +162,7 @@ public class playerShoot : MonoBehaviour
         
         isShooting = true;
         RaycastHit hit;
-        bool isHit = Physics.SphereCast(inst.KnifeHold.transform.position, knifeDistance, Camera.main.transform.forward, out hit);
+        bool isHit = Physics.SphereCast(inst.KnifeHold.transform.position, knifeDistance, Camera.main.transform.forward, out hit, 0.2f);
         if (isHit)
         {
             hit_point = hit.point;
