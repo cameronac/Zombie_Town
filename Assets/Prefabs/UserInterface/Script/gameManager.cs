@@ -23,6 +23,8 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI interactText;
     [SerializeField] TextMeshProUGUI objectiveText;
 
+    bool isPaused;
+    bool fadeInObjective = false;
 
     bool isPaused;
     // Start is called before the first frame update
@@ -30,16 +32,34 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
+
         if (player != null)
         {
             playerScript = player.GetComponent<playerState>();
         }
+
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
     void Update()
     {
+        FadeInFadeOutObjective();
+
+        if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name) {
+            mainMenu.SetActive(true);
+            ammoTextMesh.enabled = false;
+            healthImage.enabled = false;
+            staminaImage.enabled = false;
+            objectiveText.enabled = false;
+        } else {
+            mainMenu.SetActive(false);
+            ammoTextMesh.enabled = true;
+            healthImage.enabled = true;
+            staminaImage.enabled = true;
+            objectiveText.enabled = true;
+        }
+
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             statePaused();
@@ -109,12 +129,35 @@ public class gameManager : MonoBehaviour
     public void updateObjective(string txt)
     {
         objectiveText.SetText("Objective: " + txt);
+        StartCoroutine(ObjectiveFadeInFadeOut());
     }
-       
 
     //Getters
     public bool isGamePaused()
     {
         return isPaused;
     }
+
+    private void FadeInFadeOutObjective()
+    {
+        if (fadeInObjective) {
+            objectiveText.color = Color.Lerp(objectiveText.color, new Color(1, 1, 1, 1), Time.deltaTime * 5);
+        } else {
+            objectiveText.color = Color.Lerp(objectiveText.color, new Color(1, 1, 1, 0), Time.deltaTime * 5);
+        }
+    }
+
+
+    //Enumerators--------------------------------
+    IEnumerator ObjectiveFadeInFadeOut() {
+
+        //Fade In
+        fadeInObjective = true;
+        
+        yield return new WaitForSeconds(3);
+
+        //Fade Out
+        fadeInObjective = false;
+    }
+    //-------------------------------------------
 }
