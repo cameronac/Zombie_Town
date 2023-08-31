@@ -16,6 +16,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int ammo = 24;
     [SerializeField] float recoil = 1.5f;
     [SerializeField] int pDamage = 4;
+    [SerializeField] float pReloadTime = 1.5f;
 
     [Header("Shotgun")]
     int sMagazine = 0;
@@ -23,11 +24,13 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int sAmmo = 24;
     [SerializeField] float sRecoil = 1.5f;
     [SerializeField] int sDamage = 4;
+    [SerializeField] float sReloadTime = 1.5f;
 
     [Header("Knife")]
     [SerializeField] float knifeDistance = 1f; 
     [SerializeField] float swingRate = 0.5f;
     [SerializeField] int kDamage = 4;
+    [SerializeField] GameObject knifeHitbox;
 
     [Header("Other")]
     [SerializeField] ParticleSystem particleSystem;
@@ -35,7 +38,6 @@ public class playerShoot : MonoBehaviour
     float distance = 50;
     [SerializeField] float firerate = 0.1f;
     [SerializeField] float healRate = 2f;
-    float reloadTime = 1.5f;
 
     playerState inst;
 
@@ -45,6 +47,7 @@ public class playerShoot : MonoBehaviour
 
     private void Start()
     {
+        knifeHitbox.SetActive(false);
         inst = GetComponent<playerState>();
         UpdateAmmoUI();
         muzzleFlash.enabled = false;
@@ -161,15 +164,14 @@ public class playerShoot : MonoBehaviour
         //do some animation thing
         
         isShooting = true;
-        RaycastHit hit;
-        bool isHit = Physics.SphereCast(inst.KnifeHold.transform.position, knifeDistance, Camera.main.transform.forward, out hit, 0.2f);
-        if (isHit)
+        knifeHitbox.SetActive(true);
+
+        Collider[] isHit = Physics.OverlapSphere(inst.KnifeHold.transform.position, knifeDistance);
+        foreach (Collider c in isHit)
         {
-            hit_point = hit.point;
+            IDamage iDamage = c.GetComponent<IDamage>();
 
-            IDamage iDamage = hit.collider.GetComponent<IDamage>();
-
-            if (iDamage != null)
+            if (iDamage != null && c.tag != "Player")
             {
                 iDamage.TakeDamage(kDamage);
             }
@@ -178,11 +180,6 @@ public class playerShoot : MonoBehaviour
         yield return new WaitForSeconds(swingRate);
         isShooting = false;
         
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(inst.KnifeHold.transform.position, knifeDistance);
     }
 
     IEnumerator Heal()
@@ -201,7 +198,7 @@ public class playerShoot : MonoBehaviour
         audio_source.Play();
 
         isReloading = true;
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(pReloadTime);
         isReloading = false;
 
         //Reload 
@@ -222,7 +219,7 @@ public class playerShoot : MonoBehaviour
     IEnumerator shotgunReload()
     {
         isReloading = true;
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(sReloadTime);
         isReloading = false;
     }
 
