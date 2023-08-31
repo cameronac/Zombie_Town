@@ -10,23 +10,29 @@ public class playerShoot : MonoBehaviour
     [SerializeField] AudioClip shoot_audio;
     [SerializeField] AudioClip reload_audio;
 
-    [Header("Other")]
-    [SerializeField] ParticleSystem particleSystem;
-    [SerializeField] Light muzzleFlash;
     [Header("Pistol")]
     int magazine = 0;
-    int magazine_size = 12;
-    int ammo = 24;
-    float recoil = 1.5f;
+    [SerializeField] int magazine_size = 12;
+    [SerializeField] int ammo = 24;
+    [SerializeField] float recoil = 1.5f;
+    [SerializeField] int pDamage = 4;
 
     [Header("Shotgun")]
     int sMagazine = 0;
-    int sMagazine_size = 12;
-    int sAmmo = 24;
-    float sRecoil = 1.5f;
+    [SerializeField] int sMagazine_size = 12;
+    [SerializeField] int sAmmo = 24;
+    [SerializeField] float sRecoil = 1.5f;
+    [SerializeField] int sDamage = 4;
 
+    [Header("Knife")]
+    [SerializeField] float knifeDistance = 1f; 
+    [SerializeField] float swingRate = 0.5f;
+    [SerializeField] int kDamage = 4;
+
+    [Header("Other")]
+    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] Light muzzleFlash;
     float distance = 50;
-    [SerializeField] int damage = 4;
     [SerializeField] float firerate = 0.1f;
     [SerializeField] float healRate = 2f;
     float reloadTime = 1.5f;
@@ -63,9 +69,16 @@ public class playerShoot : MonoBehaviour
                     }
                     break;
                 case playerState.heldItems.knife:
+                    if(!isShooting)
+                    {
+                        StartCoroutine(knifeSwing());
+                    }
                     break;
                 case playerState.heldItems.meds:
-                    StartCoroutine(Heal());
+                    if(!isShooting)
+                    {
+                        StartCoroutine(Heal());
+                    }
                     break;
             }
         }
@@ -129,7 +142,7 @@ public class playerShoot : MonoBehaviour
 
             if (iDamage != null)
             {
-                iDamage.TakeDamage(damage);
+                iDamage.TakeDamage(pDamage);
             }
         }
 
@@ -141,6 +154,35 @@ public class playerShoot : MonoBehaviour
     IEnumerator shotgunShoot()
     {
         yield return new WaitForSeconds(firerate);
+    }
+
+    IEnumerator knifeSwing()
+    {
+        //do some animation thing
+        
+        isShooting = true;
+        RaycastHit hit;
+        bool isHit = Physics.SphereCast(inst.KnifeHold.transform.position, knifeDistance, Camera.main.transform.forward, out hit, 0.2f);
+        if (isHit)
+        {
+            hit_point = hit.point;
+
+            IDamage iDamage = hit.collider.GetComponent<IDamage>();
+
+            if (iDamage != null)
+            {
+                iDamage.TakeDamage(kDamage);
+            }
+        }
+
+        yield return new WaitForSeconds(swingRate);
+        isShooting = false;
+        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(inst.KnifeHold.transform.position, knifeDistance);
     }
 
     IEnumerator Heal()

@@ -877,12 +877,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1d955897a62b1f34b9536a927382bdfa, type: 3}
   - {fileID: 8300000, guid: a03816d0f02101244a7043dab2ea1bec, type: 3}
   - {fileID: 8300000, guid: 6a962345b87c91240a48234b8af59bad, type: 3}
+  PistolHold: {fileID: 0}
+  ShotgunHold: {fileID: 0}
+  KnifeHold: {fileID: 0}
+  MedsHold: {fileID: 0}
   flash_light: {fileID: 1451313053445656013}
   interact_distance: 1.5
   has_pistol: 0
   has_knife: 0
-  weaponHolder: {fileID: 3241173869491509040}
+  medCount: 0
   KeyItems: 
+  currItem: 0
 --- !u!82 &5617170728560848753
 AudioSource:
   m_ObjectHideFlags: 0

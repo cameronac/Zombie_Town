@@ -20392,7 +20392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7637059172876784395
 Transform:
   m_ObjectHideFlags: 0
@@ -20528,9 +20528,19 @@ MonoBehaviour:
   audio_source: {fileID: 4829562638025732311}
   shoot_audio: {fileID: 8300000, guid: 82bed27a249e50e42a722cd69dd90f96, type: 3}
   reload_audio: {fileID: 8300000, guid: 7faba53a764bc4541bb772afc8882058, type: 3}
+  magazine_size: 12
+  ammo: 24
+  recoil: 1.5
+  pDamage: 4
+  sMagazine_size: 12
+  sAmmo: 24
+  sRecoil: 1.5
+  sDamage: 4
+  knifeDistance: 1
+  swingRate: 0.5
+  kDamage: 4
   particleSystem: {fileID: 5669121686083507662}
   muzzleFlash: {fileID: 4108887530232028012}
-  damage: 4
   firerate: 0.1
   healRate: 2
 --- !u!114 &7124058798310846327
@@ -20564,7 +20574,7 @@ MonoBehaviour:
   has_pistol: 0
   has_shotgun: 0
   has_knife: 0
-  medCount: 10
+  medCount: 0
   KeyItems: 
   currItem: 0
 --- !u!82 &4829562638025732311
