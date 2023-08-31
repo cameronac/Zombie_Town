@@ -30,7 +30,6 @@ public class playerShoot : MonoBehaviour
     [SerializeField] float knifeDistance = 1f; 
     [SerializeField] float swingRate = 0.5f;
     [SerializeField] int kDamage = 4;
-    [SerializeField] GameObject knifeHitbox;
 
     [Header("Other")]
     [SerializeField] ParticleSystem particleSystem;
@@ -47,7 +46,6 @@ public class playerShoot : MonoBehaviour
 
     private void Start()
     {
-        knifeHitbox.SetActive(false);
         inst = GetComponent<playerState>();
         UpdateAmmoUI();
         muzzleFlash.enabled = false;
@@ -164,7 +162,6 @@ public class playerShoot : MonoBehaviour
         //do some animation thing
         
         isShooting = true;
-        knifeHitbox.SetActive(true);
 
         Collider[] isHit = Physics.OverlapSphere(inst.KnifeHold.transform.position, knifeDistance);
         foreach (Collider c in isHit)
