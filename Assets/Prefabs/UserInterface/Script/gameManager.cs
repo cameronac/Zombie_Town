@@ -44,8 +44,10 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //print("Main Menu: " + (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name).ToString());
+        
         FadeInFadeOutObjective();
-
+        
         if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name) {
             mainMenu.SetActive(true);
             ammoTextMesh.enabled = false;
@@ -54,10 +56,10 @@ public class gameManager : MonoBehaviour
             objectiveText.enabled = false;
         } else {
             mainMenu.SetActive(false);
-            ammoTextMesh.enabled = true;
-            healthImage.enabled = true;
-            staminaImage.enabled = true;
-            objectiveText.enabled = true;
+            ammoTextMesh.gameObject.SetActive(true);
+            healthImage.gameObject.SetActive(true);
+            staminaImage.gameObject.SetActive(true);
+            objectiveText.gameObject.SetActive(true);
         }
 
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
