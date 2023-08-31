@@ -244,7 +244,8 @@ public class enemyAI : MonoBehaviour, IDamage
         currentState = STATE.death;
         enemyMob.enabled = false;
 
-        if (whereISpawned != null) {
+        if (whereISpawned != null) 
+        {
             whereISpawned.enemiesDead();
         }
 
