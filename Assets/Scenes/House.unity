@@ -35993,6 +35993,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1451313053445656013, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2130258949532861127, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.570147
@@ -36046,6 +36050,18 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7327705366493102580, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
+      propertyPath: MedsHold
+      value: 
+      objectReference: {fileID: 52562411}
+    - target: {fileID: 7327705366493102580, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
+      propertyPath: medCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327705366493102580, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
+      propertyPath: KnifeHold
+      value: 
+      objectReference: {fileID: 1920646655}
+    - target: {fileID: 7327705366493102580, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
       propertyPath: PistolHold
       value: 
       objectReference: {fileID: 2146088977}
@@ -36053,6 +36069,14 @@ PrefabInstance:
       propertyPath: ShotgunHold
       value: 
       objectReference: {fileID: 96931566}
+    - target: {fileID: 7920552821335715993, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919306378009800765, guid: c67803cf5f3ff4a4abe30cad2394a498, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

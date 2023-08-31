@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
@@ -25,8 +26,6 @@ public class gameManager : MonoBehaviour
 
     bool isPaused;
     bool fadeInObjective = false;
-
-    bool isPaused;
     // Start is called before the first frame update
     void Awake()
     {
