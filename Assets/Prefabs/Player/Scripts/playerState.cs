@@ -17,7 +17,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [Header("Weapons")]
     [SerializeField] GameObject PistolHold;
     [SerializeField] GameObject ShotgunHold;
-    [SerializeField] GameObject KnifeHold;
+    [SerializeField] public GameObject KnifeHold;
     [SerializeField] GameObject MedsHold;
 
     [Header("Other")]
