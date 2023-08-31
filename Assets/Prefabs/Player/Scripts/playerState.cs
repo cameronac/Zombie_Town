@@ -7,8 +7,8 @@ using static IPickup;
 
 public class playerState : MonoBehaviour, IPickup, IDamage
 {
-    float health = 100;
-    float healthMax = 100;
+    public float health = 100;
+    public float healthMax = 100;
 
     [Header("Audio")]
     [SerializeField] AudioSource audio_source;
@@ -24,6 +24,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] GameObject flash_light;
     [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
+    [SerializeField] bool has_shotgun = false;
     [SerializeField] bool has_knife = false;
 
     private playerShoot pShoot;
@@ -33,14 +34,19 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     private Vector3 startPosition;
 
     
-    [SerializeField] int medCount;
+    [SerializeField] public int medCount;
     public List<int> KeyItems = new List<int>();
     
-    public enum heldItems {pistol = 0, shotgun, knife, meds}
+    public enum heldItems {pistol, shotgun, knife, meds}
     public heldItems currItem;
     void Start()
     {
-        currItem = 0;
+        PistolHold.SetActive(false);
+        ShotgunHold.SetActive(false);
+        KnifeHold.SetActive(false);
+        MedsHold.SetActive(false);
+
+        currItem = (heldItems)2;
         instance = this;
         startPosition = transform.position;
         pShoot = GetComponent<playerShoot>();
@@ -128,8 +134,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             case FirstAid.first_aid_kit:
                 if (gameManager.instance != null)
                 {
-                    health = 100;
-                    gameManager.instance.SetHealth(1);
+                    medCount++;
                 }
 
                 break;
@@ -208,19 +213,65 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
     public void ToggleItem(bool move)
     {
+        //reset everything
+        pShoot.enabled = false;
+        PistolHold.SetActive(false);
+        ShotgunHold.SetActive(false);
+        KnifeHold.SetActive(false);
+        MedsHold.SetActive(false);
+
         int tryMove = (int)currItem;
+
         if(move)
             tryMove++;
         else
             tryMove--;
 
-        if (tryMove == -1)
+        if (tryMove <= -1)
             tryMove = 3;
-        else if (tryMove == 4)
+        else if (tryMove >= 4)
             tryMove = 0;
       
         currItem = (heldItems)tryMove;
-
+        switch(currItem)
+        {
+            case heldItems.pistol: //pistol
+                if(has_pistol)
+                {
+                    pShoot.enabled = true;
+                    PistolHold.SetActive(true);
+                }
+                else
+                    pShoot.enabled = false;
+                break;
+            case heldItems.shotgun: //shotgun
+                if (has_shotgun)
+                {
+                    pShoot.enabled = true;
+                    ShotgunHold.SetActive(true);
+                }
+                else
+                    pShoot.enabled = false;
+                break;
+            case heldItems.knife:
+                if (has_knife)
+                {
+                    pShoot.enabled = true;
+                    KnifeHold.SetActive(true);
+                }
+                else
+                    pShoot.enabled = false;
+                break;
+            case heldItems.meds:
+                if (medCount > 0)
+                {
+                    pShoot.enabled = true;
+                    MedsHold.SetActive(true);
+                }
+                else
+                    pShoot.enabled = false;
+                break;
+        }
     }
     public bool has_key(int ID)
     {

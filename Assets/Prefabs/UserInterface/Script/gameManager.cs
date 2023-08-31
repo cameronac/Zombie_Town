@@ -26,7 +26,6 @@ public class gameManager : MonoBehaviour
 
     bool isPaused;
     bool fadeInObjective = false;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -69,15 +68,14 @@ public class gameManager : MonoBehaviour
             pauseMenu.SetActive(isPaused);
         }
     }
-
     public void statePaused()
     {
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         isPaused = !isPaused;
-    }
 
+    }
     public void stateUnpaused()
     {
         Time.timeScale = 1;
@@ -88,9 +86,10 @@ public class gameManager : MonoBehaviour
         {
             activeMenu.SetActive(false);
         }
-
         activeMenu = null;
     }
+
+
 
     public void youWin()
     {
@@ -105,6 +104,8 @@ public class gameManager : MonoBehaviour
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
     }
+
+
 
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)
