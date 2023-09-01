@@ -25,7 +25,6 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] float interact_distance = 1.5f;
     [SerializeField] bool has_pistol = false;
     [SerializeField] bool has_shotgun = false;
-    [SerializeField] bool has_knife = false;
 
     private playerShoot pShoot;
     private CharacterController characterController;
@@ -109,10 +108,6 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     {
         switch(type)
         {
-            case Items.knife:
-                has_knife = true;
-                break;
-
             case Items.pistol:
                 has_pistol = true;
                 break;
@@ -254,13 +249,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                     pShoot.enabled = false;
                 break;
             case heldItems.knife:
-                if (has_knife)
-                {
-                    pShoot.enabled = true;
-                    KnifeHold.SetActive(true);
-                }
-                else
-                    pShoot.enabled = false;
+                pShoot.enabled = true;
+                KnifeHold.SetActive(true);
                 break;
             case heldItems.meds:
                 if (medCount > 0)
