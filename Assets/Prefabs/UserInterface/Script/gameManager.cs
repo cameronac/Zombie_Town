@@ -136,6 +136,7 @@ public class gameManager : MonoBehaviour
     }
     public void updateObjective(string txt)
     {
+        StopCoroutine("ObjectiveFadeInFadeOut");
         objectiveText.SetText("Objective: " + txt);
         StartCoroutine(ObjectiveFadeInFadeOut(3));
     }
