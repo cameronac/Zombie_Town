@@ -26,6 +26,7 @@ public class gameManager : MonoBehaviour
 
     bool isPaused;
     bool fadeInObjective = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -97,8 +98,6 @@ public class gameManager : MonoBehaviour
         }
         activeMenu = null;
     }
-
-
 
     public void youWin()
     {
