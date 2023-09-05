@@ -30,6 +30,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] float knifeDistance = 1f; 
     [SerializeField] float swingRate = 0.5f;
     [SerializeField] int kDamage = 4;
+    [SerializeField] Animator knifeAnim;
 
     [Header("Other")]
     [SerializeField] ParticleSystem particleSystem;
@@ -160,7 +161,9 @@ public class playerShoot : MonoBehaviour
     IEnumerator knifeSwing()
     {
         //do some animation thing
-        
+
+        knifeAnim.SetTrigger("Attacking");
+
         isShooting = true;
 
         Collider[] isHit = Physics.OverlapSphere(inst.KnifeHold.transform.position, knifeDistance);
@@ -176,7 +179,8 @@ public class playerShoot : MonoBehaviour
 
         yield return new WaitForSeconds(swingRate);
         isShooting = false;
-        
+    
+
     }
 
     IEnumerator Heal()

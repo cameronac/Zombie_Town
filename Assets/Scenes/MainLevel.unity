@@ -25500,6 +25500,18 @@ PrefabInstance:
       propertyPath: knifeDistance
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2195456471955638630, guid: 8f27c3258ca0828458b55fb665932b70, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195456471955638630, guid: 8f27c3258ca0828458b55fb665932b70, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195456471955638630, guid: 8f27c3258ca0828458b55fb665932b70, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3258383143610410382, guid: 8f27c3258ca0828458b55fb665932b70, type: 3}
       propertyPath: m_Name
       value: Player 1
