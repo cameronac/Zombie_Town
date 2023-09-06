@@ -51,7 +51,7 @@ public class enemyAI : MonoBehaviour, IDamage
     private void Start()    //called before first frame update
     {
         startPos = transform.position;
-        startColor = GetComponent<MeshRenderer>().sharedMaterial.color;
+        //startColor = GetComponent<MeshRenderer>().sharedMaterial.color;
 
         //starts enemy at maxHealth;
         currentHP = maxHP;
