@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
     public Image healthImage;
     public Image staminaImage;
     public TextMeshProUGUI interactText;
+    public GameObject crosshair;
     [SerializeField] TextMeshProUGUI objectiveText;
     [SerializeField] GameObject playerDamageFlash;
 
@@ -62,6 +63,7 @@ public class gameManager : MonoBehaviour
             staminaImage.gameObject.SetActive(false);
             objectiveText.gameObject.SetActive(false);
             interactText.gameObject.SetActive(false);
+            crosshair.gameObject.SetActive(false);
 
         } else {
             mainMenu.SetActive(false);
@@ -70,6 +72,7 @@ public class gameManager : MonoBehaviour
             staminaImage.gameObject.SetActive(true);
             objectiveText.gameObject.SetActive(true);
             interactText.gameObject.SetActive(true);
+            crosshair.gameObject.SetActive(true);
         }
 
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
@@ -123,7 +126,21 @@ public class gameManager : MonoBehaviour
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)
     {
-        ammoTextMesh.SetText(magazine.ToString() + " | " + ammo.ToString());
+        switch(playerScript.currItem)
+        {
+            case playerState.heldItems.pistol:
+                ammoTextMesh.SetText(magazine.ToString() + " | " + ammo.ToString());
+                break;
+            case playerState.heldItems.shotgun:
+                ammoTextMesh.SetText(magazine.ToString() + " | " + ammo.ToString());
+                break;
+            case playerState.heldItems.meds:
+                ammoTextMesh.SetText(ammo.ToString());
+                break;
+            case playerState.heldItems.knife:
+                ammoTextMesh.SetText("∞");
+                break;
+        }
     }
 
     public void SetHealth(float health)
