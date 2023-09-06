@@ -160,6 +160,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     public void TakeDamage(float amount)
     {
         bool isDead = false;
+        StartCoroutine(gameManager.instance.playerFlashDamage());
         health -= amount;
 
         audio_source.clip = player_hurt_audio[Random.Range(0, player_hurt_audio.Length - 1)];

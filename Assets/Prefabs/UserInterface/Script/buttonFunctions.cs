@@ -44,8 +44,9 @@ public class buttonFunctions : MonoBehaviour
     }
     public void optionMenu()
     {
-        SceneManager.LoadScene(2);
         gameManager.instance.statePaused();
+        SceneManager.LoadScene(2);
+        
     }
 
 }

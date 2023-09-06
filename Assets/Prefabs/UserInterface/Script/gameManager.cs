@@ -23,6 +23,7 @@ public class gameManager : MonoBehaviour
     public Image staminaImage;
     public TextMeshProUGUI interactText;
     [SerializeField] TextMeshProUGUI objectiveText;
+    [SerializeField] GameObject playerDamageFlash;
 
     bool isPaused;
     bool fadeInObjective = false;
@@ -112,6 +113,12 @@ public class gameManager : MonoBehaviour
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
     }
+    public IEnumerator playerFlashDamage()
+    {
+        playerDamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        playerDamageFlash.SetActive(false);
+    }
 
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)
@@ -139,6 +146,7 @@ public class gameManager : MonoBehaviour
         objectiveText.SetText("Objective: " + txt);
         StartCoroutine(ObjectiveFadeInFadeOut(3));
     }
+ 
 
     //Getters
     public bool isGamePaused()
