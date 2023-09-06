@@ -48,5 +48,10 @@ public class buttonFunctions : MonoBehaviour
         SceneManager.LoadScene(2);
         
     }
+    public void creditMenu()
+    {
+        gameManager.instance.statePaused();
+        SceneManager.LoadScene(3);
+    }
 
 }
