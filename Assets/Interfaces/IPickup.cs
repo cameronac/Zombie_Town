@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface IPickup
 {
-    public enum Items { knife, pistol }
+    public enum Items { knife, pistol, shotgun }
     public enum FirstAid { bandage, first_aid_kit }
-    public enum Ammo { pistol }
+    public enum Ammo { pistol, shotgun }
 
     public void PickupItem(Items type);
     public void PickupFirstAid(FirstAid type, int amount);
