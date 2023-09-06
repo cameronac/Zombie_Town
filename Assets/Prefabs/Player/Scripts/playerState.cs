@@ -239,6 +239,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 {
                     pShoot.enabled = true;
                     PistolHold.SetActive(true);
+                    gameManager.instance.SetAmmo(pShoot.magazine_size, pShoot.ammo);
                 }
                 else
                     pShoot.enabled = false;
@@ -248,6 +249,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 {
                     pShoot.enabled = true;
                     ShotgunHold.SetActive(true);
+                    gameManager.instance.SetAmmo(pShoot.sMagazine_size, pShoot.sAmmo);
                 }
                 else
                     pShoot.enabled = false;
@@ -255,17 +257,20 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             case heldItems.knife:
                 pShoot.enabled = true;
                 KnifeHold.SetActive(true);
+                gameManager.instance.SetAmmo(0, 0);
                 break;
             case heldItems.meds:
                 if (medCount > 0)
                 {
                     pShoot.enabled = true;
                     MedsHold.SetActive(true);
+                    gameManager.instance.SetAmmo(0, medCount);
                 }
                 else
                 {
                     pShoot.enabled = false;
                     MedsHold.SetActive(false);
+                    gameManager.instance.SetAmmo(0, 0);
                 }
 
                 break;

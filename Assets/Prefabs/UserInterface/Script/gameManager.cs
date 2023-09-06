@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -123,7 +123,21 @@ public class gameManager : MonoBehaviour
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)
     {
-        ammoTextMesh.SetText(magazine.ToString() + " | " + ammo.ToString());
+        switch(playerScript.currItem)
+        {
+            case playerState.heldItems.pistol:
+                ammoTextMesh.SetText(magazine.ToString() + " | " + ammo.ToString());
+                break;
+            case playerState.heldItems.shotgun:
+                ammoTextMesh.SetText(magazine.ToString() + " | " + ammo.ToString());
+                break;
+            case playerState.heldItems.meds:
+                ammoTextMesh.SetText(ammo.ToString());
+                break;
+            case playerState.heldItems.knife:
+                ammoTextMesh.SetText("∞");
+                break;
+        }
     }
 
     public void SetHealth(float health)
