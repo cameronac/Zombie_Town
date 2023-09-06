@@ -18,7 +18,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] GameObject PistolHold;
     [SerializeField] GameObject ShotgunHold;
     [SerializeField] public GameObject KnifeHold;
-    [SerializeField] GameObject MedsHold;
+    [SerializeField] public GameObject MedsHold;
 
     [Header("Other")]
     [SerializeField] GameObject flash_light;
@@ -239,20 +239,20 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 {
                     pShoot.enabled = true;
                     PistolHold.SetActive(true);
-                    gameManager.instance.SetAmmo(pShoot.magazine_size, pShoot.ammo);
                 }
                 else
                     pShoot.enabled = false;
+                gameManager.instance.SetAmmo(pShoot.magazine, pShoot.ammo);
                 break;
             case heldItems.shotgun: //shotgun
                 if (has_shotgun)
                 {
                     pShoot.enabled = true;
                     ShotgunHold.SetActive(true);
-                    gameManager.instance.SetAmmo(pShoot.sMagazine_size, pShoot.sAmmo);
                 }
                 else
                     pShoot.enabled = false;
+                gameManager.instance.SetAmmo(pShoot.sMagazine, pShoot.sAmmo);
                 break;
             case heldItems.knife:
                 pShoot.enabled = true;

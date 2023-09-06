@@ -17,7 +17,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int pDamage = 4;
     [SerializeField] float pReloadTime = 1.5f;
     [SerializeField] float pFirerate = 0.1f;
-    int magazine = 0;
+    public int magazine = 0;
 
     [Header("Shotgun")]
     [SerializeField] public int sMagazine_size = 4;
@@ -26,7 +26,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int sDamage = 4;
     [SerializeField] float sReloadTime = 1.5f;
     [SerializeField] float sFirerate = 1.5f;
-    int sMagazine = 0;
+    public int sMagazine = 0;
 
     [Header("Knife")]
     [SerializeField] float knifeDistance = 1f; 
@@ -114,8 +114,21 @@ public class playerShoot : MonoBehaviour
 
     private void UpdateAmmoUI()
     {
-        if (gameManager.instance != null) {
-            gameManager.instance.SetAmmo(magazine, ammo);
+
+        if (gameManager.instance != null)
+        {
+            switch (inst.currItem)
+            {
+                case playerState.heldItems.pistol:
+                    gameManager.instance.SetAmmo(magazine, ammo);
+                    break;
+                case playerState.heldItems.shotgun:
+                    gameManager.instance.SetAmmo(sMagazine, sAmmo);
+                    break;
+                case playerState.heldItems.meds:
+                    gameManager.instance.SetAmmo(0, inst.medCount);
+                    break;
+            }
         }
     }
 
@@ -209,8 +222,6 @@ public class playerShoot : MonoBehaviour
 
         yield return new WaitForSeconds(swingRate);
         isShooting = false;
-    
-
     }
 
     IEnumerator Heal()
@@ -221,6 +232,11 @@ public class playerShoot : MonoBehaviour
         isShooting = false;
         inst.health = inst.health + 50 >= inst.healthMax ? inst.healthMax : inst.health + 50;
         gameManager.instance.SetHealth(inst.health/100);
+        UpdateAmmoUI();
+        if (inst.medCount <= 0)
+        {
+            inst.MedsHold.SetActive(false);
+        }
     }
 
     IEnumerator pistolReload()
