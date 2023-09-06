@@ -111,6 +111,9 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             case Items.pistol:
                 has_pistol = true;
                 break;
+            case Items.shotgun:
+                has_shotgun = true;
+                break;
         }
     }
 
@@ -259,7 +262,11 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                     MedsHold.SetActive(true);
                 }
                 else
+                {
                     pShoot.enabled = false;
+                    MedsHold.SetActive(false);
+                }
+
                 break;
         }
     }

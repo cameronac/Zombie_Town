@@ -11,20 +11,22 @@ public class playerShoot : MonoBehaviour
     [SerializeField] AudioClip reload_audio;
 
     [Header("Pistol")]
-    int magazine = 0;
     [SerializeField] int magazine_size = 12;
     [SerializeField] int ammo = 24;
     [SerializeField] float recoil = 1.5f;
     [SerializeField] int pDamage = 4;
     [SerializeField] float pReloadTime = 1.5f;
+    [SerializeField] float pFirerate = 0.1f;
+    int magazine = 0;
 
     [Header("Shotgun")]
-    int sMagazine = 0;
-    [SerializeField] int sMagazine_size = 12;
-    [SerializeField] int sAmmo = 24;
-    [SerializeField] float sRecoil = 1.5f;
+    [SerializeField] int sMagazine_size = 4;
+    [SerializeField] int sAmmo = 16;
+    [SerializeField] float sRecoil = 5f;
     [SerializeField] int sDamage = 4;
     [SerializeField] float sReloadTime = 1.5f;
+    [SerializeField] float sFirerate = 1.5f;
+    int sMagazine = 0;
 
     [Header("Knife")]
     [SerializeField] float knifeDistance = 1f; 
@@ -36,7 +38,6 @@ public class playerShoot : MonoBehaviour
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] Light muzzleFlash;
     float distance = 50;
-    [SerializeField] float firerate = 0.1f;
     [SerializeField] float healRate = 2f;
 
     playerState inst;
@@ -149,13 +150,42 @@ public class playerShoot : MonoBehaviour
         }
 
         isShooting = true;
-        yield return new WaitForSeconds(firerate);
+        yield return new WaitForSeconds(pFirerate);
         isShooting = false;
     }
     
     IEnumerator shotgunShoot()
     {
-        yield return new WaitForSeconds(firerate);
+        isShooting = true;
+        particleSystem.Play();
+        Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-sRecoil, 0, 0));
+
+        audio_source.clip = shoot_audio;
+        audio_source.Play();
+
+        StartCoroutine(eMuzzleFlash());
+        sMagazine -= 1;
+        UpdateAmmoUI();
+
+        RaycastHit hit;
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
+        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, distance);
+
+        if (isHit)
+        {
+            hit_point = hit.point;
+
+            IDamage iDamage = hit.collider.GetComponent<IDamage>();
+
+            if (iDamage != null)
+            {
+                iDamage.TakeDamage(sDamage);
+            }
+        }
+
+        yield return new WaitForSeconds(sFirerate);
+        isShooting = false;
     }
 
     IEnumerator knifeSwing()
@@ -219,9 +249,28 @@ public class playerShoot : MonoBehaviour
     
     IEnumerator shotgunReload()
     {
+        audio_source.clip = reload_audio;
+        audio_source.Play();
+
         isReloading = true;
         yield return new WaitForSeconds(sReloadTime);
         isReloading = false;
+
+        //Reload 
+        int needed_ammo = sMagazine_size - sMagazine;
+
+        if (sAmmo > needed_ammo)
+        {
+            sMagazine = sMagazine_size;
+            sAmmo -= needed_ammo;
+        }
+        else
+        {
+            sMagazine += sAmmo;
+            sAmmo = 0;
+        }
+
+        UpdateAmmoUI();
     }
 
     IEnumerator eMuzzleFlash()
