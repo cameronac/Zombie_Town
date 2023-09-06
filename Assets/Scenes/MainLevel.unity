@@ -8462,6 +8462,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7235859116875822165, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_text
+      value: 'Objective: Find the 4 car parts to fix the car'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235859116875822165, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a7b6b83d34e387429bb6447b26575b2, type: 2}
+    - target: {fileID: 7235859116875822165, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.04045032
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235859116875822165, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.04045032
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235859116875822165, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235859116875822165, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7285762040919534982, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
