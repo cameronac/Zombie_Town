@@ -3191,7 +3191,7 @@ MonoBehaviour:
   staminaImage: {fileID: 5222887824195161586}
   interactText: {fileID: 5502894253929181002}
   objectiveText: {fileID: 7235859116875822165}
-  playerDamageFlash: {fileID: 0}
+  playerDamageFlash: {fileID: 3326948627546113038}
 --- !u!114 &7443344011516168053
 MonoBehaviour:
   m_ObjectHideFlags: 0
