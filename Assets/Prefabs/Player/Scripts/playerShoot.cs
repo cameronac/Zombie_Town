@@ -38,8 +38,12 @@ public class playerShoot : MonoBehaviour
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] Light muzzleFlash;
     float distance = 50;
+    float sDistance = 30;
     [SerializeField] float healRate = 2f;
 
+    [SerializeField] GameObject sgSpread;
+    int numBullets = 5;
+    float bulletSpread = 0.15f;
     playerState inst;
 
     bool isShooting = false;
@@ -180,23 +184,32 @@ public class playerShoot : MonoBehaviour
         sMagazine -= 1;
         UpdateAmmoUI();
 
-        RaycastHit hit;
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, distance);
+        bool isHit;
 
-        if (isHit)
+        for (int i = 0; i < Mathf.Max(1, numBullets); i++)
         {
-            hit_point = hit.point;
 
-            IDamage iDamage = hit.collider.GetComponent<IDamage>();
+            Vector3 shootDirection = Camera.main.transform.forward;
+            shootDirection.x += Random.Range(-bulletSpread, bulletSpread);
+            shootDirection.y += Random.Range(-bulletSpread, bulletSpread);
+            shootDirection.z += Random.Range(-bulletSpread, bulletSpread);
 
-            if (iDamage != null)
+            isHit = Physics.Raycast(Camera.main.transform.position, shootDirection, out RaycastHit hit, sDistance);
+
+            if (isHit)
             {
-                iDamage.TakeDamage(sDamage);
+                Instantiate(sgSpread, hit.point, Quaternion.LookRotation(hit.normal));
+                hit_point = hit.point;
+
+                IDamage iDamage = hit.collider.GetComponent<IDamage>();
+
+                if (iDamage != null)
+                {
+                    iDamage.TakeDamage(sDamage);
+                }
             }
         }
-
         yield return new WaitForSeconds(sFirerate);
         isShooting = false;
     }

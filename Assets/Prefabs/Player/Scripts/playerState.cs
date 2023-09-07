@@ -110,9 +110,13 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         {
             case Items.pistol:
                 has_pistol = true;
+                currItem = heldItems.pistol;
+
                 break;
             case Items.shotgun:
                 has_shotgun = true;
+                currItem = heldItems.shotgun;
+
                 break;
         }
     }
