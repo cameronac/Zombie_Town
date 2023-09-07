@@ -4,11 +4,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class gameManager : MonoBehaviour
 {
+    [Header("File Storage Cofig")]
+    [SerializeField] private string fileName;
+    [SerializeField] private bool useEncryption;
+
+    private FileHandler dataHandler;
     public static gameManager instance;
     public GameObject playerSpawnPos;
+    private List<IData> dataPresistenceObjects;
 
     public GameObject player;
     public playerState playerScript;
@@ -28,7 +35,8 @@ public class gameManager : MonoBehaviour
 
     bool isPaused;
     bool fadeInObjective = false;
-    
+    private GameData data;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -47,6 +55,8 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
+        this.dataHandler = new FileHandler(Application.persistentDataPath, fileName, useEncryption);
+        this.dataPresistenceObjects = FindAllDataPersistenceObjects();
         StartCoroutine(ObjectiveFadeInFadeOut(8));
     }
 
@@ -117,28 +127,30 @@ public class gameManager : MonoBehaviour
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
     }
+    public void loadGame()
+    {
+        foreach (IData dataPresistenceObjects in dataPresistenceObjects)
+        {
+            this.data = dataHandler.Load();
+            dataPresistenceObjects.LoadData(data);
+        }
+    }
+
+    public void saveGame()
+    {
+        foreach (IData dataPresistenceObjects in dataPresistenceObjects)
+        {
+            dataPresistenceObjects.SaveData(ref data);
+            dataHandler.Save(data);
+        }
+    }
     public IEnumerator playerFlashDamage()
     {
         playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         playerDamageFlash.SetActive(false);
     }
-    public void loadGame()
-    {
-        GameData data = SaveData.LoadPlayer();
-
-        Vector3 position;
-        position.x = data.position[0];
-        position.y = data.position[1];
-       position.z = data.position[2];
-        transform.position = position;
-
-    }
-    public void saveGame()
-    {
-        SaveData.PlayerSave(playerScript);
-    }
-
+  
     //Update User Interface
     public void SetAmmo(int magazine, int ammo)
     {
@@ -179,7 +191,13 @@ public class gameManager : MonoBehaviour
         objectiveText.SetText("Objective: " + txt);
         StartCoroutine(ObjectiveFadeInFadeOut(3));
     }
- 
+    private List<IData> FindAllDataPersistenceObjects()
+    {
+        IEnumerable<IData> dataPresistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IData>();
+
+        return new List<IData>(dataPresistenceObjects);
+    }
+
 
     //Getters
     public bool isGamePaused()

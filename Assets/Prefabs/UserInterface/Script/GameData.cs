@@ -6,15 +6,11 @@ using UnityEngine.UIElements;
 [System.Serializable]
 public class GameData
 {
-    
-    public float[] position;
 
-    public GameData(playerState player)
+   
+
+    public GameData()
     {
-        
-        position = new float[3];
-        position[0] = player.transform.position.x;
-        position[1] = player.transform.position.y;
-        position[2] = player.transform.position.z;
+      
     }
 }

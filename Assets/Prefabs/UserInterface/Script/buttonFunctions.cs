@@ -55,11 +55,11 @@ public class buttonFunctions : MonoBehaviour
     }
    public void saveGame()
     {
-        gameManager.instance.saveGame();
+        DataPersistenceManager.Instance.saveGame();
     }
     public void loadGame()
     {
-        gameManager.instance.loadGame();
+        DataPersistenceManager.Instance.loadGame();
     }
 
 }

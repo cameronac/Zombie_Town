@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class playerMovement : MonoBehaviour
 {
     //Properties-----------------------
@@ -148,6 +149,8 @@ public class playerMovement : MonoBehaviour
             isMoving = false;
         }
     }
+   
+    
     //---------------------------------
 
     //Enumerators----------------------
