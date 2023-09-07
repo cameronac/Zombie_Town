@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class playerMovement : MonoBehaviour, IData
+public class playerMovement : MonoBehaviour
 {
     //Properties-----------------------
 
@@ -149,14 +149,7 @@ public class playerMovement : MonoBehaviour, IData
             isMoving = false;
         }
     }
-    public void LoadData(GameData data)
-    {
-        this.transform.position = data.playerPosition;
-    }
-    public void SaveData(ref GameData data)
-    {
-        data.playerPosition = this.transform.position;
-    }
+    
    
     
     //---------------------------------
