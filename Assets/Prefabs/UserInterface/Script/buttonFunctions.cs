@@ -53,5 +53,13 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.statePaused();
         SceneManager.LoadScene(3);
     }
+   public void saveGame()
+    {
+        gameManager.instance.saveGame();
+    }
+    public void loadGame()
+    {
+        gameManager.instance.loadGame();
+    }
 
 }

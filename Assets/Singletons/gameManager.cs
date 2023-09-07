@@ -28,6 +28,7 @@ public class gameManager : MonoBehaviour
 
     bool isPaused;
     bool fadeInObjective = false;
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -121,6 +122,21 @@ public class gameManager : MonoBehaviour
         playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         playerDamageFlash.SetActive(false);
+    }
+    public void loadGame()
+    {
+        GameData data = SaveData.LoadPlayer();
+
+        Vector3 position;
+        position.x = data.position[0];
+        position.y = data.position[1];
+       position.z = data.position[2];
+        transform.position = position;
+
+    }
+    public void saveGame()
+    {
+        SaveData.PlayerSave(playerScript);
     }
 
     //Update User Interface
