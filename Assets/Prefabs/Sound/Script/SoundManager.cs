@@ -9,6 +9,7 @@ public class SoundObject : MonoBehaviour
     public GameObject gameObject;
     public AudioSource audioSource;
 
+    // Method to adjust the volume of the audio source
     public void SetVolume(float volume)
     {
         audioSource.volume = volume;
@@ -22,7 +23,20 @@ public class SoundManager : MonoBehaviour
 
     // Add dictionaries to store sound categories and audio clips
     private Dictionary<string, List<AudioClip>> soundDatabase = new Dictionary<string, List<AudioClip>>();
+    
+    // Method to initialize sound categories and audio clips
+    private void InitializeSoundDatabase()
+    {
+        // Populate soundDatabase with sound categories and audio clips
+        soundDatabase["PlayerFootsteps"] = new List<AudioClip> { /* Add player footstep clips here */ };
+        soundDatabase["ZombieSounds"] = new List<AudioClip> { /* Add zombie sound clips here */ };
+        soundDatabase["CarSounds"] = new List<AudioClip> { /* Add car sound clips here */ };
+        
+        // Add more sound categories as needed
+    }
 
+    //Creates the SoundManager Singleton so that it can be used elsewhere
+    //Prevents the game object itself from being destroyed so that sounds can be played when needed
     void Awake()
     {
         if (instance == null)
@@ -34,6 +48,8 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //Prevents the Game object from being destroyed
+        //That way sounds can still be played when the scene changes
         DontDestroyOnLoad(gameObject);
 
         // Initialize your sound categories and audio clips
@@ -43,6 +59,7 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         // Handle any global audio management if needed
+
     }
 
     public void AdjustAllVolumes()
@@ -53,6 +70,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    //Needed to adjust the master volume in the Settings Manager
     public float GetMasterVolume()
     {
         return masterVolume;
@@ -64,6 +82,7 @@ public class SoundManager : MonoBehaviour
         AdjustAllVolumes();
     }
 
+    //Adds the ability for sound to game objects
     public void AddSoundObject(GameObject gameObject)
     {
         // Check if the GameObject already has an AudioSource component.
@@ -84,6 +103,7 @@ public class SoundManager : MonoBehaviour
         soundObjects.Add(soundObject);
     }
 
+    //Adjust the volume of a specific GameObject
     public void AdjustVolume(GameObject gameObject, float volume)
     {
         SoundObject soundObject = soundObjects.Find(so => so.gameObject == gameObject);
@@ -97,15 +117,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Method to initialize sound categories and audio clips
-    private void InitializeSoundDatabase()
-    {
-        // Populate soundDatabase with sound categories and audio clips
-        soundDatabase["PlayerFootsteps"] = new List<AudioClip> { /* Add player footstep clips here */ };
-        soundDatabase["ZombieSounds"] = new List<AudioClip> { /* Add zombie sound clips here */ };
-        soundDatabase["CarSounds"] = new List<AudioClip> { /* Add car sound clips here */ };
-        // Add more sound categories as needed
-    }
 
     // Method to get audio clips for a specific sound category
     public List<AudioClip> GetSoundCategory(string category)
@@ -139,6 +150,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    //Takes in the UI to allow the SettingsManager to adjust the sound of the object
     public void SetUiVolume(float volume)
     {
         foreach (var soundObject in soundObjects)
@@ -215,7 +227,7 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-
+    
     public void SetCarVolume(float volume)
     {
         foreach (var soundObject in soundObjects)
@@ -242,12 +254,17 @@ public class MusicSoundComponent : MonoBehaviour
 public class PlayerSoundComponent : MonoBehaviour
 {
     // This component is used to identify player sounds.
+    //Takes in the Game Object
     [SerializeField] private GameObject player;
+    //Calls the instance of the sound manager
     public SoundManager soundManager;
+    //Allows the addition of an audio source to the game object
     private AudioSource audioSource;
+    //Allows the addition of an audio clip to the game object
     public string footstepSoundCategory = "Footsteps 2";
     public string playerHurtSoundCategory = "Player Hurt 2";
 
+    //Plays the sound when the event occurs
     public void PlayFootstepSound()
     {
         soundManager.PlaySound(footstepSoundCategory);
