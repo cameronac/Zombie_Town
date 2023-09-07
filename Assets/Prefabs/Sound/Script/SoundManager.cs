@@ -24,11 +24,15 @@ public class SoundManager : MonoBehaviour
     // Add dictionaries to store sound categories and audio clips
     private Dictionary<string, List<AudioClip>> soundDatabase = new Dictionary<string, List<AudioClip>>();
     
+    //First step to adding the audio clips to the game
+    public AudioClip playerFootsteps;
+    public AudioClip playerAttack;
+
     // Method to initialize sound categories and audio clips
     private void InitializeSoundDatabase()
     {
         // Populate soundDatabase with sound categories and audio clips
-        soundDatabase["PlayerFootsteps"] = new List<AudioClip> { /* Add player footstep clips here */ };
+        soundDatabase["PlayerSounds"] = new List<AudioClip> {/*Step 2 of adding audio*/ playerFootsteps, playerAttack };
         soundDatabase["ZombieSounds"] = new List<AudioClip> { /* Add zombie sound clips here */ };
         soundDatabase["CarSounds"] = new List<AudioClip> { /* Add car sound clips here */ };
         
