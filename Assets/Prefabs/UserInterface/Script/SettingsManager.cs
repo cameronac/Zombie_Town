@@ -80,7 +80,9 @@ public class SettingsManager : MonoBehaviour
 
     public void OnUiVolumeChanged(float value)
     {
+        //Takes int the users change
         soundManager.SetUiVolume(value);
+        //Saves the users change for the next time they play
         PlayerPrefs.SetFloat("UiVolume", value);
     }
 

@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//This first class -
+//Allows for the adjustment and simple addition of the sound
+//as well as ability to adjust the volume of the sound
 [System.Serializable]
 public class SoundObject : MonoBehaviour
 {
+    
     public GameObject gameObject;
     public AudioSource audioSource;
 
@@ -15,6 +19,7 @@ public class SoundObject : MonoBehaviour
         audioSource.volume = volume;
     }
 }
+//Class where all of the sound is managed
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance;
