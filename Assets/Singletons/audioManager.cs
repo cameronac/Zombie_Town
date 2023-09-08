@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
 
     public void Update()
     {
-        for (int i = lAudioSource.Count; i > 0; i--)
+        for (int i = lAudioSource.Count - 1; i > 0; i--)
         {
             if (lAudioSource[i] == null)
             {

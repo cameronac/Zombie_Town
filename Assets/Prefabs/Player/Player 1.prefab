@@ -11141,6 +11141,7 @@ MonoBehaviour:
   health: 100
   healthMax: 100
   pickup_audio: {fileID: 8300000, guid: 35ab3881caabcd541b1139721f363429, type: 3}
+  switch_audio: {fileID: 8300000, guid: a3d5e98d7eab6ed4f881d3be7c7b44fd, type: 3}
   player_hurt_audio:
   - {fileID: 8300000, guid: 2cde7d2b694baeb40bc39c7cbbde1d84, type: 3}
   - {fileID: 8300000, guid: 71b37426d0b0782408dc53fa8693ab32, type: 3}
