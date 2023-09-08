@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class carParts : MonoBehaviour, IInteract
 {
-    [SerializeField] int ID;
+    [SerializeField] int[] ID;
     [SerializeField] bool locked;
 
     public void pressed()
     {
-        if (locked)
+
+
+        bool win = true;
+
+        for (int i = 0; i < ID.Length; i++)
         {
-            if (playerState.instance.has_key(ID))
+            if (!playerState.instance.has_key(ID[i]))
             {
-                gameManager.instance.youWin();
+                win = false;
+
             }
             else
             {
                 //do something to tell the player they need a key. not sure how to do that just yet.
             }
         }
-        else
+        if (win)
+        {
             gameManager.instance.youWin();
+        }
     }
+        
 }

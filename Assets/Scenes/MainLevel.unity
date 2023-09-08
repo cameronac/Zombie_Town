@@ -11211,6 +11211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car2
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 53ec6115b233000489d1dd52c385f7b0, type: 3}
+      propertyPath: m_TagString
+      value: Interact
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 53ec6115b233000489d1dd52c385f7b0, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
@@ -11334,15 +11338,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 236286748}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100004, guid: 53ec6115b233000489d1dd52c385f7b0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1003861995}
-    - targetCorrespondingSourceObject: {fileID: 100004, guid: 53ec6115b233000489d1dd52c385f7b0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1003861994}
-    - targetCorrespondingSourceObject: {fileID: 100004, guid: 53ec6115b233000489d1dd52c385f7b0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1003861993}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 53ec6115b233000489d1dd52c385f7b0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1003861992}
@@ -14142,49 +14137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c943b559029a904ea671f89624f6187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 5
-  locked: 1
---- !u!114 &1003861993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82095695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c943b559029a904ea671f89624f6187, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 4
-  locked: 1
---- !u!114 &1003861994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82095695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c943b559029a904ea671f89624f6187, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 3
-  locked: 1
---- !u!114 &1003861995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82095695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c943b559029a904ea671f89624f6187, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 2
+  ID: 02000000030000000400000005000000
   locked: 1
 --- !u!65 &1003861996
 BoxCollider:
