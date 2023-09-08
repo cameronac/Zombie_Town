@@ -10,6 +10,8 @@ public class playerShoot : MonoBehaviour
     [SerializeField] AudioClip shotgun_audio;
     [SerializeField] AudioClip pistol_reload_audio;
     [SerializeField] AudioClip shotgun_reload_audio;
+    [SerializeField] AudioClip pistol_dry_fire_audio;
+    [SerializeField] AudioClip shotgun_dry_fire_audio;
 
     [SerializeField] AudioClip knife_hit_audio;
     [SerializeField] AudioClip knife_air_audio;
@@ -71,12 +73,18 @@ public class playerShoot : MonoBehaviour
                     if (!isShooting && magazine > 0 && !isReloading)
                     {
                         StartCoroutine(pistolShoot());
+                    } else if (magazine <= 0)
+                    {
+                        AudioManager.instance.CreateSoundAtPosition(pistol_dry_fire_audio, transform.position);
                     }
                     break;
                 case playerState.heldItems.shotgun:
                     if (!isShooting && sMagazine > 0 && !isReloading)
                     {
                         StartCoroutine(shotgunShoot());
+                    } else
+                    {
+                        AudioManager.instance.CreateSoundAtPosition(shotgun_dry_fire_audio, transform.position);
                     }
                     break;
                 case playerState.heldItems.knife:

@@ -11100,6 +11100,8 @@ MonoBehaviour:
   shotgun_audio: {fileID: 8300000, guid: 2de5d6502846ce541993cc411476be7c, type: 3}
   pistol_reload_audio: {fileID: 8300000, guid: 7faba53a764bc4541bb772afc8882058, type: 3}
   shotgun_reload_audio: {fileID: 8300000, guid: 0d8d996efd7e1854a80602defd4712f0, type: 3}
+  pistol_dry_fire_audio: {fileID: 8300000, guid: f3d134b2a2a143c4a875e83b75cee862, type: 3}
+  shotgun_dry_fire_audio: {fileID: 8300000, guid: 9fa8a994653b0e34688200ba9acbba7e, type: 3}
   knife_hit_audio: {fileID: 8300000, guid: 3b43a40572671f941b7fbefa01279e28, type: 3}
   knife_air_audio: {fileID: 8300000, guid: 81de4d1ab0111394889b341d00313540, type: 3}
   magazine_size: 12

@@ -9,8 +9,6 @@ public class carParts : MonoBehaviour, IInteract
 
     public void pressed()
     {
-
-
         bool win = true;
 
         for (int i = 0; i < ID.Length; i++)
