@@ -319,3 +319,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
+  hit_sound: {fileID: 8300000, guid: 9f9f45428c24d4b44999b9c162f7c4ef, type: 3}
+  destroy_sound: {fileID: 8300000, guid: 5a960d10f3a23ad428dfc83ad1158c38, type: 3}

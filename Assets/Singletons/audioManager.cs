@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class audioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     float volume = 1.0f;
 
     [SerializeField] GameObject audioPrefab;
-    public static audioManager instance;
+    public static AudioManager instance;
 
     private void Awake()
     {
@@ -17,19 +17,22 @@ public class audioManager : MonoBehaviour
             instance = this;
         }
     }
-    public void CreateSoundAtPosition(AudioClip clip, Vector3 position)
+
+    public void CreateSoundAtPosition(AudioClip clip, Vector3 position, float new_volume = 1.0f)
     {
         GameObject prefab = Instantiate(audioPrefab, position, Quaternion.identity);
         AudioSource audioSource = prefab.GetComponent<AudioSource>();
-        audioSource.volume = volume;
+        audioSource.volume = new_volume;
         audioSource.clip = clip;
+        audioSource.Play();
     }
 
-    public void CreateOneDimensionalSound(AudioClip clip)
+    public void CreateOneDimensionalSound(AudioClip clip, float new_volume = 1.0f)
     {
         GameObject prefab = Instantiate(audioPrefab);
         AudioSource audioSource = prefab.GetComponent<AudioSource>();
-        audioSource.volume = volume;
+        audioSource.volume = new_volume;
         audioSource.clip = clip;
+        audioSource.Play();
     }
 }

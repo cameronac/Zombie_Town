@@ -6,9 +6,15 @@ using UnityEngine;
 public class playerShoot : MonoBehaviour
 {
     [Header("Audio")]
-    [SerializeField] AudioSource audio_source;
-    [SerializeField] AudioClip shoot_audio;
-    [SerializeField] AudioClip reload_audio;
+    [SerializeField] AudioClip pistol_audio;
+    [SerializeField] AudioClip shotgun_audio;
+    [SerializeField] AudioClip pistol_reload_audio;
+    [SerializeField] AudioClip shotgun_reload_audio;
+    [SerializeField] AudioClip pistol_dry_fire_audio;
+    [SerializeField] AudioClip shotgun_dry_fire_audio;
+
+    [SerializeField] AudioClip knife_hit_audio;
+    [SerializeField] AudioClip knife_air_audio;
 
     [Header("Pistol")]
     [SerializeField] public int magazine_size = 12;
@@ -67,12 +73,18 @@ public class playerShoot : MonoBehaviour
                     if (!isShooting && magazine > 0 && !isReloading)
                     {
                         StartCoroutine(pistolShoot());
+                    } else if (magazine <= 0)
+                    {
+                        AudioManager.instance.CreateSoundAtPosition(pistol_dry_fire_audio, transform.position);
                     }
                     break;
                 case playerState.heldItems.shotgun:
                     if (!isShooting && sMagazine > 0 && !isReloading)
                     {
                         StartCoroutine(shotgunShoot());
+                    } else
+                    {
+                        AudioManager.instance.CreateSoundAtPosition(shotgun_dry_fire_audio, transform.position);
                     }
                     break;
                 case playerState.heldItems.knife:
@@ -142,8 +154,7 @@ public class playerShoot : MonoBehaviour
         particleSystem.Play();
         Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-recoil, 0, 0));
 
-        audio_source.clip = shoot_audio;
-        audio_source.Play();
+        AudioManager.instance.CreateSoundAtPosition(pistol_audio, transform.position);
 
         StartCoroutine(eMuzzleFlash());
         magazine -= 1;
@@ -177,19 +188,16 @@ public class playerShoot : MonoBehaviour
         particleSystem.Play();
         Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-sRecoil, 0, 0));
 
-        audio_source.clip = shoot_audio;
-        audio_source.Play();
+        AudioManager.instance.CreateSoundAtPosition(shotgun_audio, transform.position);
 
         StartCoroutine(eMuzzleFlash());
         sMagazine -= 1;
         UpdateAmmoUI();
 
-
         bool isHit;
 
         for (int i = 0; i < Mathf.Max(1, numBullets); i++)
         {
-
             Vector3 shootDirection = Camera.main.transform.forward;
             shootDirection.x += Random.Range(-bulletSpread, bulletSpread);
             shootDirection.y += Random.Range(-bulletSpread, bulletSpread);
@@ -216,6 +224,9 @@ public class playerShoot : MonoBehaviour
 
     IEnumerator knifeSwing()
     {
+
+        print("Knife Swing");
+
         //do some animation thing
 
         knifeAnim.SetTrigger("Attacking");
@@ -231,7 +242,13 @@ public class playerShoot : MonoBehaviour
             {
                 iDamage.TakeDamage(kDamage);
             }
+
+            if (c.tag != "Player") {
+                AudioManager.instance.CreateSoundAtPosition(knife_hit_audio, transform.position);
+            }
         }
+
+        AudioManager.instance.CreateSoundAtPosition(knife_air_audio, transform.position);
 
         yield return new WaitForSeconds(swingRate);
         isShooting = false;
@@ -254,8 +271,7 @@ public class playerShoot : MonoBehaviour
 
     IEnumerator pistolReload()
     {
-        audio_source.clip = reload_audio;
-        audio_source.Play();
+        AudioManager.instance.CreateSoundAtPosition(pistol_reload_audio, transform.position);
 
         isReloading = true;
         yield return new WaitForSeconds(pReloadTime);
@@ -278,8 +294,8 @@ public class playerShoot : MonoBehaviour
     
     IEnumerator shotgunReload()
     {
-        audio_source.clip = reload_audio;
-        audio_source.Play();
+
+        AudioManager.instance.CreateSoundAtPosition(shotgun_reload_audio, transform.position);
 
         isReloading = true;
         yield return new WaitForSeconds(sReloadTime);

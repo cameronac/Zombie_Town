@@ -37,7 +37,6 @@ public class gameManager : MonoBehaviour
     bool fadeInObjective = false;
     private GameData data;
 
-
     // Start is called before the first frame update
     void Awake()
     {
