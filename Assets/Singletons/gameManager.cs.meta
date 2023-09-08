@@ -3,7 +3,23 @@ guid: 74cffddcd0f116642b92aee81243d75f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerSpawnPos: {instanceID: 0}
+  - player: {instanceID: 0}
+  - playerScript: {instanceID: 0}
+  - activeMenu: {instanceID: 0}
+  - pauseMenu: {instanceID: 0}
+  - winMenu: {instanceID: 0}
+  - loseMenu: {instanceID: 0}
+  - mainMenu: {instanceID: 0}
+  - ammoTextMesh: {instanceID: 0}
+  - healthImage: {instanceID: 0}
+  - staminaImage: {instanceID: 0}
+  - interactText: {instanceID: 0}
+  - crosshair: {instanceID: 0}
+  - objectiveText: {instanceID: 0}
+  - playerDamageFlash: {instanceID: 0}
+  - save: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -146,11 +146,6 @@ public class playerMovement : MonoBehaviour
             isMoving = false;
         }
     }
-<<<<<<< HEAD
-=======
-    
-   
->>>>>>> b611bab4215b8c5d6ceadd6f895e8532e72bfc8b
     
     //---------------------------------
 

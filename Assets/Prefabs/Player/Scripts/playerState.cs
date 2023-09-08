@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using static IPickup;
 
-public class playerState : MonoBehaviour, IPickup, IDamage, IData
+public class playerState : MonoBehaviour, IPickup, IDamage
 {
     public float health = 100;
     public float healthMax = 100;
@@ -203,14 +203,6 @@ public class playerState : MonoBehaviour, IPickup, IDamage, IData
                 gameManager.instance.SetHealth(health / healthMax);
             }
         }
-    }
-    public void LoadData(GameData data)
-    {
-        this.transform.position = data.playerPosition;
-    }
-    public void SaveData(ref GameData data)
-    {
-        data.playerPosition = this.transform.position;
     }
 
 

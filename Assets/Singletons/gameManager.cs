@@ -148,21 +148,25 @@ public class gameManager : MonoBehaviour
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
     }
+
     public void loadGame()
     {
-        GameData data = SaveSystem.LoadPlayer();
+        if(SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
+        {
+            data = SaveSystem.LoadPlayer();
 
-        playerScript.health = data.health;
-        playerScript.has_shotgun = data.shotgun;
-        playerScript.has_pistol = data.pistol;
+            playerScript.health = data.health;
+            playerScript.has_shotgun = data.shotgun;
+            playerScript.has_pistol = data.pistol;
 
-        Vector3 position;
+            Vector3 position;
 
-        position.x = data.playerPosition[0];
-        position.y = data.playerPosition[1];
-        position.z = data.playerPosition[2];
+            position.x = data.playerPosition[0];
+            position.y = data.playerPosition[1];
+            position.z = data.playerPosition[2];
 
-        player.transform.position = position;
+            player.transform.position = position;
+        }
     }
 
     public void saveGame()

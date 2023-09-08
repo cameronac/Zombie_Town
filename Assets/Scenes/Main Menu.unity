@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: buttonFunctions, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 4888757126510240337, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5417886717707531687, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_Camera
       value: 
@@ -239,6 +243,10 @@ PrefabInstance:
       propertyPath: save
       value: 
       objectReference: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
+    - target: {fileID: 9166381880971091607, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

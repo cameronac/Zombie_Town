@@ -31,7 +31,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void playButton()
     {
-        save._isLoaded = true;
+        save._isLoaded = false;
         gameManager.instance.stateUnpaused();
         SceneManager.LoadScene(1);
     }

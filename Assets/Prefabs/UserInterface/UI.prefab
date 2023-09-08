@@ -4409,8 +4409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cffddcd0f116642b92aee81243d75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.zombieTown
-  useEncryption: 1
   playerSpawnPos: {fileID: 0}
   player: {fileID: 0}
   playerScript: {fileID: 0}
@@ -4426,6 +4424,7 @@ MonoBehaviour:
   crosshair: {fileID: 7537459423310799924}
   objectiveText: {fileID: 7235859116875822165}
   playerDamageFlash: {fileID: 3326948627546113038}
+  save: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
 --- !u!114 &7443344011516168053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4438,6 +4437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98f81a63cba2344d8ebc4a748f238b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  save: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
 --- !u!223 &5417886717707531687
 Canvas:
   m_ObjectHideFlags: 0

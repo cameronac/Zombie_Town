@@ -199,9 +199,9 @@ public class playerShoot : MonoBehaviour
         for (int i = 0; i < Mathf.Max(1, numBullets); i++)
         {
             Vector3 shootDirection = Camera.main.transform.forward;
-            shootDirection.x *= Random.Range(-bulletSpread, bulletSpread);
-            shootDirection.y *= Random.Range(-bulletSpread, bulletSpread);
-            shootDirection.z *= Random.Range(-bulletSpread, bulletSpread);
+            shootDirection.x += Random.Range(-bulletSpread, bulletSpread);
+            shootDirection.y += Random.Range(-bulletSpread, bulletSpread);
+            shootDirection.z += Random.Range(-bulletSpread, bulletSpread);
 
             isHit = Physics.Raycast(Camera.main.transform.position, shootDirection, out RaycastHit hit, sDistance);
 
