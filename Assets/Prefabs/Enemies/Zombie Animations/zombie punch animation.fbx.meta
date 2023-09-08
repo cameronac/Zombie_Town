@@ -27,8 +27,27 @@ ModelImporter:
       = 34.282516 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
-    animationRetargetingWarnings: 
-    animationDoRetargetingWarnings: 0
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'mixamo.com':\n\tLeftLowerLeg
+      average position error 54.7 mm and maximum position error 82.3 mm at time 1:17
+      (40.9%) Frame 47\n\tLeftFoot average position error 130.4 mm and maximum position
+      error 151.1 mm at time 0:13 (11.3%) Frame 13\n\tRightLowerLeg average position
+      error 54.0 mm and maximum position error 63.0 mm at time 1: 4 (29.6%) Frame
+      34\n\tRightFoot average position error 147.4 mm and maximum position error
+      177.0 mm at time 0:16 (13.9%) Frame 16\n\tLeftUpperArm average position error
+      162.1 mm and maximum position error 171.0 mm at time 1:20 (43.5%) Frame 50\n\tLeftLowerArm
+      average position error 199.3 mm and maximum position error 291.6 mm at time
+      0:22 (19.1%) Frame 22\n\tLeftHand average position error 197.4 mm and maximum
+      position error 332.0 mm at time 1: 2 (27.8%) Frame 32\n\tRightUpperArm average
+      position error 163.4 mm and maximum position error 169.4 mm at time 1: 7 (32.2%)
+      Frame 37\n\tRightLowerArm average position error 140.0 mm and maximum position
+      error 286.5 mm at time 1: 7 (32.2%) Frame 37\n\tRightHand average position
+      error 146.4 mm and maximum position error 387.8 mm at time 1: 7 (32.2%) Frame
+      37\n\tHead average position error 82.5 mm and maximum position error 92.4 mm
+      at time 1:18 (41.7%) Frame 48\n\tLeftFoot average orientation error 88.2 deg
+      and maximum orientation error 112.3 deg at time 0:22 (19.1%) Frame 22\n\tRightFoot
+      average orientation error 102.0 deg and maximum orientation error 141.6 deg
+      at time 1: 1 (27.0%) Frame 31\n"
+    animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
     importConstraints: 0
     animationCompression: 3
@@ -40,26 +59,26 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: punch
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 115
+      lastFrame: 71
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
