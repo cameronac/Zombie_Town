@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using static IPickup;
 
-public class playerState : MonoBehaviour, IPickup, IDamage
+public class playerState : MonoBehaviour, IPickup, IDamage, IData
 {
     public float health = 100;
     public float healthMax = 100;
 
     [Header("Audio")]
-    [SerializeField] AudioSource audio_source;
+    [SerializeField] AudioClip pickup_audio;
     [SerializeField] AudioClip[] player_hurt_audio;
 
     [Header("Weapons")]
@@ -23,8 +23,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [Header("Other")]
     [SerializeField] GameObject flash_light;
     [SerializeField] float interact_distance = 1.5f;
-    [SerializeField] bool has_pistol = false;
-    [SerializeField] bool has_shotgun = false;
+    [SerializeField] public bool has_pistol = false;
+    [SerializeField] public bool has_shotgun = false;
 
     private playerShoot pShoot;
     private CharacterController characterController;
@@ -111,14 +111,26 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             case Items.pistol:
                 has_pistol = true;
                 currItem = heldItems.pistol;
+                ShotgunHold.SetActive(false);
+                KnifeHold.SetActive(false);
+                MedsHold.SetActive(false);
 
+                PistolHold.SetActive(true);
+                gameManager.instance.SetAmmo(pShoot.magazine, pShoot.ammo);
                 break;
             case Items.shotgun:
                 has_shotgun = true;
                 currItem = heldItems.shotgun;
+                KnifeHold.SetActive(false);
+                MedsHold.SetActive(false);
+                PistolHold.SetActive(false);
 
+                ShotgunHold.SetActive(true);
+                gameManager.instance.SetAmmo(pShoot.sMagazine, pShoot.sAmmo);
                 break;
         }
+
+        AudioManager.instance.CreateSoundAtPosition(pickup_audio, transform.position, 1);
     }
 
     public void PickupFirstAid(FirstAid type, int amount)
@@ -141,6 +153,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
                 break;
         }
+
+        AudioManager.instance.CreateSoundAtPosition(pickup_audio, transform.position, 1);
     }
 
     public void PickupAmmo(Ammo type, int amount)
@@ -154,6 +168,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 }
                 break;
         }
+
+        AudioManager.instance.CreateSoundAtPosition(pickup_audio, transform.position, 1);
     }
 
     public void PickupKeyItem(int ID) 
@@ -167,8 +183,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         StartCoroutine(gameManager.instance.playerFlashDamage());
         health -= amount;
 
-        audio_source.clip = player_hurt_audio[Random.Range(0, player_hurt_audio.Length - 1)];
-        audio_source.Play();
+        AudioManager.instance.CreateSoundAtPosition(player_hurt_audio[Random.Range(0, player_hurt_audio.Length - 1)], transform.position);
 
         if (health <= 0)
         {
@@ -189,7 +204,15 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             }
         }
     }
-   
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = this.transform.position;
+    }
+
 
 
     public void Respawn()

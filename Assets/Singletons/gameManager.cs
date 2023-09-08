@@ -8,14 +8,10 @@ using System.Linq;
 
 public class gameManager : MonoBehaviour
 {
-    [Header("File Storage Cofig")]
-    [SerializeField] private string fileName;
-    [SerializeField] private bool useEncryption;
 
     private FileHandler dataHandler;
     public static gameManager instance;
     public GameObject playerSpawnPos;
-    private List<IData> dataPresistenceObjects;
 
     public GameObject player;
     public playerState playerScript;
@@ -32,11 +28,10 @@ public class gameManager : MonoBehaviour
     public GameObject crosshair;
     [SerializeField] TextMeshProUGUI objectiveText;
     [SerializeField] GameObject playerDamageFlash;
+    [SerializeField] private SaveSO save;
 
     bool isPaused;
     bool fadeInObjective = false;
-    private GameData data;
-
 
     // Start is called before the first frame update
     void Awake()
@@ -55,10 +50,35 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        this.dataHandler = new FileHandler(Application.persistentDataPath, fileName, useEncryption);
-        this.dataPresistenceObjects = FindAllDataPersistenceObjects();
+        if (save._isLoaded == true)
+        {
+            loadGame();
+        }
+
         StartCoroutine(ObjectiveFadeInFadeOut(8));
     }
+
+    //private void OnEnable()
+    //{
+    //    SceneManager.sceneLoaded += OnSceneLoaded;
+    //    SceneManager.sceneUnloaded += OnSceneUnloaded;
+    //}
+
+    //private void OnDisable()
+    //{
+    //    SceneManager.sceneLoaded -= OnSceneLoaded;
+    //    SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    //}
+
+    //public void OnSceneLoaded(Scene sc, LoadSceneMode mode)
+    //{
+
+    //}
+
+    //public void OnSceneUnloaded(Scene sc)
+    //{
+
+    //}
 
     // Update is called once per frame
     void Update()
@@ -129,21 +149,26 @@ public class gameManager : MonoBehaviour
     }
     public void loadGame()
     {
-        foreach (IData dataPresistenceObjects in dataPresistenceObjects)
-        {
-            this.data = dataHandler.Load();
-            dataPresistenceObjects.LoadData(data);
-        }
+        GameData data = SaveSystem.LoadPlayer();
+
+        playerScript.health = data.health;
+        playerScript.has_shotgun = data.shotgun;
+        playerScript.has_pistol = data.pistol;
+
+        Vector3 position;
+
+        position.x = data.playerPosition[0];
+        position.y = data.playerPosition[1];
+        position.z = data.playerPosition[2];
+
+        player.transform.position = position;
     }
 
     public void saveGame()
     {
-        foreach (IData dataPresistenceObjects in dataPresistenceObjects)
-        {
-            dataPresistenceObjects.SaveData(ref data);
-            dataHandler.Save(data);
-        }
+        SaveSystem.SavePlayer(playerScript, player);
     }
+
     public IEnumerator playerFlashDamage()
     {
         playerDamageFlash.SetActive(true);

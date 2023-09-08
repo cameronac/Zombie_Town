@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+    [SerializeField] private SaveSO save;
+
     public void resume()
     {
         gameManager.instance.stateUnpaused();
@@ -29,6 +31,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void playButton()
     {
+        save._isLoaded = true;
         gameManager.instance.stateUnpaused();
         SceneManager.LoadScene(1);
     }
@@ -59,7 +62,9 @@ public class buttonFunctions : MonoBehaviour
     }
     public void loadGame()
     {
-        gameManager.instance.loadGame();
+        save._isLoaded = true;
+        gameManager.instance.stateUnpaused();
+        SceneManager.LoadScene(1);
     }
 
 }

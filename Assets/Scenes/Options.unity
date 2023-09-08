@@ -329,6 +329,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3094238539915816623, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: save
+      value: 
+      objectReference: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
     - target: {fileID: 3748811080315215382, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_Name
       value: UI
@@ -417,6 +421,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7443344011516168053, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: save
+      value: 
+      objectReference: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
