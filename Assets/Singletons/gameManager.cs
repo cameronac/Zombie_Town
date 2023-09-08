@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.Rendering.UI;
 
 public class gameManager : MonoBehaviour
 {
-
     private FileHandler dataHandler;
     public static gameManager instance;
     public GameObject playerSpawnPos;
@@ -29,9 +29,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI objectiveText;
     [SerializeField] GameObject playerDamageFlash;
     [SerializeField] private SaveSO save;
+    [SerializeField] Image deathAreaImage;
+    private float deathAreaTime = 5f;
 
     bool isPaused;
     bool fadeInObjective = false;
+    public bool inDeathArea = false;
     private GameData data;
 
     // Start is called before the first frame update
@@ -51,6 +54,8 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
+        deathAreaImage.color = new Color(0, 0, 0, 0);
+        inDeathArea = false;
         if (save._isLoaded == true)
         {
             loadGame();
@@ -87,25 +92,9 @@ public class gameManager : MonoBehaviour
         //print("Main Menu: " + (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name).ToString());
         
         FadeInFadeOutObjective();
-        
-        if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name) {
-            mainMenu.SetActive(true);
-            ammoTextMesh.gameObject.SetActive(false);
-            healthImage.gameObject.SetActive(false);
-            staminaImage.gameObject.SetActive(false);
-            objectiveText.gameObject.SetActive(false);
-            interactText.gameObject.SetActive(false);
-            crosshair.gameObject.SetActive(false);
 
-        } else {
-            mainMenu.SetActive(false);
-            ammoTextMesh.gameObject.SetActive(true);
-            healthImage.gameObject.SetActive(true);
-            staminaImage.gameObject.SetActive(true);
-            objectiveText.gameObject.SetActive(true);
-            interactText.gameObject.SetActive(true);
-            crosshair.gameObject.SetActive(true);
-        }
+        UpdateUIVisibility();
+        UpdateDeathArea();
 
         if (Input.GetButtonDown("Cancel") && activeMenu == null && SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
         {
@@ -114,6 +103,48 @@ public class gameManager : MonoBehaviour
             pauseMenu.SetActive(isPaused);
         }
     }
+    
+    public void UpdateUIVisibility()
+    {
+        if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name)
+        {
+            mainMenu.SetActive(true);
+            ammoTextMesh.gameObject.SetActive(false);
+            healthImage.gameObject.SetActive(false);
+            staminaImage.gameObject.SetActive(false);
+            objectiveText.gameObject.SetActive(false);
+            interactText.gameObject.SetActive(false);
+            crosshair.gameObject.SetActive(false);
+            deathAreaImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            mainMenu.SetActive(false);
+            ammoTextMesh.gameObject.SetActive(true);
+            healthImage.gameObject.SetActive(true);
+            staminaImage.gameObject.SetActive(true);
+            objectiveText.gameObject.SetActive(true);
+            interactText.gameObject.SetActive(true);
+            crosshair.gameObject.SetActive(true);
+            deathAreaImage.gameObject.SetActive(true);
+        }
+    }
+
+    public void UpdateDeathArea() {
+        deathAreaImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+
+        float alpha = deathAreaImage.color.a;
+
+        if (inDeathArea)
+        {
+            alpha = Mathf.MoveTowards(alpha, 1, Time.deltaTime * 0.25f);
+            deathAreaImage.color = new Color(0, 0, 0, alpha);  
+        } else {
+            alpha = Mathf.MoveTowards(alpha, 0, Time.deltaTime * 0.25f);
+            deathAreaImage.color = new Color(0, 0, 0, alpha);
+        }
+    }
+
     public void statePaused()
     {
         Time.timeScale = 0;
