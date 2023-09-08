@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class audioInstance : MonoBehaviour
 {
+    bool audio_played = false;
     AudioSource audioSource;
 
     private void Awake()
@@ -13,7 +14,12 @@ public class audioInstance : MonoBehaviour
 
     private void Update()
     {
-        if (!audioSource.isPlaying)
+        if (audioSource.isPlaying)
+        {
+            audio_played = true;
+        }
+
+        if (!audioSource.isPlaying && audio_played)
         {
             Destroy(gameObject);
         }

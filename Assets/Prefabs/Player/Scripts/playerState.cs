@@ -11,7 +11,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage, IData
     public float healthMax = 100;
 
     [Header("Audio")]
-    [SerializeField] AudioSource audio_source;
+    [SerializeField] AudioClip pickup_audio;
     [SerializeField] AudioClip[] player_hurt_audio;
 
     [Header("Weapons")]
@@ -119,6 +119,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage, IData
 
                 break;
         }
+
+        AudioManager.instance.CreateSoundAtPosition(pickup_audio, transform.position, 1);
     }
 
     public void PickupFirstAid(FirstAid type, int amount)
@@ -141,6 +143,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage, IData
 
                 break;
         }
+
+        AudioManager.instance.CreateSoundAtPosition(pickup_audio, transform.position, 1);
     }
 
     public void PickupAmmo(Ammo type, int amount)
@@ -154,6 +158,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage, IData
                 }
                 break;
         }
+
+        AudioManager.instance.CreateSoundAtPosition(pickup_audio, transform.position, 1);
     }
 
     public void PickupKeyItem(int ID) 
@@ -167,8 +173,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage, IData
         StartCoroutine(gameManager.instance.playerFlashDamage());
         health -= amount;
 
-        audio_source.clip = player_hurt_audio[Random.Range(0, player_hurt_audio.Length - 1)];
-        audio_source.Play();
+        AudioManager.instance.CreateSoundAtPosition(player_hurt_audio[Random.Range(0, player_hurt_audio.Length - 1)], transform.position);
 
         if (health <= 0)
         {

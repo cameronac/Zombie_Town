@@ -8,9 +8,7 @@ public class playerMovement : MonoBehaviour
 {
     //Properties-----------------------
 
-
     [Header("Audio")]
-    [SerializeField] AudioSource audio_source;
     [SerializeField] AudioClip[] footstep_audio;
     [SerializeField] AudioClip[] jump_audio;
 
@@ -88,8 +86,8 @@ public class playerMovement : MonoBehaviour
         //Jumping
         if (isJumping && controller.isGrounded) { 
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            audio_source.clip = jump_audio[Random.Range(0, jump_audio.Length - 1)];
-            audio_source.Play();
+
+            AudioManager.instance.CreateSoundAtPosition(jump_audio[Random.Range(0, jump_audio.Length - 1)], transform.position);
         }
 
         //Sprinting
@@ -133,8 +131,7 @@ public class playerMovement : MonoBehaviour
             if (footstep_current > footstep_time)
             {
                 inAir = false;
-                audio_source.clip = footstep_audio[Random.Range(0, footstep_audio.Length - 1)];
-                audio_source.Play();
+                AudioManager.instance.CreateSoundAtPosition(footstep_audio[Random.Range(0, footstep_audio.Length - 1)], transform.position, 0.05f);
                 footstep_current = 0f;
             }
         }
