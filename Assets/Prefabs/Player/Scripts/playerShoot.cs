@@ -186,6 +186,7 @@ public class playerShoot : MonoBehaviour
     {
         isShooting = true;
         particleSystem.Play();
+        
         Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-sRecoil, 0, 0));
 
         AudioManager.instance.CreateSoundAtPosition(shotgun_audio, transform.position);
@@ -198,8 +199,8 @@ public class playerShoot : MonoBehaviour
 
         for (int i = 0; i < Mathf.Max(1, numBullets); i++)
         {
-            Vector3 shootDirection = Camera.main.transform.forward;
-
+            Vector3 shootDirection = transform.forward;
+            
             shootDirection.x += Random.Range(-bulletSpread, bulletSpread);
             shootDirection.y += Random.Range(-bulletSpread, bulletSpread);
 
@@ -218,15 +219,13 @@ public class playerShoot : MonoBehaviour
                 }
             }
         }
+
         yield return new WaitForSeconds(sFirerate);
         isShooting = false;
     }
 
     IEnumerator knifeSwing()
     {
-
-        print("Knife Swing");
-
         //do some animation thing
 
         knifeAnim.SetTrigger("Attacking");

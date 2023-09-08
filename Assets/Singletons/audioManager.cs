@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    float volume = 1.0f;
+    public float volume = 1.0f;
+    float previous_volume = 1.0f;
 
+    private List<AudioSource> lAudioSource = new List<AudioSource>();
+    private List<float> volumeMaxAudioSource = new List<float>();
     [SerializeField] GameObject audioPrefab;
     public static AudioManager instance;
 
@@ -18,6 +21,26 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        for (int i = lAudioSource.Count; i > 0; i--)
+        {
+            if (lAudioSource[i] == null)
+            {
+                lAudioSource.RemoveAt(i);
+                volumeMaxAudioSource.RemoveAt(i);
+            } else
+            {
+                if (volume != previous_volume)
+                {
+                    lAudioSource[i].volume = volume * volumeMaxAudioSource[i];
+                }
+            }
+        }
+
+        previous_volume = volume;
+    }
+
     public void CreateSoundAtPosition(AudioClip clip, Vector3 position, float new_volume = 1.0f)
     {
         GameObject prefab = Instantiate(audioPrefab, position, Quaternion.identity);
@@ -25,6 +48,8 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = new_volume;
         audioSource.clip = clip;
         audioSource.Play();
+        lAudioSource.Add(audioSource);
+        volumeMaxAudioSource.Add(new_volume);
     }
 
     public void CreateOneDimensionalSound(AudioClip clip, float new_volume = 1.0f)
@@ -34,5 +59,7 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = new_volume;
         audioSource.clip = clip;
         audioSource.Play();
+        lAudioSource.Add(audioSource);
+        volumeMaxAudioSource.Add(new_volume);
     }
 }

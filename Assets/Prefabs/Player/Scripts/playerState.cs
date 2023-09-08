@@ -12,6 +12,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
     [Header("Audio")]
     [SerializeField] AudioClip pickup_audio;
+    [SerializeField] AudioClip switch_audio;
     [SerializeField] AudioClip[] player_hurt_audio;
 
     [Header("Weapons")]
@@ -247,6 +248,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             tryMove++;
         else
             tryMove--;
+
+        AudioManager.instance.CreateOneDimensionalSound(switch_audio);
 
         if (tryMove <= -1)
             tryMove = 3;
