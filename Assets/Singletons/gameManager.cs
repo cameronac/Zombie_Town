@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -32,6 +32,7 @@ public class gameManager : MonoBehaviour
 
     bool isPaused;
     bool fadeInObjective = false;
+    private GameData data;
 
     // Start is called before the first frame update
     void Awake()
