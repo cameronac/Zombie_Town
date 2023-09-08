@@ -8,6 +8,8 @@ TagManager:
   - Interact
   - Item
   - Death Area
+  - Enemy
+  - Alerted
   layers:
   - Default
   - TransparentFX

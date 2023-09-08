@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -58,6 +59,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
         enemyMob = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+
+        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
+        {
+            enemyMob.enabled = false;
+        }
     }
 
     private void Update()   //updates Every Frame
@@ -69,6 +75,11 @@ public class enemyAI : MonoBehaviour, IDamage
         }
 
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
+
+        if (enemyMob.isActiveAndEnabled && anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
+        {
+            enemyMob.enabled = true;
+        }
 
         if (currentState != STATE.death)
         {
@@ -158,6 +169,13 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             playerInRange = true;
         }
+
+        //on trigger enter, animation will play normally?
+        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
+        {
+            anim.SetTrigger("isActivated");
+            enemyMob.enabled = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -166,6 +184,11 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             playerInRange = false;
             enemyMob.stoppingDistance = 0;
+        }
+
+        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
+        {
+            enemyMob.enabled = false;
         }
     }
     //---------------------------------
@@ -184,6 +207,7 @@ public class enemyAI : MonoBehaviour, IDamage
             StartCoroutine(isDead());
         }
     }
+    //---------------------------------
 
     //IEnumerators--------------------
     private IEnumerator GetRandomPatrolPoint()
