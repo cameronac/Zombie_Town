@@ -107,7 +107,7 @@ public class gameManager : MonoBehaviour
             crosshair.gameObject.SetActive(true);
         }
 
-        if (Input.GetButtonDown("Cancel") && activeMenu == null)
+        if (Input.GetButtonDown("Cancel") && activeMenu == null && SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
         {
             statePaused();
             activeMenu = pauseMenu;
