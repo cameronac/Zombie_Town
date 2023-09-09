@@ -23,6 +23,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int pDamage = 4;
     [SerializeField] float pReloadTime = 1.5f;
     [SerializeField] float pFirerate = 0.1f;
+    [SerializeField] Animator PistolHold;
     public int magazine = 0;
 
     [Header("Shotgun")]
@@ -49,7 +50,7 @@ public class playerShoot : MonoBehaviour
 
     [SerializeField] GameObject sgSpread;
     int numBullets = 5;
-    float bulletSpread = 0.15f;
+    float bulletSpread = 0.1f;
     playerState inst;
 
     bool isShooting = false;
@@ -98,6 +99,32 @@ public class playerShoot : MonoBehaviour
                     {
                         StartCoroutine(Heal());
                     }
+                    break;
+            }
+        }
+
+        if(Input.GetButtonDown("Aim"))
+        {
+            switch (inst.currItem)
+            {
+                case playerState.heldItems.pistol:
+                    PistolHold.SetBool("ADS", true);
+                    break;
+                case playerState.heldItems.shotgun:
+                    
+                    break;
+            }
+        }
+
+        if (Input.GetButtonUp("Aim"))
+        {
+            switch (inst.currItem)
+            {
+                case playerState.heldItems.pistol:
+                    PistolHold.SetBool("ADS", false);
+                    break;
+                case playerState.heldItems.shotgun:
+
                     break;
             }
         }
@@ -197,7 +224,6 @@ public class playerShoot : MonoBehaviour
         isShooting = true;
         particleSystem.Play();
         
-        Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-sRecoil, 0, 0));
 
         AudioManager.instance.CreateSoundAtPosition(shotgun_audio, transform.position);
 
@@ -209,10 +235,11 @@ public class playerShoot : MonoBehaviour
 
         for (int i = 0; i < Mathf.Max(1, numBullets); i++)
         {
-            Vector3 shootDirection = transform.forward;
+            Vector3 shootDirection = Camera.main.transform.forward;
             
             shootDirection.x += Random.Range(-bulletSpread, bulletSpread);
             shootDirection.y += Random.Range(-bulletSpread, bulletSpread);
+            shootDirection.z += Random.Range(-bulletSpread, bulletSpread);
 
             isHit = Physics.Raycast(Camera.main.transform.position, shootDirection, out RaycastHit hit, sDistance);
 
@@ -239,6 +266,8 @@ public class playerShoot : MonoBehaviour
                 }
             }
         }
+
+        Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-sRecoil, 0, 0));
 
         yield return new WaitForSeconds(sFirerate);
         isShooting = false;

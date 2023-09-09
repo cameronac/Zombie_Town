@@ -43,7 +43,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     {
         PistolHold.SetActive(false);
         ShotgunHold.SetActive(false);
-        KnifeHold.SetActive(false);
+        KnifeHold.SetActive(true);
         MedsHold.SetActive(false);
 
         currItem = (heldItems)2;
@@ -51,7 +51,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         startPosition = transform.position;
         pShoot = GetComponent<playerShoot>();
         characterController = GetComponent<CharacterController>();
-        Respawn();  
+        Respawn();
+        gameManager.instance.SetAmmo(0, 0);
     }
      
     void Update()
@@ -111,22 +112,24 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         {
             case Items.pistol:
                 has_pistol = true;
-                currItem = heldItems.pistol;
+                currItem = (heldItems)0;
                 ShotgunHold.SetActive(false);
                 KnifeHold.SetActive(false);
                 MedsHold.SetActive(false);
 
                 PistolHold.SetActive(true);
+                pShoot.enabled = true;
                 gameManager.instance.SetAmmo(pShoot.magazine, pShoot.ammo);
                 break;
             case Items.shotgun:
                 has_shotgun = true;
-                currItem = heldItems.shotgun;
+                currItem = (heldItems)1;
                 KnifeHold.SetActive(false);
                 MedsHold.SetActive(false);
                 PistolHold.SetActive(false);
 
                 ShotgunHold.SetActive(true);
+                pShoot.enabled = true;
                 gameManager.instance.SetAmmo(pShoot.sMagazine, pShoot.sAmmo);
                 break;
         }
