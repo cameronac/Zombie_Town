@@ -159,7 +159,6 @@ public class enemyAI : MonoBehaviour, IDamage
             currentState = STATE.roam;
         }
     }
-
     //---------------------------------
 
     //Sphere Collider/Trigger-----------
@@ -168,6 +167,7 @@ public class enemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            enemyMob.stoppingDistance = 0;
         }
 
         //on trigger enter, animation will play normally?
@@ -183,7 +183,7 @@ public class enemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            enemyMob.stoppingDistance = 0;
+            
         }
 
         if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
