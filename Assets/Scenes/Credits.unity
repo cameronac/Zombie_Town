@@ -227,6 +227,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5222887824195161586, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459911282537957780, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502894253929181002, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030031875069272731, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154191899665523415, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6851705501432596802, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -305,6 +325,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6851705501432596802, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235859116875822165, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7551260947660167122, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8645384444357735254, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697038952482494302, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

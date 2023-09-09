@@ -168,9 +168,7 @@ public class gameManager : MonoBehaviour
 
     public void youWin()
     {
-        statePaused();
-        activeMenu = winMenu;
-        activeMenu.SetActive(true);
+        SceneManager.LoadScene(3);
     }
 
     public void youLose()
