@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565f1d11a84073640be163b44dbb2efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door_sound: {fileID: 8300000, guid: ed0f543184904a845ac97962e2d5c725, type: 3}
   lock_object: {fileID: 6582044078791916103}
   isLocked: 1
 --- !u!65 &2592887382357635132

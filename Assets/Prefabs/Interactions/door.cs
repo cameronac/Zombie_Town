@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class door : MonoBehaviour, IInteract
 {
+    [SerializeField] AudioClip door_sound;
     [SerializeField] GameObject lock_object;
     [SerializeField] bool isLocked = false;
     BoxCollider boxCollider;
@@ -17,6 +18,7 @@ public class door : MonoBehaviour, IInteract
     {
         if (!isLocked) {
             isOpen = !isOpen;
+            AudioManager.instance.CreateSoundAtPosition(door_sound, transform.position);
 
             if (isTouching)
             {
