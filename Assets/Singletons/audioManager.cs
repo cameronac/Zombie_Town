@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,6 +11,8 @@ public class AudioManager : MonoBehaviour
 
     private List<AudioSource> lAudioSource = new List<AudioSource>();
     private List<float> volumeMaxAudioSource = new List<float>();
+    private List<string> soundTags = new List<string>();
+
     [SerializeField] GameObject audioPrefab;
     public static AudioManager instance;
 
@@ -29,6 +32,7 @@ public class AudioManager : MonoBehaviour
             {
                 lAudioSource.RemoveAt(i);
                 volumeMaxAudioSource.RemoveAt(i);
+                soundTags.RemoveAt(i);
             } else
             {
                 if (volume != previous_volume)
@@ -41,25 +45,47 @@ public class AudioManager : MonoBehaviour
         previous_volume = volume;
     }
 
-    public void CreateSoundAtPosition(AudioClip clip, Vector3 position, float new_volume = 1.0f)
+    public void CreateSoundAtPosition(AudioClip clip, Vector3 position, float new_volume = 1.0f, string sound_tag = "default")
     {
         GameObject prefab = Instantiate(audioPrefab, position, Quaternion.identity);
         AudioSource audioSource = prefab.GetComponent<AudioSource>();
         audioSource.volume = new_volume;
         audioSource.clip = clip;
         audioSource.Play();
+
         lAudioSource.Add(audioSource);
         volumeMaxAudioSource.Add(new_volume);
+        soundTags.Add(sound_tag);
     }
 
-    public void CreateOneDimensionalSound(AudioClip clip, float new_volume = 1.0f)
+    public void CreateOneDimensionalSound(AudioClip clip, float new_volume = 1.0f, string sound_tag = "default")
     {
         GameObject prefab = Instantiate(audioPrefab);
         AudioSource audioSource = prefab.GetComponent<AudioSource>();
         audioSource.volume = new_volume;
         audioSource.clip = clip;
         audioSource.Play();
+
         lAudioSource.Add(audioSource);
         volumeMaxAudioSource.Add(new_volume);
+        soundTags.Add(sound_tag);
+    }
+
+    public void DeleteSoundWithTag(string sound_tag) {
+        print("delete sound");
+        for (int i = lAudioSource.Count - 1; i > 0; i--)
+        {
+            if (soundTags[i] == sound_tag)
+            {
+                if (lAudioSource[i] != null)
+                {
+                    print("Found Sound With Tag");
+                    Destroy(lAudioSource[i].gameObject);
+                    lAudioSource.RemoveAt(i);
+                    volumeMaxAudioSource.RemoveAt(i);
+                    soundTags.RemoveAt(i);
+                }
+            }
+        }
     }
 }

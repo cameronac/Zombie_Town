@@ -4589,10 +4589,6 @@ RectTransform:
   - {fileID: 5533882857400372128}
   - {fileID: 7167478278087169899}
   - {fileID: 2475294022224512030}
-  - {fileID: 104731688209530717}
-  - {fileID: 4098630059138962571}
-  - {fileID: 8745402103358735381}
-  - {fileID: 6213137774730676646}
   - {fileID: 8019157249755666662}
   - {fileID: 2003483985058370779}
   - {fileID: 7459082617924291299}
@@ -4601,6 +4597,10 @@ RectTransform:
   - {fileID: 7674898877578372131}
   - {fileID: 8565854499406108865}
   - {fileID: 4851472818788927962}
+  - {fileID: 104731688209530717}
+  - {fileID: 4098630059138962571}
+  - {fileID: 8745402103358735381}
+  - {fileID: 6213137774730676646}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4620,6 +4620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cffddcd0f116642b92aee81243d75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lose_sound: {fileID: 8300000, guid: 816354b2c41fe104f951ed4bbd8ab96d, type: 3}
   playerSpawnPos: {fileID: 0}
   player: {fileID: 0}
   playerScript: {fileID: 0}

@@ -9,6 +9,8 @@ using UnityEngine.Rendering.UI;
 
 public class gameManager : MonoBehaviour
 {
+    [SerializeField] AudioClip lose_sound;
+
     private FileHandler dataHandler;
     public static gameManager instance;
     public GameObject playerSpawnPos;
@@ -143,6 +145,14 @@ public class gameManager : MonoBehaviour
             alpha = Mathf.MoveTowards(alpha, 0, Time.deltaTime * 0.25f);
             deathAreaImage.color = new Color(0, 0, 0, alpha);
         }
+
+        if (inDeathArea) {
+            if (deathAreaImage.color == new Color(0, 0, 0, 1.0f) && activeMenu != loseMenu)
+            {
+                inDeathArea = false;
+                youLose();
+            }
+        }
     }
 
     public void statePaused()
@@ -159,10 +169,14 @@ public class gameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         isPaused = !isPaused;
+
         if(activeMenu != null)
         {
             activeMenu.SetActive(false);
         }
+
+        AudioManager.instance.DeleteSoundWithTag("lose");
+
         activeMenu = null;
     }
 
@@ -173,6 +187,7 @@ public class gameManager : MonoBehaviour
 
     public void youLose()
     {
+        AudioManager.instance.CreateOneDimensionalSound(lose_sound, 1f, "lose");
         statePaused();
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
