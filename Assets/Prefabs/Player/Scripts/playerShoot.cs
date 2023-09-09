@@ -175,6 +175,16 @@ public class playerShoot : MonoBehaviour
             {
                 iDamage.TakeDamage(pDamage);
             }
+
+            if (hit.collider.tag == "lock")
+            {
+                BreakableLock dO = hit.collider.GetComponent<BreakableLock>();
+
+                if (dO != null)
+                {
+                    dO.ShotLock();
+                }
+            }
         }
 
         isShooting = true;
@@ -216,6 +226,16 @@ public class playerShoot : MonoBehaviour
                 if (iDamage != null)
                 {
                     iDamage.TakeDamage(sDamage);
+                }
+
+                if (hit.collider.tag == "lock")
+                {
+                    BreakableLock dO = hit.collider.GetComponent<BreakableLock>();
+
+                    if (dO != null)
+                    {
+                        dO.ShotLock();
+                    }
                 }
             }
         }

@@ -10,6 +10,7 @@ TagManager:
   - Death Area
   - Enemy
   - Alerted
+  - lock
   layers:
   - Default
   - TransparentFX
