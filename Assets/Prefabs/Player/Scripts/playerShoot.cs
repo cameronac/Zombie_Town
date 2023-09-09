@@ -245,7 +245,6 @@ public class playerShoot : MonoBehaviour
 
             if (isHit)
             {
-                Instantiate(sgSpread, hit.point, Quaternion.LookRotation(hit.normal));
                 hit_point = hit.point;
 
                 IDamage iDamage = hit.collider.GetComponent<IDamage>();
