@@ -115,10 +115,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (gameManager.instance != null)
         {
-            //face player
-            Quaternion rot = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
-           
             enemyMob.SetDestination(gameManager.instance.player.transform.position);
         }
     }
@@ -170,7 +166,7 @@ public class enemyAI : MonoBehaviour, IDamage
             playerInRange = true;
             enemyMob.stoppingDistance = 0;
 
-            anim.SetTrigger("alertCollision");
+            //anim.SetTrigger("alertCollision");
 
             anim.SetTrigger("isActivated");
             enemyMob.enabled = true;
@@ -228,24 +224,27 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (gameManager.instance != null)
         {
-            RaycastHit hit;
-            Vector3 playerPos = gameManager.instance.player.transform.position;
-            Vector3 direction = (playerPos - transform.position).normalized;
-            bool isHit = Physics.Raycast(new Ray(transform.position, direction), out hit, 2f);
-
             anim.SetTrigger("attackPlayer");
+        }
+    }
 
-            //if collider hit player - attack
-            if (isHit)
+    public void Attack()
+    {
+        RaycastHit hit;
+        Vector3 playerPos = gameManager.instance.player.transform.position;
+        Vector3 direction = (playerPos - transform.position).normalized;
+        bool isHit = Physics.Raycast(new Ray(transform.position, direction), out hit, 2f);
+
+        //if collider hit player - attack
+        if (isHit)
+        {
+            if (hit.collider.tag == "Player")
             {
-                if (hit.collider.tag == "Player")
-                {
-                    IDamage iDamage = hit.collider.GetComponent<IDamage>();
+                IDamage iDamage = hit.collider.GetComponent<IDamage>();
 
-                    if (iDamage != null)
-                    {
-                        iDamage.TakeDamage(damage);
-                    }
+                if (iDamage != null)
+                {
+                    iDamage.TakeDamage(damage);
                 }
             }
         }
