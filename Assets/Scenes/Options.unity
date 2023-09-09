@@ -337,6 +337,34 @@ PrefabInstance:
       propertyPath: save
       value: 
       objectReference: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
+    - target: {fileID: 3578970500187363198, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578970500187363198, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578970500187363198, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8696795266999052042}
+    - target: {fileID: 3578970500187363198, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578970500187363198, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578970500187363198, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: systemMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578970500187363198, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3748811080315215382, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_Name
       value: UI
@@ -438,6 +466,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+--- !u!114 &8696795266999052042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6433061081821492277, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+  m_PrefabInstance: {fileID: 8696795266999052041}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e84675dbf1d3c44e9bf42e1d59137c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
