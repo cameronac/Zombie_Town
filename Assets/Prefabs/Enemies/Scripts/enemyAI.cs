@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering.PostProcessing;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -51,19 +52,19 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void Start()    //called before first frame update
     {
+        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
+        {
+            enemyMob.enabled = false;
+        }
+
         startPos = transform.position;
-        //startColor = GetComponent<MeshRenderer>().sharedMaterial.color;
+        startColor = GetComponent<MeshRenderer>().sharedMaterial.color;
 
         //starts enemy at maxHealth;
         currentHP = maxHP;
 
         enemyMob = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-
-        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
-        {
-            enemyMob.enabled = false;
-        }
     }
 
     private void Update()   //updates Every Frame
@@ -76,7 +77,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
 
-        if (enemyMob.isActiveAndEnabled && anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
+        if (enemyMob.isActiveAndEnabled && enemyMob.CompareTag("Alerted"))
         {
             enemyMob.enabled = true;
         }
@@ -164,15 +165,13 @@ public class enemyAI : MonoBehaviour, IDamage
     //Sphere Collider/Trigger-----------
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
         {
             playerInRange = true;
             enemyMob.stoppingDistance = 0;
-        }
 
-        //on trigger enter, animation will play normally?
-        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
-        {
+            anim.SetTrigger("alertCollision");
+
             anim.SetTrigger("isActivated");
             enemyMob.enabled = true;
         }
@@ -180,14 +179,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
         {
-            playerInRange = false;
-            
-        }
+            playerInRange = true;
+            enemyMob.stoppingDistance = 0;
 
-        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
-        {
             enemyMob.enabled = false;
         }
     }
