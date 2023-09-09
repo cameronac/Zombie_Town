@@ -28,7 +28,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] private float patrolSpeed;
     [Range(1, 10)][SerializeField] private float chaseSpeed;
     [SerializeField] int animChangeSpeed;
-    private float hitDistance = 2.5f;
+    private float hitDistance = 6f;
     private float distance = 10f;
     private float hitRate = 0.5f;
     
@@ -93,6 +93,7 @@ public class enemyAI : MonoBehaviour, IDamage
             {
                 PatrolTheArea();
             }
+
             UpdateState();
         }
     }
@@ -164,7 +165,7 @@ public class enemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
         {
             playerInRange = true;
-            enemyMob.stoppingDistance = 0;
+            enemyMob.stoppingDistance = 3f;
 
             //anim.SetTrigger("alertCollision");
 
@@ -228,12 +229,12 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    public void Attack()
+    public void Attack()    //The Attack Animation Calls This Method At A Specific Frame
     {
         RaycastHit hit;
         Vector3 playerPos = gameManager.instance.player.transform.position;
         Vector3 direction = (playerPos - transform.position).normalized;
-        bool isHit = Physics.Raycast(new Ray(transform.position, direction), out hit, 2f);
+        bool isHit = Physics.Raycast(new Ray(transform.position, direction), out hit, 2.5f);
 
         //if collider hit player - attack
         if (isHit)
