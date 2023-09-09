@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
+using System.IO;
 using UnityEngine.Rendering.UI;
 
 public class gameManager : MonoBehaviour
@@ -42,6 +43,11 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
+        {
+            save._isLoaded = false;
+        }
+
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -58,7 +64,7 @@ public class gameManager : MonoBehaviour
     {
         deathAreaImage.color = new Color(0, 0, 0, 0);
         inDeathArea = false;
-        if (save._isLoaded == true)
+        if (save._isLoaded == true && File.Exists(Application.persistentDataPath + "/player.dataucannottouch"))
         {
             loadGame();
         }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05b66274278a9c4f8d15bbd2594d175, type: 3}
   m_Name: Save
   m_EditorClassIdentifier: 
-  _isLoaded: 1
+  _isLoaded: 0
