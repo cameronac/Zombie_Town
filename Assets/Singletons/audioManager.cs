@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public float volume = 1.0f;
+    public static float volume = 1.0f;
     float previous_volume = 1.0f;
-
+   
     private List<AudioSource> lAudioSource = new List<AudioSource>();
     private List<float> volumeMaxAudioSource = new List<float>();
     private List<string> soundTags = new List<string>();
@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
 
     public void Update()
     {
+        
         for (int i = lAudioSource.Count - 1; i > 0; i--)
         {
             if (lAudioSource[i] == null)
