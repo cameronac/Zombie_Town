@@ -11195,6 +11195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_KitchenRustyKnife
       objectReference: {fileID: 0}
+    - target: {fileID: 1289100062823888, guid: 3561d375b004832418eaf9271450e06f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4902080754245960, guid: 3561d375b004832418eaf9271450e06f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11235,6 +11239,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45.7
       objectReference: {fileID: 0}
+    - target: {fileID: 584063689764521329, guid: 3561d375b004832418eaf9271450e06f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 6972411868518864432}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
