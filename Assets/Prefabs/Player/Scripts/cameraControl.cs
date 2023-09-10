@@ -7,6 +7,7 @@ public class cameraControl : MonoBehaviour
     int sensitivity = 2;
     int lockVertMin = -90;
     int lockVertMax = 90;
+    float currentXRotation = 0;
 
     [SerializeField] bool invertY = false;
 
@@ -35,8 +36,8 @@ public class cameraControl : MonoBehaviour
             xRotation -= mouseY;
         }
 
-        xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
-
+        currentXRotation += xRotation;
+        currentXRotation = Mathf.Clamp(currentXRotation, lockVertMin, lockVertMax);
 
         if (gameManager.instance != null)
         {
@@ -48,8 +49,13 @@ public class cameraControl : MonoBehaviour
 
         if (!isPaused)
         {
-            transform.localRotation *= Quaternion.Euler(xRotation, 0, 0);
+            transform.localRotation = Quaternion.Euler(currentXRotation, 0, 0);
             transform.parent.Rotate(Vector3.up * mouseX);
         }
+    }
+
+    public void ApplyRecoil(Vector3 recoil)
+    {
+        currentXRotation += recoil.x;
     }
 }

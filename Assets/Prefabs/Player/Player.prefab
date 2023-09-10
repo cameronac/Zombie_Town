@@ -10749,11 +10749,13 @@ MonoBehaviour:
   sDamage: 4
   sReloadTime: 1.5
   sFirerate: 1.5
+  ShotgunHold: {fileID: 0}
   sMagazine: 0
   knifeDistance: 1.2
   swingRate: 0.5
   kDamage: 4
   knifeAnim: {fileID: 1164588015510419553}
+  cCameraControl: {fileID: 4770664909834319104}
   particleSystem: {fileID: 7844447751836322475}
   muzzleFlash: {fileID: 9085526978181242373}
   healRate: 2

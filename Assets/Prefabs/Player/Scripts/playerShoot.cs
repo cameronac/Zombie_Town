@@ -43,6 +43,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] Animator knifeAnim;
 
     [Header("Other")]
+    [SerializeField] cameraControl cCameraControl;
     [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] Light muzzleFlash;
     float distance = 50;
@@ -201,8 +202,7 @@ public class playerShoot : MonoBehaviour
     IEnumerator pistolShoot()
     {
         particleSystem.Play();
-        Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-recoil, 0, 0));
-
+        cCameraControl.ApplyRecoil(new Vector3(-recoil, 0, 0));
         AudioManager.instance.CreateSoundAtPosition(pistol_audio, transform.position);
 
         StartCoroutine(eMuzzleFlash());
@@ -245,7 +245,8 @@ public class playerShoot : MonoBehaviour
     {
         isShooting = true;
         particleSystem.Play();
-        
+
+        cCameraControl.ApplyRecoil(new Vector3(-sRecoil, 0, 0));
         AudioManager.instance.CreateSoundAtPosition(shotgun_audio, transform.position);
 
         StartCoroutine(eMuzzleFlash());
@@ -286,8 +287,6 @@ public class playerShoot : MonoBehaviour
                 }
             }
         }
-
-        Camera.main.transform.localRotation *= Quaternion.Euler(new Vector3(-sRecoil, 0, 0));
 
         yield return new WaitForSeconds(sFirerate);
         isShooting = false;
