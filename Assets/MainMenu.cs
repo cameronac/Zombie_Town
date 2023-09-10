@@ -80,7 +80,7 @@ public class MainMenu : MonoBehaviour
 
             case (int)ButtonTypes.credits:
                 gameManager.instance.statePaused();
-                SceneManager.LoadScene(2);
+                gameManager.instance.CreditsMenuCurrent();
                 break;
 
             case (int)ButtonTypes.quit:
