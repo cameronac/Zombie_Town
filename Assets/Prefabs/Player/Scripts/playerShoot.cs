@@ -69,7 +69,7 @@ public class playerShoot : MonoBehaviour
     void Update()
     {
         if (Time.timeScale > 0) {
-            if (Input.GetButtonDown("Shoot"))
+            if (Input.GetButtonDown("Shoot") && gameManager.instance.activeMenu == null)
             {
                 switch(inst.currItem)
                 {
