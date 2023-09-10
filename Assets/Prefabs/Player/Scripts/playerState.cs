@@ -36,6 +36,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     
     [SerializeField] public int medCount;
     public List<int> KeyItems = new List<int>();
+    public int numCarParts;
     
     public enum heldItems {pistol, shotgun, knife, meds}
     public heldItems currItem;

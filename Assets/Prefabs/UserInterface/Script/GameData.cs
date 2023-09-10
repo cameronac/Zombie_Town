@@ -11,6 +11,7 @@ public class GameData
     public bool shotgun;
     public bool pistol;
     public int checkpoint;
+    public int numCarParts;
     public float[] playerPosition;
 
     public GameData(playerState player, GameObject pos)
@@ -18,6 +19,7 @@ public class GameData
         health = player.health;
         shotgun = player.has_shotgun;
         pistol = player.has_pistol;
+        numCarParts = player.numCarParts;
         playerPosition = new float[3];
 
         playerPosition[0] = pos.transform.position.x;

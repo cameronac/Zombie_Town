@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 5
   txt: Find The Other Parts
+  isCarPart: 1
 --- !u!65 &588478627255022445
 BoxCollider:
   m_ObjectHideFlags: 0

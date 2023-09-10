@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 3
   txt: Find The Other Parts
+  isCarPart: 1
 --- !u!205 &2065585408765418773
 LODGroup:
   m_ObjectHideFlags: 0
