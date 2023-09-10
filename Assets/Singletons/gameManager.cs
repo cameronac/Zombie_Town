@@ -184,7 +184,7 @@ public class gameManager : MonoBehaviour
 
     public void youWin()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
 
     public void youLose()
