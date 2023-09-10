@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class SoundObject : MonoBehaviour
 {
     
-    public GameObject gameObject;
+    public GameObject nGameObject;
     public AudioSource audioSource;
 
     // Method to adjust the volume of the audio source
@@ -106,7 +106,7 @@ public class SoundManager : MonoBehaviour
         // Create a new SoundObject instance and add it to the list.
         SoundObject soundObject = new SoundObject
         {
-            gameObject = gameObject,
+            nGameObject = gameObject,
             audioSource = audioSource
         };
         soundObjects.Add(soundObject);

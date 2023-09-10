@@ -42,7 +42,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] Animator knifeAnim;
 
     [Header("Other")]
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] Light muzzleFlash;
     float distance = 50;
     float sDistance = 30;

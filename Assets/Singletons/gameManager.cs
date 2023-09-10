@@ -33,7 +33,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerDamageFlash;
     [SerializeField] private SaveSO save;
     [SerializeField] Image deathAreaImage;
-    private float deathAreaTime = 5f;
 
     bool isPaused;
     bool fadeInObjective = false;
@@ -97,44 +96,19 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //print("Main Menu: " + (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name).ToString());
-        
         FadeInFadeOutObjective();
-
-        UpdateUIVisibility();
         UpdateDeathArea();
 
-        if (Input.GetButtonDown("Cancel") && activeMenu == null && SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
-        {
-            statePaused();
-            activeMenu = pauseMenu;
-            pauseMenu.SetActive(isPaused);
-        }
-    }
-    
-    public void UpdateUIVisibility()
-    {
-        if (SceneManager.GetSceneByBuildIndex(0).name == SceneManager.GetActiveScene().name)
-        {
-            mainMenu.SetActive(true);
-            ammoTextMesh.gameObject.SetActive(false);
-            healthImage.gameObject.SetActive(false);
-            staminaImage.gameObject.SetActive(false);
-            objectiveText.gameObject.SetActive(false);
-            interactText.gameObject.SetActive(false);
-            crosshair.gameObject.SetActive(false);
-            deathAreaImage.gameObject.SetActive(false);
-        }
-        else
-        {
-            mainMenu.SetActive(false);
-            ammoTextMesh.gameObject.SetActive(true);
-            healthImage.gameObject.SetActive(true);
-            staminaImage.gameObject.SetActive(true);
-            objectiveText.gameObject.SetActive(true);
-            interactText.gameObject.SetActive(true);
-            crosshair.gameObject.SetActive(true);
-            deathAreaImage.gameObject.SetActive(true);
+        if (SceneManager.GetSceneByBuildIndex(1).name == SceneManager.GetActiveScene().name) {
+            if (Input.GetButtonDown("Cancel") && activeMenu == null)
+            {
+                statePaused();
+                activeMenu = pauseMenu;
+                pauseMenu.SetActive(isPaused);
+
+            } else if (Input.GetButtonDown("Cancel") && activeMenu == pauseMenu) {
+                stateUnpaused();
+            }
         }
     }
 
@@ -167,8 +141,10 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         isPaused = !isPaused;
-
+        crosshair.gameObject.SetActive(false);
     }
+
+
     public void stateUnpaused()
     {
         Time.timeScale = 1;
@@ -184,6 +160,7 @@ public class gameManager : MonoBehaviour
         AudioManager.instance.DeleteSoundWithTag("lose");
 
         activeMenu = null;
+        crosshair.gameObject.SetActive(true);
     }
 
     public void youWin()
