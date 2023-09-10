@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject optionsMenu;
 
+    [SerializeField] AudioClip ui_sound;
     [SerializeField] AudioClip lose_sound;
 
     private FileHandler dataHandler;

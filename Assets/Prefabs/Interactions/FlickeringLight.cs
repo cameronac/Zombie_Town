@@ -14,7 +14,7 @@ public class FlickeringLight : MonoBehaviour
     Vector2 medium_speed = new Vector2(0.2f, 1f);
     Vector2 fast_speed = new Vector2(0.1f, 0.5f);
 
-    public new Light light;
+    private new Light light;
 
     Vector2 flickerOnSpeed;
     Vector2 flickerOffSpeed;

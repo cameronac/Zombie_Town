@@ -23,6 +23,7 @@ public class buttonFunctions : MonoBehaviour
         Application.Quit();
     }
 
+
     public void playerRespawn()
     {
         gameManager.instance.stateUnpaused();
@@ -31,14 +32,15 @@ public class buttonFunctions : MonoBehaviour
 
     public void playButton()
     {
-        save._isLoaded = false;
+        /*save._isLoaded = false;
         gameManager.instance.stateUnpaused();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);*/
     }
     public void LoadLevel()
     {
+        /*
         gameManager.instance.stateUnpaused();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);*/
     }
     public void MainMenu()
     {

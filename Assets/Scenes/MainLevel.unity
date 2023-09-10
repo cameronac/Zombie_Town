@@ -3307,7 +3307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightOnSpeed: 0
   lightOffSpeed: 2
-  light: {fileID: 0}
 --- !u!1 &392805583
 GameObject:
   m_ObjectHideFlags: 0
@@ -6068,7 +6067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightOnSpeed: 1
   lightOffSpeed: 1
-  light: {fileID: 0}
 --- !u!108 &551942079
 Light:
   m_ObjectHideFlags: 0
@@ -8380,6 +8378,10 @@ PrefabInstance:
     - target: {fileID: 8291341759659481970, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166381880971091607, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9194684670493765032, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_IsActive
@@ -23991,7 +23993,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightOnSpeed: 2
   lightOffSpeed: 0
-  light: {fileID: 0}
 --- !u!43 &1641892615
 Mesh:
   m_ObjectHideFlags: 0
