@@ -190,14 +190,17 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
-        enemyMob.SetDestination(gameManager.instance.player.transform.position);
+        
         StartCoroutine(flashDamage());
 
         if (currentHP <= 0)
         {
+            
             StopAllCoroutines();
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(isDead());
+        } else {
+            enemyMob.SetDestination(gameManager.instance.player.transform.position);
         }
     }
     //---------------------------------
@@ -268,6 +271,9 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             whereISpawned.enemiesDead();
         }
+
+        Destroy(GetComponent<CapsuleCollider>());
+        Destroy(GetComponent<CapsuleCollider>());
 
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);

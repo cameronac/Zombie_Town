@@ -37,7 +37,7 @@ public class playerShoot : MonoBehaviour
 
     [Header("Knife")]
     [SerializeField] float knifeDistance = 1f; 
-    [SerializeField] float swingRate = 0.5f;
+    [SerializeField] float swingRate = 1.5f;
     [SerializeField] int kDamage = 4;
     [SerializeField] Animator knifeAnim;
 
@@ -157,7 +157,6 @@ public class playerShoot : MonoBehaviour
 
     private void UpdateAmmoUI()
     {
-
         if (gameManager.instance != null)
         {
             switch (inst.currItem)
@@ -171,6 +170,26 @@ public class playerShoot : MonoBehaviour
                 case playerState.heldItems.meds:
                     gameManager.instance.SetAmmo(0, inst.medCount);
                     break;
+            }
+        }
+    }
+
+    public void KnifeAttack()
+    {
+        Collider[] isHit = Physics.OverlapSphere(inst.KnifeHold.transform.position, knifeDistance);
+
+        foreach (Collider c in isHit)
+        {
+            IDamage iDamage = c.GetComponent<IDamage>();
+
+            if (iDamage != null && c.tag != "Player")
+            {
+                iDamage.TakeDamage(kDamage);
+            }
+
+            if (c.tag != "Player")
+            {
+                AudioManager.instance.CreateSoundAtPosition(knife_hit_audio, transform.position);
             }
         }
     }
@@ -224,7 +243,6 @@ public class playerShoot : MonoBehaviour
         isShooting = true;
         particleSystem.Play();
         
-
         AudioManager.instance.CreateSoundAtPosition(shotgun_audio, transform.position);
 
         StartCoroutine(eMuzzleFlash());
@@ -275,26 +293,9 @@ public class playerShoot : MonoBehaviour
     IEnumerator knifeSwing()
     {
         //do some animation thing
-
         knifeAnim.SetTrigger("Attacking");
 
         isShooting = true;
-
-        Collider[] isHit = Physics.OverlapSphere(inst.KnifeHold.transform.position, knifeDistance);
-        foreach (Collider c in isHit)
-        {
-            IDamage iDamage = c.GetComponent<IDamage>();
-
-            if (iDamage != null && c.tag != "Player")
-            {
-                iDamage.TakeDamage(kDamage);
-            }
-
-            if (c.tag != "Player") {
-                AudioManager.instance.CreateSoundAtPosition(knife_hit_audio, transform.position);
-            }
-        }
-
         AudioManager.instance.CreateSoundAtPosition(knife_air_audio, transform.position);
 
         yield return new WaitForSeconds(swingRate);
