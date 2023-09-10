@@ -23,7 +23,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
     [Header("Other")]
     [SerializeField] GameObject flash_light;
-    [SerializeField] float interact_distance = 1.5f;
+    float interact_distance = 2f;
     [SerializeField] public bool has_pistol = false;
     [SerializeField] public bool has_shotgun = false;
 
@@ -57,53 +57,55 @@ public class playerState : MonoBehaviour, IPickup, IDamage
      
     void Update()
     {
-        RaycastHit interactHit;
-        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
+        if (Time.timeScale > 0) {
+            RaycastHit interactHit;
+            bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
        
-        if (isHit)
-        {
-            if (interactHit.collider)
+            if (isHit)
             {
-                IInteract iInteract = interactHit.collider.GetComponent<IInteract>();
+                if (interactHit.collider)
+                {
+                    IInteract iInteract = interactHit.collider.GetComponent<IInteract>();
 
-                if (iInteract != null) {
-                    gameManager.instance.ToggleInteract(isHit);
+                    if (iInteract != null) {
+                        gameManager.instance.ToggleInteract(isHit);
 
-                    if (Input.GetButtonDown("Interact"))
-                        iInteract.pressed();
+                        if (Input.GetButtonDown("Interact"))
+                            iInteract.pressed();
+                    }
                 }
             }
-        }
-        else {
-            gameManager.instance.ToggleInteract(false);
-        }
+            else {
+                gameManager.instance.ToggleInteract(false);
+            }
 
 
-        if (Input.GetButtonDown("Toggle Flashlight"))
-        {
-            flash_light.SetActive(!flash_light.activeSelf);
-        }
+            if (Input.GetButtonDown("Toggle Flashlight"))
+            {
+                flash_light.SetActive(!flash_light.activeSelf);
+            }
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            ToggleItem(true);
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            ToggleItem(false);
-        }
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                ToggleItem(true);
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                ToggleItem(false);
+            }
 
-        //if (!has_pistol)
-        //{
-        //    pShoot.enabled = false;
-        //    weaponHolder.SetActive(false);
-        //}
-        //else
-        //{
-        //    pShoot.enabled = true;
-        //    weaponHolder.SetActive(true);
-            
-        //}
+            //if (!has_pistol)
+            //{
+            //    pShoot.enabled = false;
+            //    weaponHolder.SetActive(false);
+            //}
+            //else
+            //{
+            //    pShoot.enabled = true;
+            //    weaponHolder.SetActive(true);
+
+            //}
+        }
     }
 
     public void PickupItem(Items type)

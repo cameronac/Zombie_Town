@@ -68,40 +68,42 @@ public class playerShoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Shoot"))
-        {
-            switch(inst.currItem)
+        if (Time.timeScale > 0) {
+            if (Input.GetButtonDown("Shoot"))
             {
-                case playerState.heldItems.pistol:
-                    if (!isShooting && magazine > 0 && !isReloading)
-                    {
-                        StartCoroutine(pistolShoot());
-                    } else if (magazine <= 0)
-                    {
-                        AudioManager.instance.CreateSoundAtPosition(pistol_dry_fire_audio, transform.position);
-                    }
-                    break;
-                case playerState.heldItems.shotgun:
-                    if (!isShooting && sMagazine > 0 && !isReloading)
-                    {
-                        StartCoroutine(shotgunShoot());
-                    } else
-                    {
-                        AudioManager.instance.CreateSoundAtPosition(shotgun_dry_fire_audio, transform.position);
-                    }
-                    break;
-                case playerState.heldItems.knife:
-                    if(!isShooting)
-                    {
-                        StartCoroutine(knifeSwing());
-                    }
-                    break;
-                case playerState.heldItems.meds:
-                    if(!isShooting)
-                    {
-                        StartCoroutine(Heal());
-                    }
-                    break;
+                switch(inst.currItem)
+                {
+                    case playerState.heldItems.pistol:
+                        if (!isShooting && magazine > 0 && !isReloading)
+                        {
+                            StartCoroutine(pistolShoot());
+                        } else if (magazine <= 0)
+                        {
+                            AudioManager.instance.CreateSoundAtPosition(pistol_dry_fire_audio, transform.position);
+                        }
+                        break;
+                    case playerState.heldItems.shotgun:
+                        if (!isShooting && sMagazine > 0 && !isReloading)
+                        {
+                            StartCoroutine(shotgunShoot());
+                        } else
+                        {
+                            AudioManager.instance.CreateSoundAtPosition(shotgun_dry_fire_audio, transform.position);
+                        }
+                        break;
+                    case playerState.heldItems.knife:
+                        if(!isShooting)
+                        {
+                            StartCoroutine(knifeSwing());
+                        }
+                        break;
+                    case playerState.heldItems.meds:
+                        if(!isShooting)
+                        {
+                            StartCoroutine(Heal());
+                        }
+                        break;
+                }
             }
         }
 

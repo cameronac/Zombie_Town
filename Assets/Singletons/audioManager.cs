@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour
 
     public void Update()
     {
-        
         for (int i = lAudioSource.Count - 1; i > 0; i--)
         {
             if (lAudioSource[i] == null)
@@ -50,7 +49,7 @@ public class AudioManager : MonoBehaviour
         if (clip != null) {
             GameObject prefab = Instantiate(audioPrefab, position, Quaternion.identity);
             AudioSource audioSource = prefab.GetComponent<AudioSource>();
-            audioSource.volume = new_volume;
+            audioSource.volume = new_volume * volume;
             audioSource.clip = clip;
             audioSource.Play();
 
@@ -66,7 +65,7 @@ public class AudioManager : MonoBehaviour
         {
             GameObject prefab = Instantiate(audioPrefab);
             AudioSource audioSource = prefab.GetComponent<AudioSource>();
-            audioSource.volume = new_volume;
+            audioSource.volume = new_volume * volume;
             audioSource.clip = clip;
             audioSource.Play();
 
