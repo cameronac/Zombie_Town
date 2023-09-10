@@ -12,6 +12,7 @@ public class gameManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject optionsMenu;
+    public GameObject creditsMenu;
 
     [SerializeField] AudioClip ui_sound;
     [SerializeField] AudioClip lose_sound;
@@ -121,12 +122,21 @@ public class gameManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
     }
 
     public void OptionsMenuCurrent()
     {
         optionsMenu.SetActive(true);
         mainMenu.SetActive(false);
+        creditsMenu.SetActive(false);
+    }
+
+    public void CreditsMenuCurrent()
+    {
+        optionsMenu.SetActive(false);
+        mainMenu.SetActive(false);
+        creditsMenu.SetActive(true);
     }
     //-------------------------------------------
 

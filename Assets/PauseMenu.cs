@@ -26,13 +26,11 @@ public class PauseMenu : MonoBehaviour
             ButtonPressed(index);
         }
 
-
         bool up = Input.GetButtonDown("Up");
         bool down = Input.GetButtonDown("Down");
 
         if (up || down)
         {
-
             if (up)
             {
                 index -= 1;

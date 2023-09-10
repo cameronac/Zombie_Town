@@ -62,7 +62,7 @@ public class buttonFunctions : MonoBehaviour
     public void creditMenu()
     {
         gameManager.instance.statePaused();
-        SceneManager.LoadScene(2);
+        gameManager.instance.CreditsMenuCurrent();
     }
    public void saveGame()
     {
