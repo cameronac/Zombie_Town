@@ -46,12 +46,7 @@ public class gameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake()
-    {
-        if (SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
-        {
-            save._isLoaded = false;
-        }
-
+    {   
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -63,11 +58,11 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
 
-
     private void Start()
     {
         deathAreaImage.color = new Color(0, 0, 0, 0);
         inDeathArea = false;
+
         if (save._isLoaded == true && File.Exists(Application.persistentDataPath + "/player.dataucannottouch"))
         {
             loadGame();
@@ -101,7 +96,6 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (isPaused)
         {
             interactText.enabled = false;
@@ -146,7 +140,10 @@ public class gameManager : MonoBehaviour
     }
     //-------------------------------------------
 
-
+    public void SetLoad(bool load)
+    {
+        save._isLoaded = load;
+    }
 
     public void UpdateDeathArea() {
         deathAreaImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);

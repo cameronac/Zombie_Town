@@ -10,7 +10,6 @@ public class LoseMenu : MonoBehaviour
     private int index = 0;
     private int max_index = 4;
 
-    [SerializeField] SaveSO save;
     [SerializeField] AudioClip ui_sound;
     [SerializeField] TextMeshProUGUI[] buttonText;
 
@@ -32,7 +31,6 @@ public class LoseMenu : MonoBehaviour
 
         if (up || down)
         {
-
             if (up)
             {
                 index -= 1;
@@ -73,7 +71,7 @@ public class LoseMenu : MonoBehaviour
                 break;
 
             case (int)ButtonTypes.load:
-                save._isLoaded = true;
+                gameManager.instance.SetLoad(true);
                 gameManager.instance.stateUnpaused();
                 SceneManager.LoadScene(1);
                 break;

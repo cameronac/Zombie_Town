@@ -4454,7 +4454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396213f05b209ae499ad3d4010cd0704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  save: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
   ui_sound: {fileID: 8300000, guid: 0f3f4e754fa45944ea000daf3ea74380, type: 3}
   buttonText:
   - {fileID: 2165358397021499605}
@@ -8958,7 +8957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82a6c9aa76bbcf4ba2190b000c26f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  save: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
   ui_sound: {fileID: 8300000, guid: 0f3f4e754fa45944ea000daf3ea74380, type: 3}
   buttonText:
   - {fileID: 3493293951370617212}
