@@ -162,26 +162,31 @@ public class enemyAI : MonoBehaviour, IDamage
     //Sphere Collider/Trigger-----------
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            enemyMob.stoppingDistance = 3f;
+        }
+
+        if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
+        {
+            enemyMob.stoppingDistance = 2.25f;
 
             //anim.SetTrigger("alertCollision");
 
             //anim.SetTrigger("isActivated");
-            enemyMob.enabled = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+
         if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
         {
-            playerInRange = true;
             enemyMob.stoppingDistance = 0;
-
-            enemyMob.enabled = false;
         }
     }
     //---------------------------------

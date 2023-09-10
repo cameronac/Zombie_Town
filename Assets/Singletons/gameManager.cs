@@ -10,6 +10,9 @@ using UnityEngine.Rendering.UI;
 
 public class gameManager : MonoBehaviour
 {
+    public GameObject mainMenu;
+    public GameObject optionsMenu;
+
     [SerializeField] AudioClip lose_sound;
 
     private FileHandler dataHandler;
@@ -23,7 +26,7 @@ public class gameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
-    public GameObject mainMenu;
+
     public TextMeshProUGUI ammoTextMesh;
     public Image healthImage;
     public Image staminaImage;
@@ -112,6 +115,22 @@ public class gameManager : MonoBehaviour
         }
     }
 
+    //Main Menu Methods--------------------------
+    public void MainMenuCurrent()
+    {
+        mainMenu.SetActive(true);
+        optionsMenu.SetActive(false);
+    }
+
+    public void OptionsMenuCurrent()
+    {
+        optionsMenu.SetActive(true);
+        mainMenu.SetActive(false);
+    }
+    //-------------------------------------------
+
+
+
     public void UpdateDeathArea() {
         deathAreaImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
 
@@ -144,7 +163,6 @@ public class gameManager : MonoBehaviour
         crosshair.gameObject.SetActive(false);
     }
 
-
     public void stateUnpaused()
     {
         Time.timeScale = 1;
@@ -152,7 +170,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         isPaused = !isPaused;
 
-        if(activeMenu != null)
+        if (activeMenu != null)
         {
             activeMenu.SetActive(false);
         }

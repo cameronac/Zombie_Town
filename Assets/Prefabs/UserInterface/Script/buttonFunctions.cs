@@ -45,16 +45,22 @@ public class buttonFunctions : MonoBehaviour
         SceneManager.LoadScene(0);
         gameManager.instance.statePaused();
     }
+
+    public void BackButton()
+    {
+        gameManager.instance.MainMenuCurrent();
+    }
+
     public void optionMenu()
     {
         gameManager.instance.statePaused();
-        SceneManager.LoadScene(2);
-        
+        gameManager.instance.OptionsMenuCurrent();
     }
+
     public void creditMenu()
     {
         gameManager.instance.statePaused();
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
    public void saveGame()
     {
