@@ -33,6 +33,7 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int sDamage = 4;
     [SerializeField] float sReloadTime = 1.5f;
     [SerializeField] float sFirerate = 1.5f;
+    [SerializeField] Animator ShotgunHold;
     public int sMagazine = 0;
 
     [Header("Knife")]
@@ -111,7 +112,8 @@ public class playerShoot : MonoBehaviour
                     PistolHold.SetBool("ADS", true);
                     break;
                 case playerState.heldItems.shotgun:
-                    
+                    ShotgunHold.SetBool("ADS", true);
+                    bulletSpread = 0.05f;
                     break;
             }
         }
@@ -124,7 +126,8 @@ public class playerShoot : MonoBehaviour
                     PistolHold.SetBool("ADS", false);
                     break;
                 case playerState.heldItems.shotgun:
-
+                    ShotgunHold.SetBool("ADS", false);
+                    bulletSpread = 0.1f;
                     break;
             }
         }
