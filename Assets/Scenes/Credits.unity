@@ -260,10 +260,10 @@ PrefabInstance:
         Wendell Moore
 
 
-        Robert Friedrick
+        Daniel Zadorozny
 
-        In The
-        End font'
+        Bloodcrowc
+        Font'
       objectReference: {fileID: 0}
     - target: {fileID: 814979911838600190, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_fontAsset
