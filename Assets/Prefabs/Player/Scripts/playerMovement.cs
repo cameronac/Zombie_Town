@@ -31,7 +31,6 @@ public class playerMovement : MonoBehaviour
     private bool isSprinting = false;
     private bool isJumping = false;
     private bool isMoving = false;
-    private bool inAir = false;
 
     //Stamina
     private bool canRun = true;
@@ -72,8 +71,6 @@ public class playerMovement : MonoBehaviour
 
         isJumping = Input.GetButton("Jump");    //Jump
         move_dir = Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward;
-        
-        if (!controller.isGrounded) { inAir = true; }
     }
 
     private void Move()
@@ -130,7 +127,6 @@ public class playerMovement : MonoBehaviour
 
             if (footstep_current > footstep_time)
             {
-                inAir = false;
                 AudioManager.instance.CreateSoundAtPosition(footstep_audio[Random.Range(0, footstep_audio.Length - 1)], transform.position, 0.05f);
                 footstep_current = 0f;
             }

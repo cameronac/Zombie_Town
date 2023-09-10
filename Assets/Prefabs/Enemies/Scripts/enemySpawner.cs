@@ -13,7 +13,6 @@ public class enemySpawner : MonoBehaviour
     int numberSpawned;
     bool isSpawning;
     bool startSpawning;
-    bool despawn;
 
     // Update is called once per frame
     private void Update()
@@ -54,7 +53,6 @@ public class enemySpawner : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            despawn = true;
 
             for (int i = 0; i < objectList.Count; i++)
             {

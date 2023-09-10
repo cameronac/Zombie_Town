@@ -18,8 +18,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent enemyMob;
     [SerializeField] Animator anim;
     private bool canSeePlayer = false;
-    private int playerFaceSpeed = 120;
-    private Vector3 playerDirection;
+    //private int playerFaceSpeed = 120;
+    //private Vector3 playerDirection;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 20)][SerializeField] private float currentHP;
@@ -169,7 +169,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
             //anim.SetTrigger("alertCollision");
 
-            anim.SetTrigger("isActivated");
+            //anim.SetTrigger("isActivated");
             enemyMob.enabled = true;
         }
     }
