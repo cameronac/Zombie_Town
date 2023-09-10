@@ -2,18 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class OptionsMenu : MonoBehaviour
+public class CreditsMenu : MonoBehaviour
 {
     enum ButtonTypes { back = 0 }
     private int index = 0;
     private int max_index = 0;
-
-    [SerializeField] Slider musicSlider;
-    [SerializeField] Slider uiSlider;
-    [SerializeField] Slider sfxSlider;
 
     [SerializeField] AudioClip ui_sound;
     [SerializeField] TextMeshProUGUI[] buttonText;
@@ -26,10 +20,6 @@ public class OptionsMenu : MonoBehaviour
 
     private void Update()
     {
-        musicSlider.value = AudioManager.music_volume;
-        uiSlider.value = AudioManager.ui_volume;
-        sfxSlider.value = AudioManager.sfx_volume;
-
         if (Input.GetButtonDown("Submit"))
         {
             ButtonPressed(index);

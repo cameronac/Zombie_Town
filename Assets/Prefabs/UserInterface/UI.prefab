@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 687008358825990670}
   - component: {fileID: 2870673696695953861}
   - component: {fileID: 5271969200531108687}
-  - component: {fileID: 7185010066609901325}
+  - component: {fileID: 7480852775427991587}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7185010066609901325
+--- !u!114 &7480852775427991587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 34019572682353090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d6ced641f67d8b4081eec8dabd2343c, type: 3}
+  m_Script: {fileID: 11500000, guid: d9d1441b939eb10498ae971cc5110373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ui_sound: {fileID: 8300000, guid: 0f3f4e754fa45944ea000daf3ea74380, type: 3}
@@ -1664,8 +1664,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7185010066609901325}
-          m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+        - m_Target: {fileID: 7480852775427991587}
+          m_TargetAssemblyTypeName: CreditsMenu, Assembly-CSharp
           m_MethodName: ButtonHover
           m_Mode: 3
           m_Arguments:
@@ -1680,8 +1680,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7185010066609901325}
-          m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+        - m_Target: {fileID: 7480852775427991587}
+          m_TargetAssemblyTypeName: CreditsMenu, Assembly-CSharp
           m_MethodName: ButtonPressed
           m_Mode: 3
           m_Arguments:
@@ -3142,6 +3142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6ced641f67d8b4081eec8dabd2343c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSlider: {fileID: 1842643796215493110}
+  uiSlider: {fileID: 3322970329139954533}
+  sfxSlider: {fileID: 3578970500187363198}
   ui_sound: {fileID: 8300000, guid: 0f3f4e754fa45944ea000daf3ea74380, type: 3}
   buttonText:
   - {fileID: 8857916919041743459}
