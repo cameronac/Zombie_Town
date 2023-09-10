@@ -309,7 +309,7 @@ MonoBehaviour:
   currentHP: 10
   maxHP: 10
   damage: 5
-  patrolSpeed: 2
+  patrolSpeed: 3.48
   chaseSpeed: 5
   animChangeSpeed: 9
   whereISpawned: {fileID: 0}
