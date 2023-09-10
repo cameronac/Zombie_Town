@@ -101,6 +101,12 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (isPaused)
+        {
+            interactText.enabled = false;
+        }
+
         FadeInFadeOutObjective();
         UpdateDeathArea();
 
@@ -194,7 +200,9 @@ public class gameManager : MonoBehaviour
 
     public void youWin()
     {
-        SceneManager.LoadScene(2);
+        statePaused();
+        activeMenu = winMenu;
+        activeMenu.SetActive(true);
     }
 
     public void youLose()
@@ -269,7 +277,9 @@ public class gameManager : MonoBehaviour
 
     public void ToggleInteract(bool toggle)
     {
-        interactText.enabled = toggle;
+        if (!isPaused) {
+            interactText.enabled = toggle;
+        } 
     }
     public void updateObjective(string txt)
     {

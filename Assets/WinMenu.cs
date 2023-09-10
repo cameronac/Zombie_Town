@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class WinMenu : MonoBehaviour
 {
-    enum ButtonTypes { enter = 0, options, load, credits, quit }
-    private int index = 0;
-    private int max_index = 4;
 
-    [SerializeField] private SaveSO save;
+    enum ButtonTypes { restart = 0, mainmenu }
+    private int index = 0;
+    private int max_index = 1;
+
     [SerializeField] AudioClip ui_sound;
     [SerializeField] TextMeshProUGUI[] buttonText;
 
@@ -30,8 +30,8 @@ public class MainMenu : MonoBehaviour
         bool up = Input.GetButtonDown("Up");
         bool down = Input.GetButtonDown("Down");
 
-        if (up || down) {
-
+        if (up || down)
+        {
             if (up)
             {
                 index -= 1;
@@ -58,39 +58,24 @@ public class MainMenu : MonoBehaviour
 
     //Events-------------------------------------
     public void ButtonPressed(int _index)
+    {
+        switch (_index)
         {
-        switch(_index)
-        {
-            case (int)ButtonTypes.enter:
-                save._isLoaded = false;
+            case (int)ButtonTypes.restart:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 gameManager.instance.stateUnpaused();
-                SceneManager.LoadScene(1);
                 break;
 
-            case (int)ButtonTypes.options:
+            case (int)ButtonTypes.mainmenu:
+                SceneManager.LoadScene(0);
                 gameManager.instance.statePaused();
-                gameManager.instance.OptionsMenuCurrent();
-                break;
-
-            case (int)ButtonTypes.load:
-                save._isLoaded = true;
-                gameManager.instance.stateUnpaused();
-                SceneManager.LoadScene(1);
-                break;
-
-            case (int)ButtonTypes.credits:
-                gameManager.instance.statePaused();
-                gameManager.instance.CreditsMenuCurrent();
-                break;
-
-            case (int)ButtonTypes.quit:
-                Application.Quit();
                 break;
         }
     }
 
     public void ButtonHover(int _index)
     {
+        index = _index;
         AudioManager.instance.CreateOneDimensionalSound(ui_sound, 1, "ui");
 
         for (int i = 0; i < buttonText.Length; i++)
@@ -98,7 +83,9 @@ public class MainMenu : MonoBehaviour
             if (i == _index)
             {
                 buttonText[i].color = Color.white;
-            } else {
+            }
+            else
+            {
                 buttonText[i].color = Color.red;
             }
         }
