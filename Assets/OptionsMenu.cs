@@ -4,13 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class OptionsMenu : MonoBehaviour
 {
-    enum ButtonTypes { enter = 0, options, load, credits, quit }
+    enum ButtonTypes { back = 0 }
     private int index = 0;
-    private int max_index = 4;
+    private int max_index = 0;
 
-    [SerializeField] private SaveSO save;
     [SerializeField] AudioClip ui_sound;
     [SerializeField] TextMeshProUGUI[] buttonText;
 
@@ -30,8 +29,8 @@ public class MainMenu : MonoBehaviour
         bool up = Input.GetButtonDown("Up");
         bool down = Input.GetButtonDown("Down");
 
-        if (up || down) {
-
+        if (up || down)
+        {
             if (up)
             {
                 index -= 1;
@@ -58,39 +57,19 @@ public class MainMenu : MonoBehaviour
 
     //Events-------------------------------------
     public void ButtonPressed(int _index)
+    {
+        switch (_index)
         {
-        switch(_index)
-        {
-            case (int)ButtonTypes.enter:
-                save._isLoaded = false;
-                gameManager.instance.stateUnpaused();
-                SceneManager.LoadScene(1);
-                break;
-
-            case (int)ButtonTypes.options:
-                gameManager.instance.statePaused();
-                gameManager.instance.OptionsMenuCurrent();
-                break;
-
-            case (int)ButtonTypes.load:
-                save._isLoaded = true;
-                gameManager.instance.stateUnpaused();
-                SceneManager.LoadScene(1);
-                break;
-
-            case (int)ButtonTypes.credits:
-                gameManager.instance.statePaused();
-                gameManager.instance.CreditsMenuCurrent();
-                break;
-
-            case (int)ButtonTypes.quit:
-                Application.Quit();
+            case (int)ButtonTypes.back:
+                gameManager.instance.MainMenuCurrent();
                 break;
         }
     }
 
     public void ButtonHover(int _index)
     {
+        index = _index;
+
         for (int i = 0; i < buttonText.Length; i++)
         {
             if (i == _index)
@@ -101,7 +80,9 @@ public class MainMenu : MonoBehaviour
                 }
 
                 buttonText[i].color = Color.white;
-            } else {
+            }
+            else
+            {
                 buttonText[i].color = Color.red;
             }
         }

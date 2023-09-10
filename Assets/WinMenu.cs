@@ -76,12 +76,16 @@ public class WinMenu : MonoBehaviour
     public void ButtonHover(int _index)
     {
         index = _index;
-        AudioManager.instance.CreateOneDimensionalSound(ui_sound, 1, "ui");
 
         for (int i = 0; i < buttonText.Length; i++)
         {
             if (i == _index)
             {
+                if (buttonText[i].color != Color.white)
+                {
+                    AudioManager.instance.CreateOneDimensionalSound(ui_sound, 1, "ui");
+                }
+
                 buttonText[i].color = Color.white;
             }
             else
