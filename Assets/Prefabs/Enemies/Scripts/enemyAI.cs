@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -17,9 +18,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] private Renderer model;
     [SerializeField] NavMeshAgent enemyMob;
     [SerializeField] Animator anim;
-    private bool canSeePlayer = false;
-    //private int playerFaceSpeed = 120;
-    //private Vector3 playerDirection;
+    [SerializeField] SphereCollider triggerSphere;
+    private bool isPlayerSeen = false;
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 20)][SerializeField] private float currentHP;
@@ -28,9 +28,11 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] private float patrolSpeed;
     [Range(1, 10)][SerializeField] private float chaseSpeed;
     [SerializeField] int animChangeSpeed;
+
     private float hitDistance = 6f;
     private float distance = 10f;
     private float hitRate = 0.5f;
+    private float playerFaceSpeed = 2f;
     
     //sphere collider/trigger - detection & attacking
     private bool playerInRange;
@@ -40,8 +42,9 @@ public class enemyAI : MonoBehaviour, IDamage
     public enemySpawner whereISpawned;
 
     //patrolling enemy
+    private float patrolDist = 10f;
+    private float visionArea = 0.5f;
     private Vector3 startPos;
-    private float pointRange = 10;
     private bool isPatrolTimer = false;
     public float distanceToPlayer;
     public Transform[] wayPoints;
@@ -67,8 +70,9 @@ public class enemyAI : MonoBehaviour, IDamage
         anim = GetComponentInChildren<Animator>();
     }
 
-    private void Update()   //updates Every Frame
+    private void Update()
     {
+        //Animation Speed
         float agentVel = 0;
         if (enemyMob.velocity.magnitude > 0)
         {
@@ -77,20 +81,24 @@ public class enemyAI : MonoBehaviour, IDamage
 
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
 
-        if (enemyMob.isActiveAndEnabled && enemyMob.CompareTag("Alerted"))
+        /*if (enemyMob.isActiveAndEnabled && enemyMob.CompareTag("Alerted"))
         {
             enemyMob.enabled = true;
-        }
+        }*/
+
+        UpdateVision();
 
         if (currentState != STATE.death)
         {
-            if (playerInRange)
+            if (isPlayerSeen)
             {
+                enemyMob.stoppingDistance = 2.25f;
                 ChasePlayer();
                 AttackPlayer();
             }
-            else if (!playerInRange)
+            else if (!isPlayerSeen)
             {
+                enemyMob.stoppingDistance = 0.0f;
                 PatrolTheArea();
             }
 
@@ -122,71 +130,58 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void AttackPlayer()
     {
-        if (canAttack && Vector3.Distance(gameManager.instance.player.transform.position, transform.position) <= hitDistance)
+        bool inHitDistance = Vector3.Distance(gameManager.instance.player.transform.position, transform.position) <= hitDistance;
+        
+        if (inHitDistance) 
+        {
+            FacePlayer();
+        }
+
+        if (canAttack && inHitDistance)
         {
             StartCoroutine(attack());
         }
     }
     //---------------------------------
 
+    //Helper Methods-----------------------------
+    private void FacePlayer()
+    {
+        Quaternion rot = Quaternion.LookRotation(gameManager.instance.player.transform.position - transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+    }
+
+    private void UpdateVision()
+    {
+        GameObject player = gameManager.instance.player;
+        Vector3 playerDirection = (player.transform.position - transform.position).normalized;
+
+        //Raycast to the object
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, playerDirection);
+
+        bool isHit = Physics.Raycast(ray, out hit, triggerSphere.radius);
+        float angleToPlayer = Vector3.Dot(playerDirection, transform.forward);
+
+        //Object in Sphere
+        if (isHit && hit.collider.tag == "Player" && angleToPlayer > 0)
+        {
+            isPlayerSeen = true;
+        }
+    }
+    //-------------------------------------------
+
     //Updates State of AI--------------
     private void UpdateState()
     {
-        RaycastHit hit;
-        Vector3 direction = (gameManager.instance.player.transform.position - transform.position).normalized;
-        Ray ray = new Ray(transform.position, direction);
-
-        bool isHit = Physics.Raycast(ray, out hit, distance);
-
-        //check if the player is Seen
-        if (isHit)
-        {
-            if (hit.transform.tag == "Player")
-            {
-                canSeePlayer = true;
-            }
-        }
-
         //change AI State
-        if (canSeePlayer)
+        if (isPlayerSeen)
         {
             currentState = STATE.chase;
         }
-        else if (!canSeePlayer)
+        else if (!isPlayerSeen)
         {
             currentState = STATE.roam;
-        }
-    }
-    //---------------------------------
-
-    //Sphere Collider/Trigger-----------
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-
-        if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
-        {
-            enemyMob.stoppingDistance = 2.25f;
-
-            //anim.SetTrigger("alertCollision");
-
-            //anim.SetTrigger("isActivated");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-        }
-
-        if (other.CompareTag("Player") || enemyMob.CompareTag("Alerted") || enemyMob.CompareTag("Screamer"))
-        {
-            enemyMob.stoppingDistance = 0;
         }
     }
     //---------------------------------
@@ -200,7 +195,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (currentHP <= 0)
         {
-            
             StopAllCoroutines();
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(isDead());
@@ -210,6 +204,25 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     //---------------------------------
 
+    //Sphere Collider/Trigger-----------
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+    //---------------------------------
+
+
     //IEnumerators--------------------
     private IEnumerator GetRandomPatrolPoint()
     {
@@ -217,12 +230,14 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(Random.Range(3, 8));
         isPatrolTimer = false;
 
-        float newX = Random.Range(-pointRange, pointRange);
-        float newZ = Random.Range(-pointRange, pointRange);
+        Vector3 randomPosition = (Random.insideUnitSphere * patrolDist) + startPos;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomPosition, out hit, patrolDist, 1);
+        enemyMob.SetDestination(hit.position);
 
-        target = new Vector3(newX + startPos.x, startPos.y, newZ + startPos.z);
+        //target = new Vector3(newX + startPos.x, startPos.y, newZ + startPos.z);
         
-        enemyMob.SetDestination(target);
+        //enemyMob.SetDestination(target);
     }
 
     private IEnumerator attack()
@@ -284,4 +299,12 @@ public class enemyAI : MonoBehaviour, IDamage
         Destroy(gameObject);
     }
     //--------------------------------
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.forward * 2 + transform.position);
+    }
+
 }

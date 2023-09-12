@@ -306,6 +306,7 @@ MonoBehaviour:
   model: {fileID: 3633426707811495822}
   enemyMob: {fileID: 8291112035639260420}
   anim: {fileID: 1271609333831063724}
+  triggerSphere: {fileID: 2342605264478948434}
   currentHP: 10
   maxHP: 10
   damage: 3
