@@ -284,8 +284,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3632109572492699828}
   - {fileID: 2934774518543856990}
@@ -308,10 +308,10 @@ MonoBehaviour:
   anim: {fileID: 1271609333831063724}
   currentHP: 10
   maxHP: 10
-  damage: 5
-  patrolSpeed: 3.48
-  chaseSpeed: 5
-  animChangeSpeed: 9
+  damage: 3
+  patrolSpeed: 3
+  chaseSpeed: 2
+  animChangeSpeed: 5
   whereISpawned: {fileID: 0}
   distanceToPlayer: 0
   wayPoints: []
@@ -347,7 +347,7 @@ Animator:
   m_GameObject: {fileID: 1002004549690370144}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8f7380da49034cd488ddff94b1ac35d1, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2f72cc89a4d37314c9b847c4a41ac823, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4a85d4ca8741e364aa75c27a6a7f406f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

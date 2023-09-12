@@ -7759,7 +7759,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.57, y: 4.64, z: 4.34}
+  m_Size: {x: 4, y: 4.8, z: 4.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &643000035
 Transform:
@@ -7770,7 +7770,7 @@ Transform:
   m_GameObject: {fileID: 643000031}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.229736, y: -1.9757814, z: -54.87953}
+  m_LocalPosition: {x: 15.36, y: -1.9757814, z: -54.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22826,7 +22826,7 @@ Transform:
   m_GameObject: {fileID: 1439880451}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 48.059723, y: 0.67421865, z: -2.229538}
+  m_LocalPosition: {x: 48.059723, y: 0.3, z: -2.229538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22864,7 +22864,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 10, z: 20}
+  m_Size: {x: 1, y: 10, z: 100}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1442948709
 PrefabInstance:
@@ -27296,7 +27296,7 @@ Transform:
   m_GameObject: {fileID: 1723704515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 395.69, y: 1.6403394, z: 248.78}
+  m_LocalPosition: {x: 395.42, y: 1.6403394, z: 248.48}
   m_LocalScale: {x: 2.5, y: 3.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28890,7 +28890,7 @@ Transform:
   m_GameObject: {fileID: 1878593574}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.7702484, y: -1.0972664, z: -1.5748901}
+  m_LocalPosition: {x: -6.2902527, y: -0.22578144, z: -0.6795349}
   m_LocalScale: {x: 1, y: 8.9758, z: 18.93419}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28928,7 +28928,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1880174829
 GameObject:
