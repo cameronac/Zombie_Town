@@ -10788,11 +10788,11 @@ MonoBehaviour:
   KnifeHold: {fileID: 2162413894516873316}
   MedsHold: {fileID: 919921389186361262}
   flash_light: {fileID: 75319301729028675}
-  interact_distance: 1.5
   has_pistol: 0
   has_shotgun: 0
   medCount: 0
   KeyItems: 
+  numCarParts: 0
   currItem: 2
 --- !u!1 &5592466431730794797
 GameObject:

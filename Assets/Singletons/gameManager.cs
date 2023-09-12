@@ -7,12 +7,14 @@ using UnityEngine.UI;
 using System.Linq;
 using System.IO;
 using UnityEngine.Rendering.UI;
+using Unity.VisualScripting;
 
 public class gameManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject optionsMenu;
     public GameObject creditsMenu;
+    public GameObject cred;
 
     [SerializeField] AudioClip ui_sound;
     [SerializeField] AudioClip lose_sound;
@@ -137,6 +139,7 @@ public class gameManager : MonoBehaviour
         optionsMenu.SetActive(false);
         mainMenu.SetActive(false);
         creditsMenu.SetActive(true);
+        StartCoroutine(credsRoll());
     }
     //-------------------------------------------
 
@@ -319,5 +322,12 @@ public class gameManager : MonoBehaviour
         //Fade Out
         fadeInObjective = false;
     }
+
+    IEnumerator credsRoll()
+    {
+        yield return new WaitForSeconds(0.5f);
+        cred.SetActive(true);
+    }
     //-------------------------------------------
+
 }
