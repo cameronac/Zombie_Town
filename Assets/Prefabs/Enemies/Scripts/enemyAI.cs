@@ -30,7 +30,6 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int animChangeSpeed;
 
     private float hitDistance = 6f;
-    private float distance = 10f;
     private float hitRate = 0.5f;
     private float playerFaceSpeed = 2f;
     
@@ -43,7 +42,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     //patrolling enemy
     private float patrolDist = 10f;
-    private float visionArea = 0.5f;
     private Vector3 startPos;
     private bool isPatrolTimer = false;
     public float distanceToPlayer;
@@ -87,6 +85,7 @@ public class enemyAI : MonoBehaviour, IDamage
         }*/
 
         UpdateVision();
+        UpdateEars();
 
         if (currentState != STATE.death)
         {
@@ -153,19 +152,31 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void UpdateVision()
     {
-        GameObject player = gameManager.instance.player;
-        Vector3 playerDirection = (player.transform.position - transform.position).normalized;
-
-        //Raycast to the object
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position, playerDirection);
-
-        bool isHit = Physics.Raycast(ray, out hit, triggerSphere.radius);
-        float angleToPlayer = Vector3.Dot(playerDirection, transform.forward);
-
-        //Object in Sphere
-        if (isHit && hit.collider.tag == "Player" && angleToPlayer > 0)
+        if (playerInRange)
         {
+            GameObject player = gameManager.instance.player;
+            Vector3 playerDirection = (player.transform.position - transform.position).normalized;
+
+            //Raycast to the object
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position, playerDirection);
+
+            bool isHit = Physics.Raycast(ray, out hit, triggerSphere.radius);
+            float angleToPlayer = Vector3.Dot(playerDirection, transform.forward);
+
+            //Object in Sphere
+            if (isHit && hit.collider.tag == "Player" && angleToPlayer > 0)
+            {
+                isPlayerSeen = true;
+            }
+        }
+    }
+    
+    private void UpdateEars()
+    {
+        if (playerInRange && gameManager.instance.p_playerShoot.IsGunShot())
+        {
+            print("heard gunshot");
             isPlayerSeen = true;
         }
     }
@@ -204,7 +215,7 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     //---------------------------------
 
-    //Sphere Collider/Trigger-----------
+    //Sphere Trigger-----------
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

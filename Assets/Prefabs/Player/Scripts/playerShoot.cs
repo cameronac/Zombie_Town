@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class playerShoot : MonoBehaviour
 {
+    private bool isGunShot = false;
+
     [Header("Audio")]
     [SerializeField] AudioClip pistol_audio;
     [SerializeField] AudioClip shotgun_audio;
@@ -68,6 +70,8 @@ public class playerShoot : MonoBehaviour
 
     void Update()
     {
+        isGunShot = false;
+
         if (Time.timeScale > 0) {
             if (Input.GetButtonDown("Shoot") && gameManager.instance.activeMenu == null)
             {
@@ -207,6 +211,7 @@ public class playerShoot : MonoBehaviour
         cCameraControl.ApplyRecoil(new Vector3(-recoil, 0, 0));
         AudioManager.instance.CreateSoundAtPosition(pistol_audio, transform.position);
 
+        isGunShot = true;
         StartCoroutine(eMuzzleFlash());
         magazine -= 1;
         UpdateAmmoUI();
@@ -251,6 +256,7 @@ public class playerShoot : MonoBehaviour
         cCameraControl.ApplyRecoil(new Vector3(-sRecoil, 0, 0));
         AudioManager.instance.CreateSoundAtPosition(shotgun_audio, transform.position);
 
+        isGunShot = true;
         StartCoroutine(eMuzzleFlash());
         sMagazine -= 1;
         UpdateAmmoUI();
@@ -377,4 +383,12 @@ public class playerShoot : MonoBehaviour
         muzzleFlash.enabled = false;
     }
     //---------------------------------
+
+    //Getter-------------------------------------
+    public bool IsGunShot()
+    {
+        return isGunShot;
+    }
+    //-------------------------------------------
+
 }

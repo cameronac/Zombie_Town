@@ -25,6 +25,8 @@ public class gameManager : MonoBehaviour
 
     public GameObject player;
     public playerState playerScript;
+    public playerShoot p_playerShoot;
+
 
     public GameObject activeMenu;
     public GameObject pauseMenu;
@@ -55,6 +57,7 @@ public class gameManager : MonoBehaviour
         if (player != null)
         {
             playerScript = player.GetComponent<playerState>();
+            p_playerShoot = player.GetComponent<playerShoot>();
         }
 
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
