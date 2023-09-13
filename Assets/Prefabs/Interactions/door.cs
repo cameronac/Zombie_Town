@@ -16,17 +16,24 @@ public class door : MonoBehaviour, IInteract
 
     public void pressed()
     {
-        if (!isLocked) {
+        if (!isLocked) 
+        {
             isOpen = !isOpen;
             AudioManager.instance.CreateSoundAtPosition(door_sound, transform.position);
 
             if (isTouching)
             {
                 rotateOther = true;
-            } else
+            } 
+            else
             {
                 rotateOther = false;
             }
+        }
+        else
+        {
+            isLocked = true;
+            gameManager.instance.updateObjective("The door is locked. We need to find another way inside");
         }
     }
 
@@ -50,7 +57,8 @@ public class door : MonoBehaviour, IInteract
             isLocked = false;
         }
 
-        if (isOpen) {
+        if (isOpen) 
+        {
             if (!rotateOther)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, startRotation * Quaternion.Euler(new Vector3(0, -90, 0)), Time.deltaTime * 5);
@@ -60,7 +68,8 @@ public class door : MonoBehaviour, IInteract
                 transform.rotation = Quaternion.Lerp(transform.rotation, startRotation * Quaternion.Euler(new Vector3(0, 90, 0)), Time.deltaTime * 5);
             }
             
-        } else {
+        } else 
+        {
             transform.rotation = Quaternion.Lerp(transform.rotation, startRotation, Time.deltaTime * 5);
         }
     }
