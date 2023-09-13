@@ -15,23 +15,25 @@ public class enemyAI : MonoBehaviour, IDamage
     private Color startColor = Color.white;
 
     [Header("----- Components -----")]
-    [SerializeField] private Renderer model;
+    [SerializeField] GameObject head;
+    [SerializeField] GameObject attackEmpty;
+    [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent enemyMob;
     [SerializeField] Animator anim;
     [SerializeField] SphereCollider triggerSphere;
     private bool isPlayerSeen = false;
 
     [Header("----- Enemy Stats -----")]
-    [Range(1, 20)][SerializeField] private float currentHP;
-    [Range(1, 20)][SerializeField] private float maxHP;
+    [Range(1, 20)][SerializeField] private float currentHP = 15;
+    [Range(1, 20)][SerializeField] private float maxHP = 15;
     [Range(1, 20)][SerializeField] public float damage;
     [Range(1, 10)][SerializeField] private float patrolSpeed;
     [Range(1, 10)][SerializeField] private float chaseSpeed;
     [SerializeField] int animChangeSpeed;
 
-    private float hitDistance = 6f;
+    private float hitDistance = 3f;
     private float hitRate = 0.5f;
-    private float playerFaceSpeed = 2f;
+    private float playerFaceSpeed = 3f;
     
     //sphere collider/trigger - detection & attacking
     private bool playerInRange;
@@ -51,13 +53,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     //-----------------Main Methods-----------------//
 
-    private void Start()    //called before first frame update
-    {
-        if (anim.GetComponentInChildren<Animator>().CompareTag("Alerted"))
-        {
-            enemyMob.enabled = false;
-        }
-
+    private void Start() {  //called before first frame update
         startPos = transform.position;
         startColor = GetComponent<MeshRenderer>().sharedMaterial.color;
 
@@ -79,11 +75,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
 
-        /*if (enemyMob.isActiveAndEnabled && enemyMob.CompareTag("Alerted"))
-        {
-            enemyMob.enabled = true;
-        }*/
-
         UpdateVision();
         UpdateEars();
 
@@ -93,7 +84,6 @@ public class enemyAI : MonoBehaviour, IDamage
             {
                 enemyMob.stoppingDistance = 2.25f;
                 ChasePlayer();
-                AttackPlayer();
             }
             else if (!isPlayerSeen)
             {
@@ -104,9 +94,9 @@ public class enemyAI : MonoBehaviour, IDamage
             UpdateState();
         }
     }
-    //---------------------------------
+    //-------------------------------------------
 
-    //States: Main Methods-------------
+    //Actions------------------------------------
     private void PatrolTheArea()
     {
         enemyMob.speed = patrolSpeed;
@@ -117,31 +107,53 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    private void ChasePlayer()
-    {
+    private void ChasePlayer() {
+        //Chase
         enemyMob.speed = chaseSpeed;
 
         if (gameManager.instance != null)
         {
             enemyMob.SetDestination(gameManager.instance.player.transform.position);
         }
-    }
 
-    private void AttackPlayer()
-    {
+        //Attack
         bool inHitDistance = Vector3.Distance(gameManager.instance.player.transform.position, transform.position) <= hitDistance;
-        
-        if (inHitDistance) 
+
+        if (inHitDistance)
         {
             FacePlayer();
         }
 
         if (canAttack && inHitDistance)
         {
-            StartCoroutine(attack());
+            if (canAttack) {
+                canAttack = false;
+                anim.SetTrigger("attackPlayer");
+            }
         }
     }
-    //---------------------------------
+
+    public void Attack() {   //The Attack Animation Calls This Method At A Specific Frame
+        Collider[] colliders = Physics.OverlapSphere(attackEmpty.transform.position, 1f);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].tag == "Player")
+            {
+                IDamage iDamage = colliders[i].gameObject.GetComponent<IDamage>();
+
+                if (iDamage != null)
+                {
+                    iDamage.TakeDamage(damage);
+                }
+
+                break;
+            }
+        }
+
+        canAttack = true;
+    }
+    //-------------------------------------------
 
     //Helper Methods-----------------------------
     private void FacePlayer()
@@ -155,11 +167,11 @@ public class enemyAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             GameObject player = gameManager.instance.player;
-            Vector3 playerDirection = (player.transform.position - transform.position).normalized;
+            Vector3 playerDirection = (player.transform.position - head.transform.position).normalized;
 
             //Raycast to the object
             RaycastHit hit;
-            Ray ray = new Ray(transform.position, playerDirection);
+            Ray ray = new Ray(head.transform.position, playerDirection);
 
             bool isHit = Physics.Raycast(ray, out hit, triggerSphere.radius);
             float angleToPlayer = Vector3.Dot(playerDirection, transform.forward);
@@ -176,7 +188,6 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         if (playerInRange && gameManager.instance.p_playerShoot.IsGunShot())
         {
-            print("heard gunshot");
             isPlayerSeen = true;
         }
     }
@@ -245,44 +256,6 @@ public class enemyAI : MonoBehaviour, IDamage
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPosition, out hit, patrolDist, 1);
         enemyMob.SetDestination(hit.position);
-
-        //target = new Vector3(newX + startPos.x, startPos.y, newZ + startPos.z);
-        
-        //enemyMob.SetDestination(target);
-    }
-
-    private IEnumerator attack()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(hitRate);
-        canAttack = true;
-
-        if (gameManager.instance != null)
-        {
-            anim.SetTrigger("attackPlayer");
-        }
-    }
-
-    public void Attack()    //The Attack Animation Calls This Method At A Specific Frame
-    {
-        RaycastHit hit;
-        Vector3 playerPos = gameManager.instance.player.transform.position;
-        Vector3 direction = (playerPos - transform.position).normalized;
-        bool isHit = Physics.Raycast(new Ray(transform.position, direction), out hit, 2.5f);
-
-        //if collider hit player - attack
-        if (isHit)
-        {
-            if (hit.collider.tag == "Player")
-            {
-                IDamage iDamage = hit.collider.GetComponent<IDamage>();
-
-                if (iDamage != null)
-                {
-                    iDamage.TakeDamage(damage);
-                }
-            }
-        }
     }
 
     private IEnumerator flashDamage() //to show damage(for now)
@@ -310,12 +283,4 @@ public class enemyAI : MonoBehaviour, IDamage
         Destroy(gameObject);
     }
     //--------------------------------
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.forward * 2 + transform.position);
-    }
-
 }

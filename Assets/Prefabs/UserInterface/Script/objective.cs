@@ -19,7 +19,7 @@ public class Objective : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            gameManager.instance.updateObjective(newObjective);
+            gameManager.instance.updateObjective(currentObjective);
             Destroy(gameObject);
         }
     }

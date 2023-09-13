@@ -142,7 +142,7 @@ public class gameManager : MonoBehaviour
         optionsMenu.SetActive(false);
         mainMenu.SetActive(false);
         creditsMenu.SetActive(true);
-        StartCoroutine(credsRoll());
+        //StartCoroutine(credsRoll());
     }
     //-------------------------------------------
 
@@ -329,7 +329,7 @@ public class gameManager : MonoBehaviour
     IEnumerator credsRoll()
     {
         yield return new WaitForSeconds(0.5f);
-        cred.SetActive(true);
+        //cred.SetActive(true);
     }
     //-------------------------------------------
 
