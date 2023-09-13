@@ -247,7 +247,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         ShotgunHold.SetActive(false);
         KnifeHold.SetActive(false);
         MedsHold.SetActive(false);
-
+        // Do a while loop to see what the next available enum type is, once found, switch to that, even if it is the same item
         int tryMove = (int)currItem;
 
         if(move)

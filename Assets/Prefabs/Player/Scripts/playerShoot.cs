@@ -61,8 +61,12 @@ public class playerShoot : MonoBehaviour
     bool isReloading = false;
     Vector3 hit_point = Vector3.zero;
 
+    itemSway pistolInst;
+    itemSway shotgunInst;
     private void Start()
     {
+        pistolInst = PistolHold.GetComponent<itemSway>();
+        shotgunInst = ShotgunHold.GetComponent<itemSway>();
         inst = GetComponent<playerState>();
         UpdateAmmoUI();
         muzzleFlash.enabled = false;
@@ -117,10 +121,12 @@ public class playerShoot : MonoBehaviour
             {
                 case playerState.heldItems.pistol:
                     PistolHold.SetBool("ADS", true);
+                    pistolInst.intesity = 1;
                     break;
                 case playerState.heldItems.shotgun:
                     ShotgunHold.SetBool("ADS", true);
                     bulletSpread = 0.05f;
+                    shotgunInst.intesity = 1;
                     break;
             }
         }
@@ -131,10 +137,12 @@ public class playerShoot : MonoBehaviour
             {
                 case playerState.heldItems.pistol:
                     PistolHold.SetBool("ADS", false);
+                    pistolInst.intesity = 2.5f;
                     break;
                 case playerState.heldItems.shotgun:
                     ShotgunHold.SetBool("ADS", false);
                     bulletSpread = 0.1f;
+                    shotgunInst.intesity = 2.5f;
                     break;
             }
         }
