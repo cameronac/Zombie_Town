@@ -6,9 +6,17 @@ using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
-    [SerializeField] string newObjective;
+    [SerializeField] string currentObjective;
+    //[SerializeField] string newObjective;
 
-    void OnTriggerEnter(Collider other) {
+    //private void Start()
+    //{
+    //    gameManager.instance.updateObjective(currentObjective);
+    //    Destroy(gameObject);
+    //}
+
+    void OnTriggerEnter(Collider other) 
+    {
         if (other.gameObject.tag == "Player")
         {
             gameManager.instance.updateObjective(newObjective);
