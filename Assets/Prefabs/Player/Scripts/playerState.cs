@@ -242,27 +242,52 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     public void ToggleItem(bool move)
     {
         //reset everything
+        // Do a while loop to see what the next available enum type is, once found, switch to that, even if it is the same item
+
         pShoot.enabled = false;
         PistolHold.SetActive(false);
         ShotgunHold.SetActive(false);
         KnifeHold.SetActive(false);
         MedsHold.SetActive(false);
-        // Do a while loop to see what the next available enum type is, once found, switch to that, even if it is the same item
-        int tryMove = (int)currItem;
+        bool correctMove = false;
+        bool playSound = true;
+        heldItems prevItem = currItem;
 
-        if(move)
-            tryMove++;
-        else
-            tryMove--;
+        while(!correctMove)
+        {
+            int tryMove = (int)currItem;
 
-        AudioManager.instance.CreateOneDimensionalSound(switch_audio);
+            if(move)
+                tryMove++;
+            else
+                tryMove--;
 
-        if (tryMove <= -1)
-            tryMove = 3;
-        else if (tryMove >= 4)
-            tryMove = 0;
+            if (tryMove <= -1)
+                tryMove = 3;
+            else if (tryMove >= 4)
+                tryMove = 0;
+
+            currItem = (heldItems)tryMove;
+
+            if (currItem == heldItems.pistol && has_pistol)            
+                correctMove = true;
+            if (currItem == heldItems.shotgun && has_shotgun)
+                correctMove = true;
+            if (currItem == heldItems.pistol && medCount > 0 )
+                correctMove = true;
+            if (currItem == heldItems.knife)
+                correctMove = true;
+
+            if (currItem == prevItem)
+            {
+                playSound = false;
+            }
+        }
+
+        if (playSound)
+            AudioManager.instance.CreateOneDimensionalSound(switch_audio);
+
       
-        currItem = (heldItems)tryMove;
         switch(currItem)
         {
             case heldItems.pistol: //pistol
