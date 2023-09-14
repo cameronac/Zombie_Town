@@ -174,6 +174,13 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                     pShoot.AddAmmo(amount);
                 }
                 break;
+
+            case Ammo.shotgun:
+                if (pShoot != null)
+                {
+                    pShoot.AddShotgunAmmo(amount);
+                }
+                break;
         }
 
         AudioManager.instance.CreateSoundAtPosition(pickup_audio, transform.position, 1);
@@ -273,7 +280,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 correctMove = true;
             if (currItem == heldItems.shotgun && has_shotgun)
                 correctMove = true;
-            if (currItem == heldItems.pistol && medCount > 0 )
+            if (currItem == heldItems.meds && medCount > 0 )
                 correctMove = true;
             if (currItem == heldItems.knife)
                 correctMove = true;

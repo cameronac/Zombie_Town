@@ -172,6 +172,11 @@ public class playerShoot : MonoBehaviour
         ammo += amount;
         UpdateAmmoUI();
     }
+    public void AddShotgunAmmo(int amount)
+    {
+        sAmmo += amount;
+        UpdateAmmoUI();
+    }
 
     private void UpdateAmmoUI()
     {
