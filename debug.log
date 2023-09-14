@@ -88,3 +88,5 @@
 [0913/130757.684:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
 [0913/130757.687:WARNING:dns_config_service_win.cc(583)] Failed to read DnsConfig.
 [0913/181415.155:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
+[0914/153102.143:ERROR:component_installer.cc(298)] Failed to verify installation for Widevine Content Decryption Module (C:\Users\Eli\AppData\Local\CEF\User Data\WidevineCdm\4.10.2557.0).: The system cannot find the path specified. (0x3)
+[0914/153302.347:ERROR:gpu_init.cc(523)] Passthrough is not supported, GL is disabled, ANGLE is 
