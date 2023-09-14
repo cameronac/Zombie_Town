@@ -18474,6 +18474,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 918486132}
+    - target: {fileID: 2035348181895426911, guid: e949b878eca37c34dbbc6bd228ec0871, type: 3}
+      propertyPath: hp
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2437782858132709884, guid: e949b878eca37c34dbbc6bd228ec0871, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
@@ -40561,6 +40565,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1907739644}
+    - target: {fileID: 2035348181895426911, guid: e949b878eca37c34dbbc6bd228ec0871, type: 3}
+      propertyPath: hp
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2437782858132709884, guid: e949b878eca37c34dbbc6bd228ec0871, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
@@ -42748,7 +42756,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3853943818523629375, guid: 118640508ca9ef841bb5ba9fbe8c90e8, type: 3}
       propertyPath: hp
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6681825861569176631, guid: 118640508ca9ef841bb5ba9fbe8c90e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42918,11 +42926,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: ammo
-      value: 24
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: sAmmo
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: kDamage
@@ -42934,15 +42942,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: sDamage
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: magazine
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: sFirerate
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: sMagazine
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: magazine_size
