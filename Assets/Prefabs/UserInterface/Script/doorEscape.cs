@@ -7,7 +7,7 @@ public class doorEscape : MonoBehaviour, IInteract
     [SerializeField] int ID;
     [SerializeField] bool locked;
 
-    public void pressed()
+    public void buttonPressed()
     {
         if(locked){
             if(playerState.instance.has_key(ID))

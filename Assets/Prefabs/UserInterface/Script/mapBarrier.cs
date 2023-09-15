@@ -6,16 +6,17 @@ public class mapBarrier : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent("playerState") as playerState != null)
+        if (other.gameObject.GetComponent("playerState") as playerState != null)
         {
-            if(playerState.instance.has_pistol)
+            if (playerState.instance.has_pistol || playerState.instance.has_shotgun)
             {
                 Destroy(gameObject);
             }
             else
             {
-                gameManager.instance.updateObjective("pistol required to proceed");
+                gameManager.instance.updateObjective("a better weapon is required before entering the town");
             }
         }
     }
 }
+

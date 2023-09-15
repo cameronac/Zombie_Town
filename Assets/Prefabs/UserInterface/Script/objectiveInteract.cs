@@ -8,7 +8,7 @@ public class ObjectiveInteract : MonoBehaviour, IInteract
 {
     [SerializeField] string newObjective;
 
-    public void pressed()
+    public void buttonPressed()
     {
         gameManager.instance.updateObjective(newObjective);
         Destroy(this);
