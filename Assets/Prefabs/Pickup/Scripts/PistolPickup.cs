@@ -12,6 +12,7 @@ public class PistolPickup : MonoBehaviour
 
             if (iPickup != null)
             {
+                playerState.instance.destroyItems.Add(gameObject.name);
                 iPickup.PickupItem(IPickup.Items.pistol);
                 Destroy(gameObject);
             }

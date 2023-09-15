@@ -10,6 +10,7 @@ public class shotgunPickup : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out IPickup isPickup))
         {
+            playerState.instance.destroyItems.Add(gameObject.name);
             isPickup.PickupItem(Items.shotgun);
             Destroy(gameObject);
         }

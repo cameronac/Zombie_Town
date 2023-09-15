@@ -15,6 +15,7 @@ public class DestructableObject : MonoBehaviour, IDamage
 
         if (hp <= 0)
         {
+            playerState.instance.destroyItems.Add(gameObject.name);
             AudioManager.instance.CreateSoundAtPosition(destroy_sound, transform.position);
             Destroy(gameObject);
         } else

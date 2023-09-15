@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using System;
 
 [System.Serializable]
 public class GameData
@@ -13,6 +13,7 @@ public class GameData
     public int checkpoint;
     public int numCarParts;
     public float[] playerPosition;
+    public List<string> thingsToDestroy = new List<string>(0);
 
     public GameData(playerState player, GameObject pos)
     {
@@ -25,5 +26,10 @@ public class GameData
         playerPosition[0] = pos.transform.position.x;
         playerPosition[1] = pos.transform.position.y;
         playerPosition[2] = pos.transform.position.z;
+
+        foreach(string item in player.destroyItems)
+        {
+            thingsToDestroy.Add(item);
+        }
     }
 }

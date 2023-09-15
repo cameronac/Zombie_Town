@@ -233,7 +233,18 @@ public class gameManager : MonoBehaviour
             position.z = data.playerPosition[2];
 
             player.transform.position = position;
+
+            for(int i = 0; i < data.thingsToDestroy.Count; i++)
+            {
+                GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
+                if (killMe)
+                {
+                    playerScript.destroyItems.Add(data.thingsToDestroy[i]);
+                    Destroy(killMe);
+                }
+            }
         }
+
     }
 
     public void saveGame()

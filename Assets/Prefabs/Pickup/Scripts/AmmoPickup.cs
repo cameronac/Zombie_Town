@@ -6,6 +6,7 @@ using static IPickup;
 public class AmmoPickup : MonoBehaviour
 {
     [SerializeField] bool shotgun;
+
     void OnTriggerEnter(Collider other)
     {
 
@@ -14,13 +15,14 @@ public class AmmoPickup : MonoBehaviour
             if(shotgun)
             {
                 isPickup.PickupAmmo(Ammo.shotgun, 4);
-                Destroy(gameObject);
             }
             else
             {
                 isPickup.PickupAmmo(Ammo.pistol, 12);
-                Destroy(gameObject);
             }
+
+            playerState.instance.destroyItems.Add(gameObject.name);
+            Destroy(gameObject);
         }
     }
 }

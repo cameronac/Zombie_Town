@@ -9,6 +9,7 @@ public class MedpackPickup : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out IPickup isPickup))
         {
+            playerState.instance.destroyItems.Add(gameObject.name);
             isPickup.PickupFirstAid(FirstAid.first_aid_kit, 1);
             Destroy(gameObject);
         }
