@@ -11,21 +11,19 @@ public class enemyAI : MonoBehaviour, IDamage
     { roam, chase, attacked, death }
 
     private STATE currentState = STATE.roam;
-    
-    private Color startColor = Color.white;
 
     [Header("----- Components -----")]
+    [SerializeField] GameObject head_mesh;
+    [SerializeField] GameObject headCollider;
     [SerializeField] GameObject head;
     [SerializeField] GameObject attackEmpty;
-    [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent enemyMob;
     [SerializeField] Animator anim;
     [SerializeField] SphereCollider triggerSphere;
     
 
     [Header("----- Enemy Stats -----")]
-    [Range(1, 20)][SerializeField] private float currentHP = 15;
-    [Range(1, 20)][SerializeField] private float maxHP = 15;
+    [Range(1, 20)][SerializeField] public float currentHP = 15;
     [Range(1, 20)][SerializeField] public float damage;
     [Range(1, 10)][SerializeField] private float patrolSpeed;
     [Range(1, 10)][SerializeField] private float chaseSpeed;
@@ -35,7 +33,7 @@ public class enemyAI : MonoBehaviour, IDamage
     private bool isPlayerSeen = false;
     private bool playerInRange = false;
     private bool isDead = false;
-    
+    public bool wasHeadShot = false;
 
     private float hitDistance = 3f;
     private float playerFaceSpeed = 3f;
@@ -45,25 +43,18 @@ public class enemyAI : MonoBehaviour, IDamage
     private bool wasAttacked = false;
     private float visualDistance = 20f;
 
-    //enemy spawner
-    public enemySpawner whereISpawned;
 
     //patrolling enemy
     private float patrolDist = 10f;
     private Vector3 startPos;
     private bool isPatrolTimer = false;
-    private bool isAttackedTimer = false;
+    private bool isDeathTimer = false;
     public float distanceToPlayer;
-    public Transform[] wayPoints;
 
     //-----------------Main Methods-----------------//
 
     private void Start() {  //called before first frame update
         startPos = transform.position;
-        startColor = GetComponent<MeshRenderer>().sharedMaterial.color;
-
-        //starts enemy at maxHealth;
-        currentHP = maxHP;
 
         enemyMob = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
@@ -131,10 +122,10 @@ public class enemyAI : MonoBehaviour, IDamage
     private IEnumerator GetRandomPatrolPoint()
     {
         isPatrolTimer = true;
-        yield return new WaitForSeconds(Random.Range(3, 8));
+        yield return new WaitForSeconds(Random.Range(1, 3));
         isPatrolTimer = false;
 
-        if (!wasAttacked) {
+        if (!wasAttacked && !isDead) {
             Vector3 randomPosition = (Random.insideUnitSphere * patrolDist) + startPos;
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPosition, out hit, patrolDist, 1);
@@ -250,19 +241,28 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
-        StartCoroutine(flashDamage());
 
-        if (currentHP <= 0) {
-            StopAllCoroutines();
-            GetComponent<CapsuleCollider>().enabled = false;
-            StartCoroutine(Death());
-
-        } else {
-            if (currentState != STATE.chase) {
+        if (currentHP > 0 && !isDead) {
+            if (playerInRange)
+            {
+                isPlayerSeen = true;
+            } else if (currentState != STATE.chase)
+            {
                 enemyMob.SetDestination(gameManager.instance.player.transform.position);
                 wasAttacked = true;
+            } 
+          
+        } else {
+            if (wasHeadShot)
+            {
+                head_mesh.SetActive(false);
             }
+
+            isDead = true;
+            StartCoroutine(Death());
         }
+
+        wasHeadShot = false;
     }
     //---------------------------------
 
@@ -286,24 +286,12 @@ public class enemyAI : MonoBehaviour, IDamage
 
 
     //IEnumerators--------------------
-    private IEnumerator flashDamage() //to show damage(for now)
-    {
-        model.material.color = UnityEngine.Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = startColor;
-    }
-
     private IEnumerator Death()
     {
-        isDead = true;
         anim.SetTrigger("enemyDeath");
         enemyMob.enabled = false;
 
-        if (whereISpawned != null) 
-        {
-            whereISpawned.enemiesDead();
-        }
-
+        Destroy(headCollider);
         Destroy(GetComponent<CapsuleCollider>());
         Destroy(GetComponent<CapsuleCollider>());
 

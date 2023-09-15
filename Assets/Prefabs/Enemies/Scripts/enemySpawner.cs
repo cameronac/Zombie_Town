@@ -29,11 +29,6 @@ public class enemySpawner : MonoBehaviour
 
         GameObject objectSpawned = Instantiate(zombiePrefab, spawnPos[Random.Range(0, spawnPos.Length)].position, zombiePrefab.transform.rotation);
 
-        if (objectSpawned.GetComponent<enemyAI>())
-        {
-            objectSpawned.GetComponent<enemyAI>().whereISpawned = this;
-        }
-
         objectList.Add(objectSpawned);
         numberSpawned++;
 
