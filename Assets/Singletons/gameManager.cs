@@ -234,6 +234,8 @@ public class gameManager : MonoBehaviour
 
             player.transform.position = position;
 
+            playerScript.medCount = data.medCount;
+
             for(int i = 0; i < data.thingsToDestroy.Count; i++)
             {
                 GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
