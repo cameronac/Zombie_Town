@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class BasicMenu : MonoBehaviour
 {
-    enum ButtonTypes { enter = 0, options, load, credits, quit }
     private int index = 0;
-    private int max_index = 4;
+    public int max_index = 0;
 
     [SerializeField] AudioClip ui_sound;
     [SerializeField] TextMeshProUGUI[] buttonText;
@@ -21,16 +19,11 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Submit"))
-        {
-            ButtonPressed(index);
-        }
-
         bool up = Input.GetButtonDown("Up");
         bool down = Input.GetButtonDown("Down");
 
-        if (up || down) {
-
+        if (up || down)
+        {
             if (up)
             {
                 index -= 1;
@@ -56,40 +49,10 @@ public class MainMenu : MonoBehaviour
     }
 
     //Events-------------------------------------
-    public void ButtonPressed(int _index)
-        {
-        switch(_index)
-        {
-            case (int)ButtonTypes.enter:
-                gameManager.instance.SetLoad(false);
-                gameManager.instance.stateUnpaused();
-                SceneManager.LoadScene(1);
-                break;
-
-            case (int)ButtonTypes.options:
-                gameManager.instance.statePaused();
-                gameManager.instance.OptionsMenuCurrent();
-                break;
-
-            case (int)ButtonTypes.load:
-                gameManager.instance.SetLoad(true);
-                gameManager.instance.stateUnpaused();
-                SceneManager.LoadScene(1);
-                break;
-
-            case (int)ButtonTypes.credits:
-                gameManager.instance.statePaused();
-                gameManager.instance.CreditsMenuCurrent();
-                break;
-
-            case (int)ButtonTypes.quit:
-                Application.Quit();
-                break;
-        }
-    }
-
     public void ButtonHover(int _index)
     {
+        index = _index;
+
         for (int i = 0; i < buttonText.Length; i++)
         {
             if (i == _index)
@@ -100,7 +63,9 @@ public class MainMenu : MonoBehaviour
                 }
 
                 buttonText[i].color = Color.white;
-            } else {
+            }
+            else
+            {
                 buttonText[i].color = Color.red;
             }
         }
