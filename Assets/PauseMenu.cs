@@ -24,7 +24,6 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetButtonDown("Submit"))
         {
             ButtonPressed(index);
-            
         }
 
         bool up = Input.GetButtonDown("Up");
