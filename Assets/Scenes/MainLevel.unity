@@ -2647,6 +2647,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1274775455}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1274775456}
   m_SourcePrefab: {fileID: 100100000, guid: e01fb1a694c3dc34294327117e516909, type: 3}
 --- !u!1 &179731495 stripped
 GameObject:
@@ -10355,7 +10358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: You must find a better weapon before you can traverse any further!
 --- !u!65 &618948348
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10721,7 +10723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: Break the barrier
 --- !u!1 &645618384
 GameObject:
   m_ObjectHideFlags: 0
@@ -22977,6 +22978,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5, y: 14, z: 3.4}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!208 &1274775456
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179731495}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.75, y: 7, z: 1.7}
+  m_MoveThreshold: 0.001
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5, z: 0}
+  m_TimeToStationary: 0.001
 --- !u!4 &1276661405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8781446736758761401, guid: 092c19e4108d71e40bd4457e4832aefc, type: 3}
@@ -27747,7 +27764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: Find a way into the town
 --- !u!65 &1439880454
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28914,6 +28930,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1500189034}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1500189035}
   m_SourcePrefab: {fileID: 100100000, guid: e01fb1a694c3dc34294327117e516909, type: 3}
 --- !u!1 &1500189033 stripped
 GameObject:
@@ -28941,6 +28960,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5, y: 13.7, z: 3.6}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!208 &1500189035
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500189033}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.75, y: 6.85, z: 1.8}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!4 &1506679009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4174875708765392, guid: 418ee091cafdbb245a2cf2b8286cc39a, type: 3}
@@ -36405,7 +36440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: Find a better weapon
 --- !u!65 &1878593577
 BoxCollider:
   m_ObjectHideFlags: 0
