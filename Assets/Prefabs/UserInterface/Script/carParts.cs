@@ -7,7 +7,7 @@ public class carParts : MonoBehaviour, IInteract
     [SerializeField] int numRequired;
     [SerializeField] string locked;
 
-    public void pressed()
+    public void buttonPressed()
     {
 
         if (playerState.instance.numCarParts == numRequired)

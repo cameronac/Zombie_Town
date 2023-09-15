@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractTestScript : MonoBehaviour, IInteract
 {
 
-    public void pressed()
+    public void buttonPressed()
     {
         print("Pressed Cube!");
     }

@@ -72,7 +72,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                         gameManager.instance.ToggleInteract(isHit);
 
                         if (Input.GetButtonDown("Interact"))
-                            iInteract.pressed();
+                            iInteract.buttonPressed();
                     }
                 }
             }

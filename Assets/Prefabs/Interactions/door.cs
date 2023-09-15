@@ -14,7 +14,7 @@ public class door : MonoBehaviour, IInteract
     bool isTouching = false;
     bool rotateOther = false;
 
-    public void pressed()
+    public void buttonPressed()
     {
         if (!isLocked) 
         {

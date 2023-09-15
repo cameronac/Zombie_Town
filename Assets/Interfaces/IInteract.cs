@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IInteract
 {
-    public void pressed();
+    public void buttonPressed();
 }
