@@ -8,7 +8,7 @@ using UnityEngine.ProBuilder;
 public class enemyAI : MonoBehaviour, IDamage
 {
     private enum STATE
-    { roam, chase, death }
+    { roam, chase, attacked, death }
 
     private STATE currentState = STATE.roam;
     
@@ -21,7 +21,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent enemyMob;
     [SerializeField] Animator anim;
     [SerializeField] SphereCollider triggerSphere;
-    private bool isPlayerSeen = false;
+    
 
     [Header("----- Enemy Stats -----")]
     [Range(1, 20)][SerializeField] private float currentHP = 15;
@@ -31,13 +31,19 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] private float chaseSpeed;
     [SerializeField] int animChangeSpeed;
 
+    //State Conditions
+    private bool isPlayerSeen = false;
+    private bool playerInRange = false;
+    private bool isDead = false;
+    
+
     private float hitDistance = 3f;
-    private float hitRate = 0.5f;
     private float playerFaceSpeed = 3f;
     
     //sphere collider/trigger - detection & attacking
-    private bool playerInRange;
     private bool canAttack = true;
+    private bool wasAttacked = false;
+    private float visualDistance = 20f;
 
     //enemy spawner
     public enemySpawner whereISpawned;
@@ -46,10 +52,9 @@ public class enemyAI : MonoBehaviour, IDamage
     private float patrolDist = 10f;
     private Vector3 startPos;
     private bool isPatrolTimer = false;
+    private bool isAttackedTimer = false;
     public float distanceToPlayer;
     public Transform[] wayPoints;
-    private int wayPointIndex;
-    private Vector3 target;
 
     //-----------------Main Methods-----------------//
 
@@ -75,28 +80,45 @@ public class enemyAI : MonoBehaviour, IDamage
 
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
 
-        UpdateVision();
-        UpdateEars();
+        //Triggers
+        if (currentState != STATE.chase) {
+            UpdateEars();
+        }
 
-        if (currentState != STATE.death)
+        UpdateVision();
+        UpdateState();
+
+        //State Actions
+        switch(currentState)
         {
-            if (isPlayerSeen)
-            {
-                enemyMob.stoppingDistance = 2.25f;
-                ChasePlayer();
-            }
-            else if (!isPlayerSeen)
-            {
+            case STATE.roam:
                 enemyMob.stoppingDistance = 0.0f;
                 PatrolTheArea();
-            }
+                break;
 
-            UpdateState();
+            case STATE.chase:
+                enemyMob.speed = chaseSpeed;
+                enemyMob.stoppingDistance = 2.25f;
+                ChasePlayer();
+                break;
+
+            case STATE.attacked:
+                enemyMob.speed = chaseSpeed;
+                enemyMob.stoppingDistance = 2.25f;
+                ChaseToPoint();
+                break;
+
+            case STATE.death:
+                break;
         }
     }
     //-------------------------------------------
 
-    //Actions------------------------------------
+
+
+    //States-------------------------------------
+
+    //Patrol-------------------------------------
     private void PatrolTheArea()
     {
         enemyMob.speed = patrolSpeed;
@@ -106,30 +128,33 @@ public class enemyAI : MonoBehaviour, IDamage
             StartCoroutine(GetRandomPatrolPoint());
         }
     }
+    private IEnumerator GetRandomPatrolPoint()
+    {
+        isPatrolTimer = true;
+        yield return new WaitForSeconds(Random.Range(3, 8));
+        isPatrolTimer = false;
 
-    private void ChasePlayer() {
-        //Chase
-        enemyMob.speed = chaseSpeed;
-
-        if (gameManager.instance != null)
-        {
-            enemyMob.SetDestination(gameManager.instance.player.transform.position);
+        if (!wasAttacked) {
+            Vector3 randomPosition = (Random.insideUnitSphere * patrolDist) + startPos;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomPosition, out hit, patrolDist, 1);
+            enemyMob.SetDestination(hit.position);
         }
+    }
+    //-------------------------------------------
 
-        //Attack
+    //Chase--------------------------------------
+    private void ChasePlayer() {
+
+        enemyMob.SetDestination(gameManager.instance.player.transform.position);
         bool inHitDistance = Vector3.Distance(gameManager.instance.player.transform.position, transform.position) <= hitDistance;
 
-        if (inHitDistance)
-        {
-            FacePlayer();
-        }
+        if (inHitDistance) { FacePlayer(); }
 
         if (canAttack && inHitDistance)
         {
-            if (canAttack) {
-                canAttack = false;
-                anim.SetTrigger("attackPlayer");
-            }
+            canAttack = false;
+            anim.SetTrigger("attackPlayer");
         }
     }
 
@@ -155,6 +180,18 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     //-------------------------------------------
 
+    //Attacked-----------------------------------
+    private void ChaseToPoint()
+    {
+        if (Vector3.Distance(transform.position, enemyMob.destination) <= 2f)
+        {
+            wasAttacked = false;
+        }
+    }
+    //-------------------------------------------
+    //-------------------------------------------
+
+
     //Helper Methods-----------------------------
     private void FacePlayer()
     {
@@ -164,26 +201,24 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void UpdateVision()
     {
-        if (playerInRange)
-        {
-            GameObject player = gameManager.instance.player;
-            Vector3 playerDirection = (player.transform.position - head.transform.position).normalized;
+        GameObject player = gameManager.instance.player;
+        Vector3 playerDirection = (player.transform.position - head.transform.position).normalized;
+        
+        //Raycast to the object
+        RaycastHit hit;
+        Ray ray = new Ray(head.transform.position, playerDirection);
+        
+        bool isHit = Physics.Raycast(ray, out hit, visualDistance);
+        float angleToPlayer = Vector3.Dot(playerDirection, transform.forward);
+        
+        if (isHit && hit.collider.tag == "Player" && angleToPlayer > 0) {
+            isPlayerSeen = true;
 
-            //Raycast to the object
-            RaycastHit hit;
-            Ray ray = new Ray(head.transform.position, playerDirection);
-
-            bool isHit = Physics.Raycast(ray, out hit, triggerSphere.radius);
-            float angleToPlayer = Vector3.Dot(playerDirection, transform.forward);
-
-            //Object in Sphere
-            if (isHit && hit.collider.tag == "Player" && angleToPlayer > 0)
-            {
-                isPlayerSeen = true;
-            }
+        } else if (!playerInRange) {
+            isPlayerSeen = false;
         }
     }
-    
+
     private void UpdateEars()
     {
         if (playerInRange && gameManager.instance.p_playerShoot.IsGunShot())
@@ -196,13 +231,16 @@ public class enemyAI : MonoBehaviour, IDamage
     //Updates State of AI--------------
     private void UpdateState()
     {
-        //change AI State
-        if (isPlayerSeen)
-        {
+        if (isDead) {
+            currentState = STATE.death;
+
+        } else if (isPlayerSeen) {
             currentState = STATE.chase;
-        }
-        else if (!isPlayerSeen)
-        {
+
+        } else if (wasAttacked) {
+            currentState = STATE.attacked;
+
+        } else {
             currentState = STATE.roam;
         }
     }
@@ -212,16 +250,18 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
-        
         StartCoroutine(flashDamage());
 
-        if (currentHP <= 0)
-        {
+        if (currentHP <= 0) {
             StopAllCoroutines();
             GetComponent<CapsuleCollider>().enabled = false;
-            StartCoroutine(isDead());
+            StartCoroutine(Death());
+
         } else {
-            enemyMob.SetDestination(gameManager.instance.player.transform.position);
+            if (currentState != STATE.chase) {
+                enemyMob.SetDestination(gameManager.instance.player.transform.position);
+                wasAttacked = true;
+            }
         }
     }
     //---------------------------------
@@ -246,18 +286,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
 
     //IEnumerators--------------------
-    private IEnumerator GetRandomPatrolPoint()
-    {
-        isPatrolTimer = true;
-        yield return new WaitForSeconds(Random.Range(3, 8));
-        isPatrolTimer = false;
-
-        Vector3 randomPosition = (Random.insideUnitSphere * patrolDist) + startPos;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomPosition, out hit, patrolDist, 1);
-        enemyMob.SetDestination(hit.position);
-    }
-
     private IEnumerator flashDamage() //to show damage(for now)
     {
         model.material.color = UnityEngine.Color.red;
@@ -265,10 +293,10 @@ public class enemyAI : MonoBehaviour, IDamage
         model.material.color = startColor;
     }
 
-    private IEnumerator isDead()
+    private IEnumerator Death()
     {
+        isDead = true;
         anim.SetTrigger("enemyDeath");
-        currentState = STATE.death;
         enemyMob.enabled = false;
 
         if (whereISpawned != null) 
