@@ -10,7 +10,7 @@ public class Objective : MonoBehaviour
 
     //spawn wall gameObjects around the player or enemy they collided with and when the player obtains a weapon, delete/destroy those gameObjects
 
-    void OnTriggerEnter(Collider other) 
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {

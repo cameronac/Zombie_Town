@@ -1136,6 +1136,140 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 53ec6115b233000489d1dd52c385f7b0, type: 3}
   m_PrefabInstance: {fileID: 817993625}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &82510354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 82510355}
+  - component: {fileID: 82510357}
+  - component: {fileID: 82510356}
+  m_Layer: 5
+  m_Name: ControlText (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &82510355
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82510354}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 219479917}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 308, y: 329.99997}
+  m_SizeDelta: {x: 725, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &82510356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82510354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Main Objective: Find all 4 Car Parts to Fix Your Car!'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: b5f17befe99bcf04e898e101b82a34d2, type: 2}
+  m_sharedMaterial: {fileID: 4042682541679146844, guid: b5f17befe99bcf04e898e101b82a34d2, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &82510357
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82510354}
+  m_CullTransparentMesh: 1
 --- !u!4 &82620113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4109752109433260114, guid: 42dca3f16c592e64ab2ccbba6a1f6e8a, type: 3}
@@ -2513,6 +2647,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1274775455}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1274775456}
   m_SourcePrefab: {fileID: 100100000, guid: e01fb1a694c3dc34294327117e516909, type: 3}
 --- !u!1 &179731495 stripped
 GameObject:
@@ -3138,6 +3275,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 418ee091cafdbb245a2cf2b8286cc39a, type: 3}
+--- !u!224 &219479917 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4098630059138962571, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+  m_PrefabInstance: {fileID: 685880863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &224634578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5846101279795787268, guid: 8aa7a1b5ff1244344b016d3a040257b3, type: 3}
@@ -10216,7 +10358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: You must find a better weapon before you can traverse any further!
 --- !u!65 &618948348
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10582,7 +10723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: Break the barrier
 --- !u!1 &645618384
 GameObject:
   m_ObjectHideFlags: 0
@@ -11597,6 +11737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4379741307742755279, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5871555062579415846, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: player
       value: 
@@ -11691,7 +11835,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4098630059138962571, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 82510355}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
 --- !u!4 &688350634 stripped
@@ -22831,6 +22978,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5, y: 14, z: 3.4}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!208 &1274775456
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179731495}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.75, y: 7, z: 1.7}
+  m_MoveThreshold: 0.001
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5, z: 0}
+  m_TimeToStationary: 0.001
 --- !u!4 &1276661405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8781446736758761401, guid: 092c19e4108d71e40bd4457e4832aefc, type: 3}
@@ -27601,7 +27764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: Find a way into the town
 --- !u!65 &1439880454
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28768,6 +28930,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1500189034}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1500189035}
   m_SourcePrefab: {fileID: 100100000, guid: e01fb1a694c3dc34294327117e516909, type: 3}
 --- !u!1 &1500189033 stripped
 GameObject:
@@ -28795,6 +28960,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5, y: 13.7, z: 3.6}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!208 &1500189035
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500189033}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.75, y: 6.85, z: 1.8}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!4 &1506679009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4174875708765392, guid: 418ee091cafdbb245a2cf2b8286cc39a, type: 3}
@@ -36259,7 +36440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756ee5e36f5fb94d82a55e7924e5e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentObjective: Find a better weapon
 --- !u!65 &1878593577
 BoxCollider:
   m_ObjectHideFlags: 0
