@@ -142,6 +142,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 34019572682353090, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 215800388990710353, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -149,6 +153,27 @@ PrefabInstance:
     - target: {fileID: 215800388990710353, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 814979911838600190, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_text
+      value: 'Adam Mashaw
+
+        Cameron Collins
+
+        Donald Slebodnick
+
+        Sandy
+        Boyett
+
+        Wendell Moore
+
+
+        Daniel Zadorozny -Bloodcrowc font
+
+        Jamal
+        Benjamin - Industrial Fridge Prefab
+
+        Peter_D - Store Shelves Prefab'
       objectReference: {fileID: 0}
     - target: {fileID: 1353600055216069311, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_AnchorMax.x
