@@ -215,6 +215,11 @@ public class gameManager : MonoBehaviour
 
                 playerScript.medCount = data.medCount;
 
+                playerScript.pAmmo = data.pAmmo;
+                playerScript.pMagazine = data.pMag;
+                playerScript.sAmmo = data.sAmmo;
+                playerScript.sMagazine = data.sMag;
+
                 for (int i = 0; i < data.thingsToDestroy.Count; i++)
                 {
                     GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
