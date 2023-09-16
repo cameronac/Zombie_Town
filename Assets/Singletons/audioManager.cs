@@ -78,6 +78,7 @@ public class AudioManager : MonoBehaviour
         if (clip != null) {
             GameObject prefab = Instantiate(audioPrefab, position, Quaternion.identity);
             AudioSource audioSource = prefab.GetComponent<AudioSource>();
+            audioSource.spatialBlend = 1f;
 
             if (sound_tag == "music")
             {
@@ -105,6 +106,7 @@ public class AudioManager : MonoBehaviour
         {
             GameObject prefab = Instantiate(audioPrefab);
             AudioSource audioSource = prefab.GetComponent<AudioSource>();
+            audioSource.spatialBlend = 0;
 
             if (sound_tag == "music")
             {

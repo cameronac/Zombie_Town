@@ -2565,8 +2565,8 @@ Transform:
   m_GameObject: {fileID: 6848762899526182464}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.15, y: 0.02, z: -16.79}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1561010847312805778}
@@ -2621,6 +2621,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b14f7455df2d14798fdffd303188a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damaged_audio:
+  - {fileID: 8300000, guid: b771cd0787c16e64e8e8ba11c3c83734, type: 3}
+  growl_audio:
+  - {fileID: 8300000, guid: ceb2474913e8b5e40b17213af473d784, type: 3}
+  - {fileID: 8300000, guid: ebb96c703224744479e6294bd49515d9, type: 3}
+  - {fileID: 8300000, guid: f1ff3e33006a291449618f6fc613e928, type: 3}
+  walk_audio:
+  - {fileID: 8300000, guid: eb6ed60616e05dc49b0cc6e46d9f997d, type: 3}
+  - {fileID: 8300000, guid: 759b9a0480a20b842b1aa870d6f06afb, type: 3}
+  - {fileID: 8300000, guid: 1caaceceb10725844964933ca7d66626, type: 3}
+  death_audio:
+  - {fileID: 8300000, guid: 9df77b70cadc8384ca073a95aebc666f, type: 3}
+  - {fileID: 8300000, guid: 1d92c5ac0e056b045b4461b147f95be5, type: 3}
+  random_audio: []
   head_mesh: {fileID: 139784426351778455}
   headCollider: {fileID: 4448802832538407593}
   head: {fileID: 5862907491764178399}
