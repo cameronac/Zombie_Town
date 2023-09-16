@@ -44,13 +44,16 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int kDamage = 4;
     [SerializeField] Animator knifeAnim;
 
+    [Header("Meds")]
+    [SerializeField] Animator MedsHold;
+
     [Header("Other")]
     [SerializeField] cameraControl cCameraControl;
     [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] Light muzzleFlash;
     float distance = 50;
     float sDistance = 30;
-    [SerializeField] float healRate = 2f;
+    [SerializeField] float healRate;
 
     [SerializeField] GameObject sgSpread;
     int numBullets = 5;
@@ -327,10 +330,15 @@ public class playerShoot : MonoBehaviour
 
     IEnumerator Heal()
     {
-        inst.medCount--;
+
+        MedsHold.SetBool("Use", true);
+
         isShooting = true;
         yield return new WaitForSeconds(healRate);
         isShooting = false;
+        MedsHold.SetBool("Use", false);
+
+        inst.medCount--;
         inst.health = inst.health + 50 >= inst.healthMax ? inst.healthMax : inst.health + 50;
         gameManager.instance.SetHealth(inst.health/100);
         UpdateAmmoUI();

@@ -50762,6 +50762,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6393870086037597223, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: ammo
       value: 27
@@ -50783,6 +50787,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: MedsHold
+      value: 
+      objectReference: {fileID: 1813079400}
+    - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: healRate
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: magazine
       value: 9
       objectReference: {fileID: 0}
@@ -50801,6 +50813,10 @@ PrefabInstance:
     - target: {fileID: 7226521623247516344, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082521953619214354, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: medCount
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
