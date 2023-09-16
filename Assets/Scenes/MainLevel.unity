@@ -15399,6 +15399,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -121.99988
       objectReference: {fileID: 0}
+    - target: {fileID: 3719749098786792448, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: fullScreenToggle
+      objectReference: {fileID: 0}
     - target: {fileID: 3748811080315215382, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_Name
       value: UI
@@ -15463,6 +15467,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8a516fc94f00eb040bd2cc8b0eed06ad, type: 3}
+    - target: {fileID: 5459911282537957780, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459911282537957780, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b5f17befe99bcf04e898e101b82a34d2, type: 2}
+    - target: {fileID: 5459911282537957780, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459911282537957780, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4042682541679146844, guid: b5f17befe99bcf04e898e101b82a34d2, type: 2}
+    - target: {fileID: 5459911282537957780, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5871555062579415846, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: player
       value: 
