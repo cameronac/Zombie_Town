@@ -1,20 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FullScreen : MonoBehaviour
 {
-    private static FullScreen instance;
-    public bool isFullScreen = true;
+    public Toggle fullScreenToggle;
+    public KeyCode fullScreenKey = KeyCode.F11;
 
-    void Start()
+    private void Start()
     {
-        instance = this;
+        // Initialize the fullscreen toggle state
+        if (fullScreenToggle != null)
+        {
+            fullScreenToggle.isOn = Screen.fullScreen;
+            fullScreenToggle.onValueChanged.AddListener(OnToggleValueChanged);
+        }
+        else
+        {
+            Debug.LogWarning("Fullscreen Toggle is not assigned in the Inspector.");
+        }
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F11))
+        // Toggle fullscreen mode when the key is pressed
+        if (Input.GetKeyDown(fullScreenKey))
         {
             ToggleFullscreen();
         }
@@ -22,19 +33,19 @@ public class FullScreen : MonoBehaviour
 
     public void ToggleFullscreen()
     {
-        isFullScreen = !isFullScreen;
-        Screen.fullScreen = isFullScreen;
+        // Toggle fullscreen mode
+        Screen.fullScreen = !Screen.fullScreen;
+
+        // Update the toggle UI if available
+        if (fullScreenToggle != null)
+        {
+            fullScreenToggle.isOn = Screen.fullScreen;
+        }
     }
 
-    public static FullScreen Instance
+    private void OnToggleValueChanged(bool isOn)
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectOfType<FullScreen>();
-            }
-            return instance;
-        }
+        // Toggle fullscreen mode when the toggle UI changes
+        ToggleFullscreen();
     }
 }

@@ -17,6 +17,7 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.statePaused();
         gameManager.instance.OptionsMenuCurrent();
+
     }
 
     public void Load()
