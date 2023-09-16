@@ -24,6 +24,8 @@ public class PickKeyPickup : MonoBehaviour
         {
             isPickup.PickupKeyItem(ID);
         }
+
+        gameManager.instance.updateObjective(txt);
         playerState.instance.destroyItems.Add(gameObject.name);
         Destroy(gameObject);
     }
