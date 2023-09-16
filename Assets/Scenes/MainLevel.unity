@@ -58370,6 +58370,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: med_audio
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a4e6338b2408b4498c4cdd5fefe1e96, type: 3}
+    - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: sFirerate
       value: 1.2
       objectReference: {fileID: 0}

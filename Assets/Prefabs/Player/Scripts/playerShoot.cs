@@ -17,6 +17,7 @@ public class playerShoot : MonoBehaviour
 
     [SerializeField] AudioClip knife_hit_audio;
     [SerializeField] AudioClip knife_air_audio;
+    [SerializeField] AudioClip med_audio;
 
     [Header("Pistol")]
     [SerializeField] public int magazine_size = 12;
@@ -333,7 +334,7 @@ public class playerShoot : MonoBehaviour
         yield return new WaitForSeconds(healRate);
         isShooting = false;
         MedsHold.SetBool("Use", false);
-
+        AudioManager.instance.CreateSoundAtPosition(med_audio, transform.position);
         inst.medCount--;
         inst.health = inst.health + 50 >= inst.healthMax ? inst.healthMax : inst.health + 50;
         gameManager.instance.SetHealth(inst.health/100);
