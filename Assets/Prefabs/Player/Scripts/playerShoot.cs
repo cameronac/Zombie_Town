@@ -342,6 +342,7 @@ public class playerShoot : MonoBehaviour
         if (inst.medCount <= 0)
         {
             inst.MedsHold.SetActive(false);
+            inst.ToggleItem(true);
         }
     }
 
