@@ -21,13 +21,19 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     [SerializeField] public GameObject KnifeHold;
     [SerializeField] public GameObject MedsHold;
 
+    [SerializeField] public int pAmmo = 24;
+    public int pMagazine = 0;
+    [SerializeField] public int sAmmo = 16;
+    public int sMagazine = 0;
+
+
     [Header("Other")]
     [SerializeField] GameObject flash_light;
     float interact_distance = 2f;
     [SerializeField] public bool has_pistol = false;
     [SerializeField] public bool has_shotgun = false;
 
-    private playerShoot pShoot;
+    public playerShoot pShoot;
     private CharacterController characterController;
     public static playerState instance;
 
@@ -124,7 +130,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
                 PistolHold.SetActive(true);
                 pShoot.enabled = true;
-                gameManager.instance.SetAmmo(pShoot.magazine, pShoot.ammo);
+                gameManager.instance.SetAmmo(pMagazine, pAmmo);
                 break;
             case Items.shotgun:
                 has_shotgun = true;
@@ -135,7 +141,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
 
                 ShotgunHold.SetActive(true);
                 pShoot.enabled = true;
-                gameManager.instance.SetAmmo(pShoot.sMagazine, pShoot.sAmmo);
+                gameManager.instance.SetAmmo(sMagazine, sAmmo);
                 break;
         }
 
@@ -307,7 +313,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 }
                 else
                     pShoot.enabled = false;
-                gameManager.instance.SetAmmo(pShoot.magazine, pShoot.ammo);
+                gameManager.instance.SetAmmo(pMagazine, pAmmo);
                 break;
             case heldItems.shotgun: //shotgun
                 if (has_shotgun)
@@ -317,7 +323,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 }
                 else
                     pShoot.enabled = false;
-                gameManager.instance.SetAmmo(pShoot.sMagazine, pShoot.sAmmo);
+                gameManager.instance.SetAmmo(sMagazine, sAmmo);
                 break;
             case heldItems.knife:
                 pShoot.enabled = true;

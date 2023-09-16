@@ -71,33 +71,11 @@ public class gameManager : MonoBehaviour
         if (save._isLoaded == true && File.Exists(Application.persistentDataPath + "/player.dataucannottouch"))
         {
             loadGame();
+            save._isLoaded = false;
         }
 
         StartCoroutine(ObjectiveFadeInFadeOut(8));
     }
-
-    //private void OnEnable()
-    //{
-    //    SceneManager.sceneLoaded += OnSceneLoaded;
-    //    SceneManager.sceneUnloaded += OnSceneUnloaded;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    SceneManager.sceneLoaded -= OnSceneLoaded;
-    //    SceneManager.sceneUnloaded -= OnSceneUnloaded;
-    //}
-
-    //public void OnSceneLoaded(Scene sc, LoadSceneMode mode)
-    //{
-
-    //}
-
-    //public void OnSceneUnloaded(Scene sc)
-    //{
-
-    //}
-
     // Update is called once per frame
     void Update()
     {
@@ -128,6 +106,7 @@ public class gameManager : MonoBehaviour
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void OptionsMenuCurrent()
@@ -135,6 +114,7 @@ public class gameManager : MonoBehaviour
         optionsMenu.SetActive(true);
         mainMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void CreditsMenuCurrent()
@@ -142,7 +122,7 @@ public class gameManager : MonoBehaviour
         optionsMenu.SetActive(false);
         mainMenu.SetActive(false);
         creditsMenu.SetActive(true);
-        //StartCoroutine(credsRoll());
+        Time.timeScale = 1;
     }
     //-------------------------------------------
 
@@ -218,31 +198,38 @@ public class gameManager : MonoBehaviour
 
     public void loadGame()
     {
-        if(SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
+        if (SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
         {
             data = SaveSystem.LoadPlayer();
-
-            playerScript.health = data.health;
-            playerScript.has_shotgun = data.shotgun;
-            playerScript.has_pistol = data.pistol;
-
-            Vector3 position;
-
-            position.x = data.playerPosition[0];
-            position.y = data.playerPosition[1];
-            position.z = data.playerPosition[2];
-
-            player.transform.position = position;
-
-            playerScript.medCount = data.medCount;
-
-            for(int i = 0; i < data.thingsToDestroy.Count; i++)
+            if (data != null)
             {
-                GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
-                if (killMe)
+                playerScript.health = data.health;
+                playerScript.has_shotgun = data.shotgun;
+                playerScript.has_pistol = data.pistol;
+
+                Vector3 position;
+
+                position.x = data.playerPosition[0];
+                position.y = data.playerPosition[1];
+                position.z = data.playerPosition[2];
+
+                player.transform.position = position;
+
+                playerScript.medCount = data.medCount;
+
+                playerScript.pAmmo = data.pAmmo;
+                playerScript.pMagazine = data.pMag;
+                playerScript.sAmmo = data.sAmmo;
+                playerScript.sMagazine = data.sMag;
+
+                for (int i = 0; i < data.thingsToDestroy.Count; i++)
                 {
-                    playerScript.destroyItems.Add(data.thingsToDestroy[i]);
-                    Destroy(killMe);
+                    GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
+                    if (killMe)
+                    {
+                        playerScript.destroyItems.Add(data.thingsToDestroy[i]);
+                        Destroy(killMe);
+                    }
                 }
             }
         }

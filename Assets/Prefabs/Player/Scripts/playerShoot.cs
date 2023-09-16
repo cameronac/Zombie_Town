@@ -20,23 +20,19 @@ public class playerShoot : MonoBehaviour
 
     [Header("Pistol")]
     [SerializeField] public int magazine_size = 12;
-    [SerializeField] public int ammo = 24;
     [SerializeField] float recoil = 1.5f;
     [SerializeField] int pDamage = 4;
     [SerializeField] float pReloadTime = 1.5f;
     [SerializeField] float pFirerate = 0.1f;
     [SerializeField] Animator PistolHold;
-    public int magazine = 0;
 
     [Header("Shotgun")]
     [SerializeField] public int sMagazine_size = 4;
-    [SerializeField] public int sAmmo = 16;
     [SerializeField] float sRecoil = 5f;
     [SerializeField] int sDamage = 4;
     [SerializeField] float sReloadTime = 1.5f;
     [SerializeField] float sFirerate = 1.5f;
     [SerializeField] Animator ShotgunHold;
-    public int sMagazine = 0;
 
     [Header("Knife")]
     [SerializeField] float knifeDistance = 1f; 
@@ -44,13 +40,16 @@ public class playerShoot : MonoBehaviour
     [SerializeField] int kDamage = 4;
     [SerializeField] Animator knifeAnim;
 
+    [Header("Meds")]
+    [SerializeField] Animator MedsHold;
+
     [Header("Other")]
     [SerializeField] cameraControl cCameraControl;
     [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] Light muzzleFlash;
     float distance = 50;
     float sDistance = 30;
-    [SerializeField] float healRate = 2f;
+    [SerializeField] float healRate;
 
     [SerializeField] GameObject sgSpread;
     int numBullets = 5;
@@ -82,16 +81,16 @@ public class playerShoot : MonoBehaviour
                 switch(inst.currItem)
                 {
                     case playerState.heldItems.pistol:
-                        if (!isShooting && magazine > 0 && !isReloading)
+                        if (!isShooting && inst.pMagazine > 0 && !isReloading)
                         {
                             StartCoroutine(pistolShoot());
-                        } else if (magazine <= 0)
+                        } else if (inst.pMagazine <= 0)
                         {
                             AudioManager.instance.CreateSoundAtPosition(pistol_dry_fire_audio, transform.position);
                         }
                         break;
                     case playerState.heldItems.shotgun:
-                        if (!isShooting && sMagazine > 0 && !isReloading)
+                        if (!isShooting && inst.sMagazine > 0 && !isReloading)
                         {
                             StartCoroutine(shotgunShoot());
                         } else
@@ -152,13 +151,13 @@ public class playerShoot : MonoBehaviour
             switch (inst.currItem)
             {
                 case playerState.heldItems.pistol:
-                    if (magazine < magazine_size && ammo > 0)
+                    if (inst.pMagazine < magazine_size && inst.pAmmo > 0)
                     {
                         StartCoroutine(pistolReload());
                     }
                     break;
                 case playerState.heldItems.shotgun:
-                    if (sMagazine < sMagazine_size && sAmmo > 0)
+                    if (inst.sMagazine < sMagazine_size && inst.sAmmo > 0)
                     {
                         StartCoroutine(shotgunReload());
                     }
@@ -169,12 +168,12 @@ public class playerShoot : MonoBehaviour
 
     public void AddAmmo(int amount)
     {
-        ammo += amount;
+        inst.pAmmo += amount;
         UpdateAmmoUI();
     }
     public void AddShotgunAmmo(int amount)
     {
-        sAmmo += amount;
+        inst.sAmmo += amount;
         UpdateAmmoUI();
     }
 
@@ -185,10 +184,10 @@ public class playerShoot : MonoBehaviour
             switch (inst.currItem)
             {
                 case playerState.heldItems.pistol:
-                    gameManager.instance.SetAmmo(magazine, ammo);
+                    gameManager.instance.SetAmmo(inst.pMagazine, inst.pAmmo);
                     break;
                 case playerState.heldItems.shotgun:
-                    gameManager.instance.SetAmmo(sMagazine, sAmmo);
+                    gameManager.instance.SetAmmo(inst.sMagazine, inst.sAmmo);
                     break;
                 case playerState.heldItems.meds:
                     gameManager.instance.SetAmmo(0, inst.medCount);
@@ -226,7 +225,7 @@ public class playerShoot : MonoBehaviour
 
         isGunShot = true;
         StartCoroutine(eMuzzleFlash());
-        magazine -= 1;
+        inst.pMagazine -= 1;
         UpdateAmmoUI();
 
         RaycastHit hit;
@@ -271,7 +270,7 @@ public class playerShoot : MonoBehaviour
 
         isGunShot = true;
         StartCoroutine(eMuzzleFlash());
-        sMagazine -= 1;
+        inst.sMagazine -= 1;
         UpdateAmmoUI();
 
         bool isHit;
@@ -327,10 +326,15 @@ public class playerShoot : MonoBehaviour
 
     IEnumerator Heal()
     {
-        inst.medCount--;
+
+        MedsHold.SetBool("Use", true);
+
         isShooting = true;
         yield return new WaitForSeconds(healRate);
         isShooting = false;
+        MedsHold.SetBool("Use", false);
+
+        inst.medCount--;
         inst.health = inst.health + 50 >= inst.healthMax ? inst.healthMax : inst.health + 50;
         gameManager.instance.SetHealth(inst.health/100);
         UpdateAmmoUI();
@@ -349,15 +353,15 @@ public class playerShoot : MonoBehaviour
         isReloading = false;
 
         //Reload 
-        int needed_ammo = magazine_size - magazine;
+        int needed_ammo = magazine_size - inst.pMagazine;
 
-        if (ammo > needed_ammo)
+        if (inst.pAmmo > needed_ammo)
         {
-            magazine = magazine_size;
-            ammo -= needed_ammo;
+            inst.pMagazine = magazine_size;
+            inst.pAmmo -= needed_ammo;
         } else {
-            magazine += ammo;
-            ammo = 0;
+            inst.pMagazine += inst.pAmmo;
+            inst.pAmmo = 0;
         }
 
         UpdateAmmoUI();
@@ -373,17 +377,17 @@ public class playerShoot : MonoBehaviour
         isReloading = false;
 
         //Reload 
-        int needed_ammo = sMagazine_size - sMagazine;
+        int needed_ammo = sMagazine_size - inst.sMagazine;
 
-        if (sAmmo > needed_ammo)
+        if (inst.sAmmo > needed_ammo)
         {
-            sMagazine = sMagazine_size;
-            sAmmo -= needed_ammo;
+            inst.sMagazine = sMagazine_size;
+            inst.sAmmo -= needed_ammo;
         }
         else
         {
-            sMagazine += sAmmo;
-            sAmmo = 0;
+            inst.sMagazine += inst.sAmmo;
+            inst.sAmmo = 0;
         }
 
         UpdateAmmoUI();
