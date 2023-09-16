@@ -54154,8 +54154,24 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 9082521953619214354, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: pAmmo
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082521953619214354, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: sAmmo
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082521953619214354, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: medCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082521953619214354, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: pMagazine
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082521953619214354, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: sMagazine
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
