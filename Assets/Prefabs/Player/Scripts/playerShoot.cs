@@ -342,8 +342,7 @@ public class playerShoot : MonoBehaviour
         if (inst.medCount <= 0)
         {
             inst.MedsHold.SetActive(false);
-            inst.currItem = playerState.heldItems.knife;
-            playerState.instance.KnifeHold.SetActive(true);
+            inst.ToggleItem(true);
         }
     }
 
