@@ -12,6 +12,13 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private STATE currentState = STATE.roam;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] damaged_audio;
+    [SerializeField] AudioClip[] growl_audio;
+    [SerializeField] AudioClip[] walk_audio;
+    [SerializeField] AudioClip[] death_audio;
+    [SerializeField] AudioClip[] random_audio;
+    
     [Header("----- Components -----")]
     [SerializeField] GameObject head_mesh;
     [SerializeField] GameObject headCollider;
@@ -114,7 +121,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         enemyMob.speed = patrolSpeed;
 
-        if (!isPatrolTimer)
+        if (!isPatrolTimer && Vector3.Distance(transform.position, enemyMob.destination) <= 1.0f)
         {
             StartCoroutine(GetRandomPatrolPoint());
         }
@@ -203,6 +210,12 @@ public class enemyAI : MonoBehaviour, IDamage
         float angleToPlayer = Vector3.Dot(playerDirection, transform.forward);
         
         if (isHit && hit.collider.tag == "Player" && angleToPlayer > 0) {
+
+            if (!isPlayerSeen)
+            {
+                AudioManager.instance.CreateSoundAtPosition(growl_audio[Random.Range(0, growl_audio.Length)], transform.position, 1, "zombie");
+            }
+
             isPlayerSeen = true;
 
         } else if (!playerInRange) {
@@ -214,6 +227,11 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         if (playerInRange && gameManager.instance.p_playerShoot.IsGunShot())
         {
+            if (!isPlayerSeen)
+            {
+                AudioManager.instance.CreateSoundAtPosition(growl_audio[Random.Range(0, growl_audio.Length)], transform.position, 1, "zombie");
+            }
+
             isPlayerSeen = true;
         }
     }
@@ -237,7 +255,11 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     //---------------------------------
 
-    //Taking Damage-------------------
+    //Events---------------------------
+    public void Stepped()
+    {
+        AudioManager.instance.CreateSoundAtPosition(walk_audio[Random.Range(0, walk_audio.Length)], transform.position, 0.1f, "zombie");
+    }
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
@@ -288,6 +310,7 @@ public class enemyAI : MonoBehaviour, IDamage
     //IEnumerators--------------------
     private IEnumerator Death()
     {
+        AudioManager.instance.CreateSoundAtPosition(death_audio[Random.Range(0, death_audio.Length)], head_mesh.transform.position, 1, "zombie");
         anim.SetTrigger("enemyDeath");
         enemyMob.enabled = false;
 

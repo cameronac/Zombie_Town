@@ -2775,6 +2775,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b14f7455df2d14798fdffd303188a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damaged_audio: []
+  growl_audio: []
+  walk_audio: []
+  death_audio: []
+  random_audio: []
   head_mesh: {fileID: 0}
   headCollider: {fileID: 0}
   head: {fileID: 0}
@@ -3678,16 +3683,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 1469553549}
     m_Modifications:
     - target: {fileID: 2786872853812919578, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786872853812919578, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786872853812919578, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786872853812919578, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.64
+      value: 9.81
       objectReference: {fileID: 0}
     - target: {fileID: 2786872853812919578, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5067239
+      value: 12.91
       objectReference: {fileID: 0}
     - target: {fileID: 2786872853812919578, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.48
+      value: -3.62
       objectReference: {fileID: 0}
     - target: {fileID: 2786872853812919578, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4505,6 +4522,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b14f7455df2d14798fdffd303188a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damaged_audio: []
+  growl_audio: []
+  walk_audio: []
+  death_audio: []
+  random_audio: []
   head_mesh: {fileID: 0}
   headCollider: {fileID: 0}
   head: {fileID: 0}
@@ -4863,6 +4885,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b14f7455df2d14798fdffd303188a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damaged_audio: []
+  growl_audio: []
+  walk_audio: []
+  death_audio: []
+  random_audio: []
   head_mesh: {fileID: 0}
   headCollider: {fileID: 0}
   head: {fileID: 0}
@@ -5893,6 +5920,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b14f7455df2d14798fdffd303188a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damaged_audio: []
+  growl_audio: []
+  walk_audio: []
+  death_audio: []
+  random_audio: []
   head_mesh: {fileID: 0}
   headCollider: {fileID: 0}
   head: {fileID: 0}
@@ -6780,6 +6812,10 @@ PrefabInstance:
     - target: {fileID: 3912141042235361744, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142525564003126152, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4469068815628747564, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_IsActive
@@ -11670,6 +11706,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b14f7455df2d14798fdffd303188a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damaged_audio: []
+  growl_audio: []
+  walk_audio: []
+  death_audio: []
+  random_audio: []
   head_mesh: {fileID: 0}
   headCollider: {fileID: 0}
   head: {fileID: 0}

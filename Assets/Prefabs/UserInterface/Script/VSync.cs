@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class VSync : MonoBehaviour
 {
-    private static VSync instance;
+    public static VSync instance;
     private bool isVSync = true;
     void Start()
     {
         instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
         OnButtonClick();
