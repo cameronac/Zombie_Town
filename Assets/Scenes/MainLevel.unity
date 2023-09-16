@@ -1756,6 +1756,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CargoB1
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1a4c663dc60c3ec47be0d5adb5bf3168, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1a4c663dc60c3ec47be0d5adb5bf3168, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a4c663dc60c3ec47be0d5adb5bf3168, type: 3}
       propertyPath: m_LocalScale.y
       value: 2
@@ -3241,6 +3249,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CargoC0
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 463e9d66ec2b7ad428d27c80a2b2d1db, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 463e9d66ec2b7ad428d27c80a2b2d1db, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 463e9d66ec2b7ad428d27c80a2b2d1db, type: 3}
       propertyPath: m_LocalScale.y
       value: 2
@@ -3425,9 +3441,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
       propertyPath: m_Name
       value: WoodenPile (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
       propertyPath: m_LocalScale.x
@@ -4945,6 +4977,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: bb9c226855cc8584a847a9d2b0dea912, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bb9c226855cc8584a847a9d2b0dea912, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: bb9c226855cc8584a847a9d2b0dea912, type: 3}
       propertyPath: m_Name
       value: Electric00
@@ -9051,6 +9091,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: e01fb1a694c3dc34294327117e516909, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e01fb1a694c3dc34294327117e516909, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: e01fb1a694c3dc34294327117e516909, type: 3}
       propertyPath: m_Name
       value: GasPump
@@ -13046,6 +13094,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: 926564bed8347d441a4bb1bdce21a3ff, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 926564bed8347d441a4bb1bdce21a3ff, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 926564bed8347d441a4bb1bdce21a3ff, type: 3}
       propertyPath: m_Name
       value: Sink
@@ -17173,6 +17229,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
       propertyPath: m_Name
       value: WoodenPile (3)
@@ -17486,6 +17550,8 @@ MonoBehaviour:
   door_sound: {fileID: 8300000, guid: e9a559010baa5084f918468a44cdba38, type: 3}
   lock_object: {fileID: 1613694930}
   isLocked: 1
+  keyID: 0
+  txt: 
 --- !u!65 &771217871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36351,6 +36417,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 3b6f5a7a1b9d5b44ba0d8136fcab450e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 3b6f5a7a1b9d5b44ba0d8136fcab450e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.92
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36502,6 +36576,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
       propertyPath: m_Name
       value: WoodenPile (1)
@@ -37091,6 +37173,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
       propertyPath: m_Name
       value: WoodenPile
@@ -37801,6 +37891,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d6af62285e15be041ae052ab5b1f2dd7, type: 3}
       propertyPath: m_Name
       value: Chair
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: d6af62285e15be041ae052ab5b1f2dd7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: d6af62285e15be041ae052ab5b1f2dd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d6af62285e15be041ae052ab5b1f2dd7, type: 3}
       propertyPath: m_LocalScale.x
@@ -43917,6 +44015,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: ff3b095851e7d9345bd9357a4bb8e486, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ff3b095851e7d9345bd9357a4bb8e486, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: ff3b095851e7d9345bd9357a4bb8e486, type: 3}
       propertyPath: m_Name
       value: Part01
@@ -44417,6 +44523,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: f5ec3391ef4f27d4eb9250e169c4c5e7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f5ec3391ef4f27d4eb9250e169c4c5e7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f5ec3391ef4f27d4eb9250e169c4c5e7, type: 3}
       propertyPath: m_Name
       value: TV01
@@ -44668,6 +44782,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 932936470}
     m_Modifications:
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f6236ebf8fbb4614a8f7c14192266205, type: 3}
       propertyPath: m_Name
       value: WoodenPile (2)
@@ -49359,6 +49481,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 30632b5d632d2c545ba8cc142519ce91, type: 3}
       propertyPath: m_Name
       value: Box0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 30632b5d632d2c545ba8cc142519ce91, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 30632b5d632d2c545ba8cc142519ce91, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 30632b5d632d2c545ba8cc142519ce91, type: 3}
       propertyPath: m_LocalScale.x
