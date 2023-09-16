@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class systemMenu : MonoBehaviour
 {
-    public Toggle isFullscreen;
-    public Toggle isVsync;
+    [SerializeField] public Toggle isFullscreen;
+    [SerializeField] public Toggle isVsync;
     public void Start()
     {
         isFullscreen.isOn = Screen.fullScreen;
