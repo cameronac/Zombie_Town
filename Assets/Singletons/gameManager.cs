@@ -30,6 +30,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject activeMenu;
     public GameObject pauseMenu;
+    public GameObject pauseOptionsMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
 
@@ -125,6 +126,21 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1;
     }
     //-------------------------------------------
+
+    //Pause menu current
+    public void PauseMenuCurrent()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0; 
+        pauseOptionsMenu.SetActive(false);
+    }
+
+    public void PauseOptionsMenuCurrent()
+    {
+        pauseOptionsMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 0;
+    }
 
     public void SetLoad(bool load)
     {
