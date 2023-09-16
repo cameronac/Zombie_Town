@@ -106,6 +106,7 @@ public class gameManager : MonoBehaviour
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void OptionsMenuCurrent()
@@ -113,6 +114,7 @@ public class gameManager : MonoBehaviour
         optionsMenu.SetActive(true);
         mainMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void CreditsMenuCurrent()
@@ -120,7 +122,7 @@ public class gameManager : MonoBehaviour
         optionsMenu.SetActive(false);
         mainMenu.SetActive(false);
         creditsMenu.SetActive(true);
-        //StartCoroutine(credsRoll());
+        Time.timeScale = 1;
     }
     //-------------------------------------------
 
