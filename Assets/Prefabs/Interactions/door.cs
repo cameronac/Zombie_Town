@@ -7,6 +7,8 @@ public class door : MonoBehaviour, IInteract
     [SerializeField] AudioClip door_sound;
     [SerializeField] GameObject lock_object;
     [SerializeField] bool isLocked = false;
+    [SerializeField] int keyID;
+    [SerializeField] string txt;
     BoxCollider boxCollider;
 
     bool isOpen = false;
@@ -30,11 +32,16 @@ public class door : MonoBehaviour, IInteract
                 rotateOther = false;
             }
         }
+        else if(playerState.instance.has_key(keyID))
+        {
+            isLocked = false;
+        }
         else
         {
             isLocked = true;
-            gameManager.instance.updateObjective("The door is locked. We need to find another way inside");
+            gameManager.instance.updateObjective(txt);
         }
+       
     }
 
     //Built In Methods---------------------------
