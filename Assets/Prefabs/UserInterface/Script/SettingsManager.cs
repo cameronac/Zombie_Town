@@ -11,6 +11,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider brightnessSlider;
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Slider mouseSensitivitySlider;
+    [SerializeField] private Toggle vSyncToggle;
+    [SerializeField] private Toggle fullScreenToggle;
     
     [Range(0,100)][SerializeField] Slider masterVolumeSlider;
     [Range(0,100)][SerializeField] Slider uiVolumeSlider;
@@ -40,6 +42,9 @@ public class SettingsManager : MonoBehaviour
         float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
         masterVolumeSlider.value = masterVolume;
         OnMasterVolumeChanged(masterVolume);
+
+        vSyncToggle.isOn = PlayerPrefs.GetInt("VSync", 1) == 1;
+        fullScreenToggle.isOn = Screen.fullScreen;
     }
 
 
@@ -125,5 +130,16 @@ public class SettingsManager : MonoBehaviour
     public void OnPlayerDropdownChanged(int index)
     {
 
+    }
+
+    public void OnVSyncToggleChanged(bool isOn)
+    {
+        QualitySettings.vSyncCount = isOn ? 1 : 0;
+        PlayerPrefs.SetInt("VSync", isOn ? 1 : 0);
+    }
+
+    public void OnFullScreenToggleChanged(bool isOn)
+    {
+        Screen.fullScreen = isOn;
     }
 }

@@ -70,7 +70,7 @@ public class gameManager : MonoBehaviour
 
         if (save._isLoaded == true && File.Exists(Application.persistentDataPath + "/player.dataucannottouch"))
         {
-            loadGame();
+            //loadGame();
         }
 
         StartCoroutine(ObjectiveFadeInFadeOut(8));
@@ -216,38 +216,38 @@ public class gameManager : MonoBehaviour
         activeMenu.SetActive(true);
     }
 
-    public void loadGame()
-    {
-        if(SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
-        {
-            data = SaveSystem.LoadPlayer();
+    //public void loadGame()
+    //{
+    //    if(SceneManager.GetSceneByBuildIndex(0).name != SceneManager.GetActiveScene().name)
+    //    {
+    //        data = SaveSystem.LoadPlayer();
 
-            playerScript.health = data.health;
-            playerScript.has_shotgun = data.shotgun;
-            playerScript.has_pistol = data.pistol;
+    //        playerScript.health = data.health;
+    //        playerScript.has_shotgun = data.shotgun;
+    //        playerScript.has_pistol = data.pistol;
 
-            Vector3 position;
+    //        Vector3 position;
 
-            position.x = data.playerPosition[0];
-            position.y = data.playerPosition[1];
-            position.z = data.playerPosition[2];
+    //        position.x = data.playerPosition[0];
+    //        position.y = data.playerPosition[1];
+    //        position.z = data.playerPosition[2];
 
-            player.transform.position = position;
+    //        player.transform.position = position;
 
-            playerScript.medCount = data.medCount;
+    //        playerScript.medCount = data.medCount;
 
-            for(int i = 0; i < data.thingsToDestroy.Count; i++)
-            {
-                GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
-                if (killMe)
-                {
-                    playerScript.destroyItems.Add(data.thingsToDestroy[i]);
-                    Destroy(killMe);
-                }
-            }
-        }
+    //        for(int i = 0; i < data.thingsToDestroy.Count; i++)
+    //        {
+    //            GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
+    //            if (killMe)
+    //            {
+    //                playerScript.destroyItems.Add(data.thingsToDestroy[i]);
+    //                Destroy(killMe);
+    //            }
+    //        }
+    //    }
 
-    }
+    //}
 
     public void saveGame()
     {
