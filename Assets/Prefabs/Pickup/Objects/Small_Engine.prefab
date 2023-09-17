@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 6091069886962513093}
   - component: {fileID: 5154653535074853939}
   - component: {fileID: 588478627255022445}
+  - component: {fileID: -6163006390539127792}
   m_Layer: 0
   m_Name: Small_Engine
   m_TagString: Item
@@ -237,3 +238,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9199449, y: 0.8737522, z: 0.94401217}
   m_Center: {x: -0.054806903, y: 0.43687555, z: -0.0470677}
+--- !u!114 &-6163006390539127792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653820371568272285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50840319a6f4f9d4b9a3d96b5c59e936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

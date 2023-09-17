@@ -5,10 +5,13 @@ using UnityEngine;
 public class RepeatingAmbient : MonoBehaviour
 {
     private AudioSource s;
+    private float starting_volume;
+    private float custom_volume;
 
     void Start()
     {
         s = GetComponent<AudioSource>();
+        custom_volume = 0;
         s.volume = 0;
         StartCoroutine(play(true, s, 2f, .1f));
         StartCoroutine(play(false, s, 2f, 0f));
@@ -22,6 +25,8 @@ public class RepeatingAmbient : MonoBehaviour
             StartCoroutine(play(true, s, 2f, .1f));
             StartCoroutine(play(false, s, 2f, 0f));
         }
+
+        s.volume = AudioManager.music_volume * custom_volume;
     }
 
     public IEnumerator play(bool fade, AudioSource s, float dur, float volume)
@@ -38,7 +43,7 @@ public class RepeatingAmbient : MonoBehaviour
         while(time < dur)
         {
             time += Time.deltaTime;
-            s.volume = Mathf.Lerp(startVol, volume, time / dur);
+            custom_volume = Mathf.Lerp(startVol, volume, time / dur);
             yield return null;
         }
 
