@@ -97,7 +97,7 @@ public class playerShoot : MonoBehaviour
                         if (!isShooting && inst.sMagazine > 0 && !isReloading)
                         {
                             StartCoroutine(shotgunShoot());
-                        } else
+                        } else if (inst.sMagazine <= 0)
                         {
                             AudioManager.instance.CreateSoundAtPosition(shotgun_dry_fire_audio, transform.position);
                         }
