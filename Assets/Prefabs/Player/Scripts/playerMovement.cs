@@ -118,11 +118,12 @@ public class playerMovement : MonoBehaviour
         
         //Apply Move Speed
         move_dir = move_dir * currentSpeed;
-        Vector3 current_speed = (move_dir + playerVelocity) * Time.deltaTime;
+        Vector3 current_speed = (move_dir + new Vector3(playerVelocity.x, 0, playerVelocity.z)) * Time.deltaTime;
 
         //Grounded
         if (controller.isGrounded)
         {
+
             footstep_current += current_speed.magnitude;
 
             if (footstep_current > footstep_time)
