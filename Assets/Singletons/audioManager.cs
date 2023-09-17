@@ -100,7 +100,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void CreateOneDimensionalSound(AudioClip clip, float new_volume = 1.0f, string sound_tag = "default")
+    public void CreateOneDimensionalSound(AudioClip clip, float new_volume = 1.0f, string sound_tag = "default", bool loop = false)
     {
         if (clip != null)
         {
@@ -122,6 +122,7 @@ public class AudioManager : MonoBehaviour
             }
 
             audioSource.clip = clip;
+            audioSource.loop = loop;      
             audioSource.Play();
 
             lAudioSource.Add(audioSource);

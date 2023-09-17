@@ -38,7 +38,6 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     public static playerState instance;
 
     private Vector3 startPosition;
-
     
     [SerializeField] public int medCount;
     public List<int> KeyItems = new List<int>();
@@ -48,6 +47,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     
     public enum heldItems {pistol, shotgun, knife, meds}
     public heldItems currItem;
+
     void Start()
     {
         PistolHold.SetActive(false);
@@ -65,7 +65,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     }
      
     void Update()
-    {
+    {   
         if (Time.timeScale > 0) {
             RaycastHit interactHit;
             bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interact_distance);
