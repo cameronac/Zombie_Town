@@ -8,10 +8,12 @@ public class MiniMap : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 newPosition = player.position;
-        newPosition.y = transform.position.y;
-        transform.position = newPosition;
+        if (player != null) {
+            Vector3 newPosition = player.position;
+            newPosition.y = transform.position.y;
+            transform.position = newPosition;
 
-        transform.rotation = Quaternion.Euler(90f, player.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Euler(90f, player.eulerAngles.y, 0f);
+        }
     }
 }
