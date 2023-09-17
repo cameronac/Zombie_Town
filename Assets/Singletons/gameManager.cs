@@ -95,7 +95,7 @@ public class gameManager : MonoBehaviour
                 activeMenu = pauseMenu;
                 pauseMenu.SetActive(isPaused);
 
-            } else if (Input.GetButtonDown("Cancel") && activeMenu == pauseMenu) {
+            } else if (Input.GetButtonDown("Cancel") && (activeMenu == pauseMenu || activeMenu == pauseOptionsMenu)) {
                 stateUnpaused();
             }
         }
@@ -131,8 +131,10 @@ public class gameManager : MonoBehaviour
     public void PauseMenuCurrent()
     {
         pauseMenu.SetActive(true);
-        Time.timeScale = 0; 
         pauseOptionsMenu.SetActive(false);
+        Time.timeScale = 0;
+
+        activeMenu = pauseMenu;
     }
 
     public void PauseOptionsMenuCurrent()
@@ -140,6 +142,8 @@ public class gameManager : MonoBehaviour
         pauseOptionsMenu.SetActive(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 0;
+
+        activeMenu = pauseOptionsMenu;
     }
 
     public void SetLoad(bool load)
