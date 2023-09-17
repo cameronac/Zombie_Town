@@ -14,7 +14,7 @@ public class mapBarrier : MonoBehaviour
             }
             else
             {
-                gameManager.instance.updateObjective("a better weapon is required before entering the town");
+                gameManager.instance.updateObjective("I think we'll need a better weapon before we can go inside the town");
             }
         }
     }
