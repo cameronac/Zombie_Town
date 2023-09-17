@@ -19,6 +19,7 @@ public class GameData
     public int sAmmo;
     public float[] playerPosition;
     public List<string> thingsToDestroy = new List<string>(0);
+    public List<int> KeyItems = new List<int>(0);
 
     public GameData(playerState player, GameObject pos)
     {
@@ -38,6 +39,11 @@ public class GameData
 
         sMag = player.sMagazine;
         sAmmo = player.sAmmo;
+
+        foreach(int key in player.KeyItems)
+        {
+            KeyItems.Add(key);
+        }
 
         foreach(string item in player.destroyItems)
         {
