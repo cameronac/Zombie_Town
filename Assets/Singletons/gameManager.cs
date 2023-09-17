@@ -262,7 +262,7 @@ public class gameManager : MonoBehaviour
                 position.z = data.playerPosition[2];
 
                 player.transform.position = position;
-
+                playerScript.numCarParts = data.numCarParts;
                 playerScript.medCount = data.medCount;
 
                 playerScript.pAmmo = data.pAmmo;
