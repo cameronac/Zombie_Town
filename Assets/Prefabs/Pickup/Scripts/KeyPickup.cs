@@ -11,7 +11,12 @@ public class PickKeyPickup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(isCarPart)
+        if (ID == 1)
+        {
+            gameManager.instance.updateObjective(txt);
+        }
+
+        if (isCarPart)
         {
             playerState.instance.numCarParts++;
             gameManager.instance.updateMainObjective(ID);
