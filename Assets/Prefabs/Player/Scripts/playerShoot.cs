@@ -34,6 +34,8 @@ public class playerShoot : MonoBehaviour
     [SerializeField] float sReloadTime = 1.5f;
     [SerializeField] float sFirerate = 1.5f;
     [SerializeField] Animator ShotgunHold;
+    [SerializeField] float maxDamageMultiplier = 2.0f;
+    [SerializeField] float minDistance = 5.0f;
 
     [Header("Knife")]
     [SerializeField] float knifeDistance = 1f; 
@@ -284,7 +286,7 @@ public class playerShoot : MonoBehaviour
         for (int i = 0; i < Mathf.Max(1, numBullets); i++)
         {
             Vector3 shootDirection = Camera.main.transform.forward;
-            
+
             shootDirection.x += Random.Range(-bulletSpread, bulletSpread);
             shootDirection.y += Random.Range(-bulletSpread, bulletSpread);
             shootDirection.z += Random.Range(-bulletSpread, bulletSpread);
@@ -299,7 +301,12 @@ public class playerShoot : MonoBehaviour
 
                 if (iDamage != null)
                 {
-                    iDamage.TakeDamage(sDamage);
+                    // Calculate damage based on distance
+                    float distanceToEnemy = Vector3.Distance(transform.position, hit.collider.transform.position);
+                    float damageMultiplier = Mathf.Lerp(1.0f, maxDamageMultiplier, Mathf.Clamp01((distanceToEnemy - minDistance) / (sDistance - minDistance)));
+
+                    // Apply damage to enemyAI
+                    iDamage.TakeDamage(sDamage * damageMultiplier);
                 }
 
                 if (hit.collider.tag == "lock")
