@@ -18,8 +18,8 @@ public class playerMovement : MonoBehaviour
 
     private CharacterController controller;
 
-    private float sprintMod = 2f;
-    private float playerSpeed = 3.0f;
+    private float sprintSpeed = 6.0f;
+    private float playerSpeed = 3.5f;
     private float jumpHeight = 0.5f;
     private float gravityValue = -9.8f;
 
@@ -37,7 +37,7 @@ public class playerMovement : MonoBehaviour
     private float stamina = 2;
     private float staminaMax = 2;
     private float staminaDecrease = 0.3f;
-    private float staminaIncrease = 0.2f;
+    private float staminaIncrease = 0.5f;
     private float staminaRefreshTime = 1.5f;
     //---------------------------------
 
@@ -92,7 +92,7 @@ public class playerMovement : MonoBehaviour
             if (stamina <= 0) { StartCoroutine(staminaRecharge()); }
 
             if (isSprinting && isMoving) { 
-                currentSpeed = currentSpeed * sprintMod;
+                currentSpeed = sprintSpeed;
                 stamina -= staminaDecrease * Time.deltaTime;
             } else {
                 isSprinting = false;
