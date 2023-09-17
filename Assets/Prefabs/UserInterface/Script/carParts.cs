@@ -10,7 +10,7 @@ public class carParts : MonoBehaviour, IInteract
     public void buttonPressed()
     {
 
-        if (playerState.instance.numCarParts == numRequired)
+        if (playerState.instance.numCarParts >= numRequired)
             gameManager.instance.youWin();
         else
             gameManager.instance.updateObjective(locked);
