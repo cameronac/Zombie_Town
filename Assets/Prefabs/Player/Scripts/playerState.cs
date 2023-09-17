@@ -103,6 +103,25 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 ToggleItem(false);
             }
 
+            if (Input.GetButtonDown("A1"))
+            {
+                ToggleItem(true, 0);
+            }
+
+            if (Input.GetButtonDown("A2"))
+            {
+                ToggleItem(true, 1);
+            }
+
+            if (Input.GetButtonDown("A3"))
+            {
+                ToggleItem(true, 2);
+            }
+
+            if (Input.GetButtonDown("A4"))
+            {
+                ToggleItem(true, 3);
+            }
             //if (!has_pistol)
             //{
             //    pShoot.enabled = false;
@@ -254,7 +273,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     }
     
 
-    public void ToggleItem(bool move)
+    public void ToggleItem(bool move, int num = -1)
     {
         //reset everything
         // Do a while loop to see what the next available enum type is, once found, switch to that, even if it is the same item
@@ -268,34 +287,57 @@ public class playerState : MonoBehaviour, IPickup, IDamage
         bool playSound = true;
         heldItems prevItem = currItem;
 
-        while(!correctMove)
+        if(num != -1)
         {
-            int tryMove = (int)currItem;
+            currItem = (heldItems)num;
 
-            if(move)
-                tryMove++;
-            else
-                tryMove--;
 
-            if (tryMove <= -1)
-                tryMove = 3;
-            else if (tryMove >= 4)
-                tryMove = 0;
-
-            currItem = (heldItems)tryMove;
-
-            if (currItem == heldItems.pistol && has_pistol)            
+            if (currItem == heldItems.pistol && has_pistol)
                 correctMove = true;
-            if (currItem == heldItems.shotgun && has_shotgun)
+            else if (currItem == heldItems.shotgun && has_shotgun)
                 correctMove = true;
-            if (currItem == heldItems.meds && medCount > 0 )
+            else if (currItem == heldItems.meds && medCount > 0)
                 correctMove = true;
-            if (currItem == heldItems.knife)
+            else if (currItem == heldItems.knife)
                 correctMove = true;
 
-            if (currItem == prevItem)
+            if(!correctMove || currItem == prevItem)
             {
+                currItem = prevItem;
                 playSound = false;
+            }
+        }
+        else
+        {
+            while(!correctMove)
+            {
+                int tryMove = (int)currItem;
+
+                if(move)
+                    tryMove++;
+                else
+                    tryMove--;
+
+                if (tryMove <= -1)
+                    tryMove = 3;
+                else if (tryMove >= 4)
+                    tryMove = 0;
+
+                currItem = (heldItems)tryMove;
+
+                if (currItem == heldItems.pistol && has_pistol)            
+                    correctMove = true;
+                if (currItem == heldItems.shotgun && has_shotgun)
+                    correctMove = true;
+                if (currItem == heldItems.meds && medCount > 0 )
+                    correctMove = true;
+                if (currItem == heldItems.knife)
+                    correctMove = true;
+
+                if (currItem == prevItem)
+                {
+                    playSound = false;
+                }
             }
         }
 
