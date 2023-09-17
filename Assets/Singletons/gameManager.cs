@@ -49,7 +49,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI EngineText;
     [SerializeField] TextMeshProUGUI AirIntakeText;
     [SerializeField] TextMeshProUGUI MetalPipesText;
-    [SerializeField] TextMeshProUGUI AluminumRodText;
+    [SerializeField] TextMeshProUGUI MufflerText;
 
     bool isPaused;
     bool fadeInObjective = false;
@@ -324,7 +324,7 @@ public class gameManager : MonoBehaviour
         switch(id)
         {
             case 2:
-                AluminumRodText.enabled = false;
+                MufflerText.enabled = false;
                 break;
 
             case 3:
@@ -340,7 +340,7 @@ public class gameManager : MonoBehaviour
                 break;
         }
 
-        if (!AluminumRodText.enabled && !MetalPipesText.enabled && !AirIntakeText.enabled && !EngineText.enabled)
+        if (!MufflerText.enabled && !MetalPipesText.enabled && !AirIntakeText.enabled && !EngineText.enabled)
         {
             updateObjective("We have all the parts we need. Let's go back to the car to fix it!");
             pauseObjectiveText.text = "Get back to your car and fix it!";

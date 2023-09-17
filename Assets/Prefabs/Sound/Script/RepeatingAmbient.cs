@@ -5,6 +5,7 @@ using UnityEngine;
 public class RepeatingAmbient : MonoBehaviour
 {
     private AudioSource s;
+    private float starting_volume;
 
     void Start()
     {
@@ -16,6 +17,9 @@ public class RepeatingAmbient : MonoBehaviour
 
     private void Update()
     {
+        print(AudioManager.music_volume);
+        s.volume = AudioManager.music_volume * 0.1f;
+
         if(!s.isPlaying)
         {
             s.Play();

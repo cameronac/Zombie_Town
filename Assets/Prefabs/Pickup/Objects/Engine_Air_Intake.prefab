@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 4088413270229888065}
   - component: {fileID: 6920851327666215301}
   - component: {fileID: 2271928523554311393}
+  - component: {fileID: 6995590866134806048}
   m_Layer: 0
   m_Name: Engine_Air_Intake
   m_TagString: Item
@@ -261,3 +262,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6995590866134806048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7422768344744110362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50840319a6f4f9d4b9a3d96b5c59e936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
