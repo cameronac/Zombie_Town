@@ -8,6 +8,7 @@ using System.Linq;
 using System.IO;
 using UnityEngine.Rendering.UI;
 using Unity.VisualScripting;
+using System.Net.Http.Headers;
 
 public class gameManager : MonoBehaviour
 {
@@ -16,9 +17,6 @@ public class gameManager : MonoBehaviour
     public GameObject creditsMenu;
     public GameObject cred;
 
-    [SerializeField] AudioClip ui_sound;
-    [SerializeField] AudioClip lose_sound;
-
     private FileHandler dataHandler;
     public static gameManager instance;
     public GameObject playerSpawnPos;
@@ -26,7 +24,6 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerState playerScript;
     public playerShoot p_playerShoot;
-
 
     public GameObject activeMenu;
     public GameObject pauseMenu;
@@ -39,10 +36,20 @@ public class gameManager : MonoBehaviour
     public Image staminaImage;
     public TextMeshProUGUI interactText;
     public GameObject crosshair;
+
+    [SerializeField] AudioClip ui_sound;
+    [SerializeField] AudioClip lose_sound;
+
     [SerializeField] TextMeshProUGUI objectiveText;
     [SerializeField] GameObject playerDamageFlash;
     [SerializeField] private SaveSO save;
     [SerializeField] Image deathAreaImage;
+
+    [SerializeField] TextMeshProUGUI pauseObjectiveText;
+    [SerializeField] TextMeshProUGUI EngineText;
+    [SerializeField] TextMeshProUGUI AirIntakeText;
+    [SerializeField] TextMeshProUGUI MetalPipesText;
+    [SerializeField] TextMeshProUGUI AluminumRodText;
 
     bool isPaused;
     bool fadeInObjective = false;
@@ -127,7 +134,7 @@ public class gameManager : MonoBehaviour
     }
     //-------------------------------------------
 
-    //Pause menu current
+    //Pause menu current-------------------------
     public void PauseMenuCurrent()
     {
         pauseMenu.SetActive(true);
@@ -145,6 +152,7 @@ public class gameManager : MonoBehaviour
 
         activeMenu = pauseOptionsMenu;
     }
+    //-------------------------------------------
 
     public void SetLoad(bool load)
     {
@@ -308,15 +316,43 @@ public class gameManager : MonoBehaviour
     {
         StopCoroutine("ObjectiveFadeInFadeOut");
         objectiveText.SetText("Objective: " + txt);
-        StartCoroutine(ObjectiveFadeInFadeOut(3));
+        StartCoroutine(ObjectiveFadeInFadeOut(5));
     }
+
+    public void updateMainObjective(int id)
+    {
+        switch(id)
+        {
+            case 2:
+                AluminumRodText.enabled = false;
+                break;
+
+            case 3:
+                MetalPipesText.enabled = false;
+                break;
+
+            case 4:
+                AirIntakeText.enabled = false;
+                break;
+
+            case 5:
+                EngineText.enabled = false;
+                break;
+        }
+
+        if (!AluminumRodText.enabled && !MetalPipesText.enabled && !AirIntakeText.enabled && !EngineText.enabled)
+        {
+            updateObjective("We have all the parts we need. Let's go back to the car to fix it!");
+            pauseObjectiveText.text = "Get back to your car and fix it!";
+        }
+    }
+
     private List<IData> FindAllDataPersistenceObjects()
     {
         IEnumerable<IData> dataPresistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IData>();
 
         return new List<IData>(dataPresistenceObjects);
     }
-
 
     //Getters
     public bool isGamePaused()
@@ -332,7 +368,6 @@ public class gameManager : MonoBehaviour
             objectiveText.color = Color.Lerp(objectiveText.color, new Color(1, 1, 1, 0), Time.deltaTime * 5);
         }
     }
-
 
     //Enumerators--------------------------------
     IEnumerator ObjectiveFadeInFadeOut(int time) {
