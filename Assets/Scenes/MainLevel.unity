@@ -58887,7 +58887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: sDamage
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: MedsHold
@@ -58916,6 +58916,10 @@ PrefabInstance:
     - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: magazine_size
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621477942665172828, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
+      propertyPath: maxDamageMultiplier
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7226521623247516344, guid: 04df13069dafa024d83e8b4861782c71, type: 3}
       propertyPath: m_Name
