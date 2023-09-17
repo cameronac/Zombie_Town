@@ -6398,6 +6398,12 @@ MonoBehaviour:
   playerDamageFlash: {fileID: 3326948627546113038}
   save: {fileID: 11400000, guid: 650734a0aae7db24cbd75adf5a0748f0, type: 2}
   deathAreaImage: {fileID: 6171538171275171955}
+  mainOptionsMusicSlider: {fileID: 1842643796215493110}
+  mainOptionsSFXSlider: {fileID: 3578970500187363198}
+  mainOptionsUISlider: {fileID: 3322970329139954533}
+  pauseOptionsMusicSlider: {fileID: 1925938470430831633}
+  pauseOptionsSFXSlider: {fileID: 4659269255439323934}
+  pauseOptionsUISlider: {fileID: 4511534879163022212}
   pauseObjectiveText: {fileID: 3329619700416906581}
   EngineText: {fileID: 8892665181971408080}
   AirIntakeText: {fileID: 5126905569058844671}

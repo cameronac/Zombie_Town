@@ -45,6 +45,17 @@ public class gameManager : MonoBehaviour
     [SerializeField] private SaveSO save;
     [SerializeField] Image deathAreaImage;
 
+    [Header("Options")]
+    [SerializeField] Slider mainOptionsMusicSlider;
+    [SerializeField] Slider mainOptionsSFXSlider;
+    [SerializeField] Slider mainOptionsUISlider;
+
+    [SerializeField] Slider pauseOptionsMusicSlider;
+    [SerializeField] Slider pauseOptionsSFXSlider;
+    [SerializeField] Slider pauseOptionsUISlider;
+
+
+    [Header("Objective")]
     [SerializeField] TextMeshProUGUI pauseObjectiveText;
     [SerializeField] TextMeshProUGUI EngineText;
     [SerializeField] TextMeshProUGUI AirIntakeText;
@@ -106,6 +117,15 @@ public class gameManager : MonoBehaviour
                 stateUnpaused();
             }
         }
+
+        //Update Options Menus
+        mainOptionsMusicSlider.value = AudioManager.music_volume;
+        mainOptionsUISlider.value = AudioManager.ui_volume;
+        mainOptionsSFXSlider.value = AudioManager.sfx_volume;
+
+        pauseOptionsMusicSlider.value = AudioManager.music_volume;
+        pauseOptionsUISlider.value = AudioManager.ui_volume;
+        pauseOptionsSFXSlider.value = AudioManager.sfx_volume;
     }
 
     //Main Menu Methods--------------------------
