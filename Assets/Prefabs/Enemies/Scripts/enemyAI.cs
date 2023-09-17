@@ -50,12 +50,10 @@ public class enemyAI : MonoBehaviour, IDamage
     private bool wasAttacked = false;
     private float visualDistance = 20f;
 
-
     //patrolling enemy
     private float patrolDist = 10f;
     private Vector3 startPos;
     private bool isPatrolTimer = false;
-    private bool isDeathTimer = false;
     public float distanceToPlayer;
 
     //-----------------Main Methods-----------------//
