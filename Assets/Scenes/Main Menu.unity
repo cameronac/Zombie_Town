@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6324922604656683902, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6433061081821492277, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: isVsync
       value: 
