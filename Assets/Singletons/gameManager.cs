@@ -279,6 +279,11 @@ public class gameManager : MonoBehaviour
                         Destroy(killMe);
                     }
                 }
+
+                for(int i = 0; i < data.KeyItems.Count; i++)
+                {
+                    playerScript.KeyItems.Add(data.KeyItems[i]);
+                }
             }
         }
 
