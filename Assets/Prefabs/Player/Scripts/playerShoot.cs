@@ -57,8 +57,9 @@ public class playerShoot : MonoBehaviour
     float bulletSpread = 0.1f;
     playerState inst;
 
-    bool isShooting = false;
-    bool isReloading = false;
+    public bool isShooting = false;
+    public bool isReloading = false;
+    public bool isAiming = false;
     Vector3 hit_point = Vector3.zero;
 
     itemSway pistolInst;
@@ -120,10 +121,12 @@ public class playerShoot : MonoBehaviour
             switch (inst.currItem)
             {
                 case playerState.heldItems.pistol:
+                    isAiming = true;
                     PistolHold.SetBool("ADS", true);
                     pistolInst.intesity = 1;
                     break;
                 case playerState.heldItems.shotgun:
+                    isAiming = true;
                     ShotgunHold.SetBool("ADS", true);
                     bulletSpread = 0.05f;
                     shotgunInst.intesity = 1;
@@ -136,10 +139,12 @@ public class playerShoot : MonoBehaviour
             switch (inst.currItem)
             {
                 case playerState.heldItems.pistol:
+                    isAiming = false;
                     PistolHold.SetBool("ADS", false);
                     pistolInst.intesity = 2.5f;
                     break;
                 case playerState.heldItems.shotgun:
+                    isAiming = false;
                     ShotgunHold.SetBool("ADS", false);
                     bulletSpread = 0.1f;
                     shotgunInst.intesity = 2.5f;
@@ -316,9 +321,9 @@ public class playerShoot : MonoBehaviour
     IEnumerator knifeSwing()
     {
         //do some animation thing
+        isShooting = true;
         knifeAnim.SetTrigger("Attacking");
 
-        isShooting = true;
         AudioManager.instance.CreateSoundAtPosition(knife_air_audio, transform.position);
 
         yield return new WaitForSeconds(swingRate);
@@ -331,10 +336,10 @@ public class playerShoot : MonoBehaviour
         MedsHold.SetBool("Use", true);
 
         isShooting = true;
+        AudioManager.instance.CreateSoundAtPosition(med_audio, transform.position, .25f);
         yield return new WaitForSeconds(healRate);
         isShooting = false;
         MedsHold.SetBool("Use", false);
-        AudioManager.instance.CreateSoundAtPosition(med_audio, transform.position);
         inst.medCount--;
         inst.health = inst.health + 50 >= inst.healthMax ? inst.healthMax : inst.health + 50;
         gameManager.instance.SetHealth(inst.health/100);

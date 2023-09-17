@@ -94,31 +94,31 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 flash_light.SetActive(!flash_light.activeSelf);
             }
 
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f && !pShoot.isShooting && !pShoot.isAiming)
             {
                 ToggleItem(true);
             }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f && !pShoot.isShooting && !pShoot.isAiming)
             {
                 ToggleItem(false);
             }
 
-            if (Input.GetButtonDown("A1"))
+            if (Input.GetButtonDown("A1") && !pShoot.isShooting && !pShoot.isAiming)
             {
                 ToggleItem(true, 0);
             }
 
-            if (Input.GetButtonDown("A2"))
+            if (Input.GetButtonDown("A2") && !pShoot.isShooting && !pShoot.isAiming)
             {
                 ToggleItem(true, 1);
             }
 
-            if (Input.GetButtonDown("A3"))
+            if (Input.GetButtonDown("A3") && !pShoot.isShooting && !pShoot.isAiming)
             {
                 ToggleItem(true, 2);
             }
 
-            if (Input.GetButtonDown("A4"))
+            if (Input.GetButtonDown("A4") && !pShoot.isShooting && !pShoot.isAiming)
             {
                 ToggleItem(true, 3);
             }
