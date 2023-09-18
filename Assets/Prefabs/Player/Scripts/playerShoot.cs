@@ -332,8 +332,8 @@ public class playerShoot : MonoBehaviour
         knifeAnim.SetTrigger("Attacking");
 
         AudioManager.instance.CreateSoundAtPosition(knife_air_audio, transform.position);
-
         yield return new WaitForSeconds(swingRate);
+
         isShooting = false;
     }
 
