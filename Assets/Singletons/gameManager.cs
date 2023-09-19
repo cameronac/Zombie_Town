@@ -270,17 +270,33 @@ public class gameManager : MonoBehaviour
                 playerScript.sAmmo = data.sAmmo;
                 playerScript.sMagazine = data.sMag;
 
+                GameObject[] listObjects = GameObject.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
                 for (int i = 0; i < data.thingsToDestroy.Count; i++)
                 {
-                    GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
-                    if (killMe)
+                    foreach (GameObject killMe in listObjects)
                     {
-                        playerScript.destroyItems.Add(data.thingsToDestroy[i]);
-                        Destroy(killMe);
+
+                        if (killMe.name == data.thingsToDestroy[i])
+                        {
+                            //print("found");
+                            playerScript.destroyItems.Add(data.thingsToDestroy[i]);
+                            Destroy(killMe);
+                        }
+
                     }
+
+                    //GameObject killMe = GameObject.Find(data.thingsToDestroy[i]);
+
+                    //if (killMe.name == data.thingsToDestroy[i])
+                    //{
+                    //    playerScript.destroyItems.Add(data.thingsToDestroy[i]);
+                    //    Destroy(killMe);
+                    //}
+
                 }
 
-                for(int i = 0; i < data.KeyItems.Count; i++)
+                for (int i = 0; i < data.KeyItems.Count; i++)
                 {
                     playerScript.KeyItems.Add(data.KeyItems[i]);
                 }

@@ -41,7 +41,7 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     
     [SerializeField] public int medCount;
     public List<int> KeyItems = new List<int>();
-    public List<string> destroyItems = new List<string>();
+    [SerializeField] public List<string> destroyItems = new List<string>();
 
     public int numCarParts;
     
@@ -183,6 +183,10 @@ public class playerState : MonoBehaviour, IPickup, IDamage
                 if (gameManager.instance != null)
                 {
                     medCount++;
+                    if(currItem == heldItems.meds)
+                    {
+                        gameManager.instance.SetAmmo(0, medCount);
+                    }
                 }
 
                 break;
