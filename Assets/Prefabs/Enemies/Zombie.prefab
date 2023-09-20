@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 6068295906330375087}
   m_Layer: 0
   m_Name: HeadCollider
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1368,6 +1368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombie: {fileID: 6848762899526182464}
+  head_mesh: {fileID: 139784426351778455}
 --- !u!1 &4526587954242605753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,7 +2552,7 @@ GameObject:
   - component: {fileID: 6392327928313012853}
   m_Layer: 6
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2647,7 +2648,6 @@ MonoBehaviour:
   patrolSpeed: 3
   chaseSpeed: 5
   animChangeSpeed: 5
-  wasHeadShot: 0
   distanceToPlayer: 0
 --- !u!195 &6703013284012365705
 NavMeshAgent:

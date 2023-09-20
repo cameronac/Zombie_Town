@@ -40,7 +40,6 @@ public class enemyAI : MonoBehaviour, IDamage
     private bool isPlayerSeen = false;
     private bool playerInRange = false;
     private bool isDead = false;
-    public bool wasHeadShot = false;
 
     private float hitDistance = 3f;
     private float playerFaceSpeed = 3f;
@@ -262,27 +261,21 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         currentHP -= damage;
 
+        print(currentHP);
+
         if (currentHP > 0 && !isDead) {
             if (playerInRange)
             {
                 isPlayerSeen = true;
-            } else if (currentState != STATE.chase)
-            {
+            } else if (currentState != STATE.chase) {
                 enemyMob.SetDestination(gameManager.instance.player.transform.position);
                 wasAttacked = true;
             } 
           
         } else {
-            if (wasHeadShot)
-            {
-                head_mesh.SetActive(false);
-            }
-
             isDead = true;
             StartCoroutine(Death());
         }
-
-        wasHeadShot = false;
     }
     //---------------------------------
 

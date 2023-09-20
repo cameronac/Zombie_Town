@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Alerted
   - lock
+  - Head
   layers:
   - Default
   - TransparentFX

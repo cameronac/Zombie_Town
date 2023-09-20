@@ -207,20 +207,44 @@ public class playerShoot : MonoBehaviour
     public void KnifeAttack()
     {
         Collider[] isHit = Physics.OverlapSphere(inst.KnifeHold.transform.position, knifeDistance);
+        Collider n_collider = null;
+        bool hit = false;
 
         foreach (Collider c in isHit)
         {
-            IDamage iDamage = c.GetComponent<IDamage>();
+            if (c.tag == "Head")
+            {
+                n_collider = c;
+                hit = true;
+                break;
 
-            if (iDamage != null && c.tag != "Player")
+            } else if (c.tag == "Enemy") {
+                n_collider = c;
+                hit = true;
+                break;
+
+            } else if (c.tag != "Player") {    //Untagged
+                IDamage iDamage = c.gameObject.GetComponent<IDamage>();
+
+                if (iDamage != null) {
+                    iDamage.TakeDamage(kDamage);
+                }
+
+                hit = true;
+            }
+        }
+
+        //Take Damage
+        if (n_collider != null) {
+            IDamage iDamage = n_collider.gameObject.GetComponent<IDamage>();
+
+            if (iDamage != null && n_collider.tag != "Player")
             {
                 iDamage.TakeDamage(kDamage);
-            }
-
-            if (c.tag != "Player")
-            {
                 AudioManager.instance.CreateSoundAtPosition(knife_hit_audio, transform.position);
             }
+        } else if (hit) {
+            AudioManager.instance.CreateSoundAtPosition(knife_hit_audio, transform.position);
         }
     }
 
