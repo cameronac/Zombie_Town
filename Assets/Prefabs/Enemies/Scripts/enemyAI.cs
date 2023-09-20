@@ -70,7 +70,7 @@ public class enemyAI : MonoBehaviour, IDamage
         float agentVel = 0;
         if (enemyMob.velocity.magnitude > 0)
         {
-            agentVel = enemyMob.velocity.magnitude / chaseSpeed;
+            agentVel = enemyMob.velocity.magnitude / 2.25f;
         }
 
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
@@ -260,8 +260,6 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
         currentHP -= damage;
-
-        print(currentHP);
 
         if (currentHP > 0 && !isDead) {
             if (playerInRange)
