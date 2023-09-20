@@ -76,11 +76,14 @@ public class enemyAI : MonoBehaviour, IDamage
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
 
         //Triggers
-        if (currentState != STATE.chase) {
-            UpdateEars();
+        if (!isDead) {
+            if (currentState != STATE.chase) {
+                UpdateEars();
+            }
+
+            UpdateVision();
         }
 
-        UpdateVision();
         UpdateState();
 
         //State Actions
@@ -210,7 +213,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
             if (!isPlayerSeen)
             {
-                AudioManager.instance.CreateSoundAtPosition(growl_audio[Random.Range(0, growl_audio.Length)], transform.position, 1, "zombie");
+                AudioManager.instance.CreateSoundWithParent(growl_audio[Random.Range(0, growl_audio.Length)], transform.position, transform, 1, "zombie");
             }
 
             isPlayerSeen = true;
@@ -259,20 +262,22 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     public void TakeDamage(float damage) //enemy takes damage & apparates(for now)
     {
-        currentHP -= damage;
+        if (!isDead) {
+            currentHP -= damage;
 
-        if (currentHP > 0 && !isDead) {
-            if (playerInRange)
-            {
-                isPlayerSeen = true;
-            } else if (currentState != STATE.chase) {
-                enemyMob.SetDestination(gameManager.instance.player.transform.position);
-                wasAttacked = true;
-            } 
+            if (currentHP > 0) {
+                if (playerInRange)
+                {
+                    isPlayerSeen = true;
+                } else if (currentState != STATE.chase) {
+                    enemyMob.SetDestination(gameManager.instance.player.transform.position);
+                    wasAttacked = true;
+                } 
           
-        } else {
-            isDead = true;
-            StartCoroutine(Death());
+            } else {
+                isDead = true;
+                StartCoroutine(Death());
+            }
         }
     }
     //---------------------------------

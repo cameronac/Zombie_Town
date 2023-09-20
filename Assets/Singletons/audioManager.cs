@@ -100,6 +100,36 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void CreateSoundWithParent(AudioClip clip, Vector3 position, Transform parent, float new_volume = 1.0f, string sound_tag = "default")
+    {
+        if (clip != null)
+        {
+            GameObject prefab = Instantiate(audioPrefab, position, Quaternion.identity, parent);
+            AudioSource audioSource = prefab.GetComponent<AudioSource>();
+            audioSource.spatialBlend = 1f;
+
+            if (sound_tag == "music")
+            {
+                audioSource.volume = new_volume * music_volume;
+            }
+            else if (sound_tag == "ui")
+            {
+                audioSource.volume = new_volume * ui_volume;
+            }
+            else
+            {
+                audioSource.volume = new_volume * sfx_volume;
+            }
+
+            audioSource.clip = clip;
+            audioSource.Play();
+
+            lAudioSource.Add(audioSource);
+            volumeMaxAudioSource.Add(new_volume);
+            soundTags.Add(sound_tag);
+        }
+    }
+
     public void CreateOneDimensionalSound(AudioClip clip, float new_volume = 1.0f, string sound_tag = "default", bool loop = false)
     {
         if (clip != null)

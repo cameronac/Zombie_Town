@@ -90,7 +90,7 @@ public class playerShoot : MonoBehaviour
                             StartCoroutine(pistolShoot());
                         } else if (inst.pMagazine <= 0)
                         {
-                            AudioManager.instance.CreateSoundAtPosition(pistol_dry_fire_audio, transform.position);
+                            AudioManager.instance.CreateSoundWithParent(pistol_dry_fire_audio, transform.position, transform);
                         }
                         break;
                     case playerState.heldItems.shotgun:
@@ -99,7 +99,7 @@ public class playerShoot : MonoBehaviour
                             StartCoroutine(shotgunShoot());
                         } else if (inst.sMagazine <= 0)
                         {
-                            AudioManager.instance.CreateSoundAtPosition(shotgun_dry_fire_audio, transform.position);
+                            AudioManager.instance.CreateSoundWithParent(shotgun_dry_fire_audio, transform.position, transform);
                         }
                         break;
                     case playerState.heldItems.knife:
@@ -241,10 +241,10 @@ public class playerShoot : MonoBehaviour
             if (iDamage != null && n_collider.tag != "Player")
             {
                 iDamage.TakeDamage(kDamage);
-                AudioManager.instance.CreateSoundAtPosition(knife_hit_audio, transform.position);
+                AudioManager.instance.CreateSoundWithParent(knife_hit_audio, transform.position, transform);
             }
         } else if (hit) {
-            AudioManager.instance.CreateSoundAtPosition(knife_hit_audio, transform.position);
+            AudioManager.instance.CreateSoundWithParent(knife_hit_audio, transform.position, transform);
         }
     }
 
@@ -253,7 +253,7 @@ public class playerShoot : MonoBehaviour
     {
         particleSystem.Play();
         cCameraControl.ApplyRecoil(new Vector3(-recoil, 0, 0));
-        AudioManager.instance.CreateSoundAtPosition(pistol_audio, transform.position);
+        AudioManager.instance.CreateSoundWithParent(pistol_audio, transform.position, transform);
 
         isGunShot = true;
         StartCoroutine(eMuzzleFlash());
@@ -298,7 +298,7 @@ public class playerShoot : MonoBehaviour
         particleSystem.Play();
 
         cCameraControl.ApplyRecoil(new Vector3(-sRecoil, 0, 0));
-        AudioManager.instance.CreateSoundAtPosition(shotgun_audio, transform.position);
+        AudioManager.instance.CreateSoundWithParent(shotgun_audio, transform.position, transform);
 
         isGunShot = true;
         StartCoroutine(eMuzzleFlash());
@@ -367,7 +367,7 @@ public class playerShoot : MonoBehaviour
         MedsHold.SetBool("Use", true);
 
         isShooting = true;
-        AudioManager.instance.CreateSoundAtPosition(med_audio, transform.position, .25f);
+        AudioManager.instance.CreateSoundWithParent(med_audio, transform.position, transform, .25f);
         yield return new WaitForSeconds(healRate);
         isShooting = false;
         MedsHold.SetBool("Use", false);
