@@ -71,6 +71,7 @@ public class playerMovement : MonoBehaviour
 
         isJumping = Input.GetButton("Jump");    //Jump
         move_dir = Input.GetAxisRaw("Horizontal") * transform.right + Input.GetAxisRaw("Vertical") * transform.forward;
+        move_dir = move_dir.normalized;
     }
 
     private void Move()
