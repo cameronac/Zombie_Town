@@ -85,7 +85,7 @@ public class playerMovement : MonoBehaviour
         if (isJumping && controller.isGrounded) { 
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
 
-            AudioManager.instance.CreateSoundAtPosition(jump_audio[Random.Range(0, jump_audio.Length - 1)], transform.position);
+            AudioManager.instance.CreateSoundWithParent(jump_audio[Random.Range(0, jump_audio.Length - 1)], transform.position, transform);
         }
 
         //Sprinting

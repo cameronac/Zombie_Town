@@ -10,7 +10,6 @@ public class DestructableObject : MonoBehaviour, IDamage
 
     public void TakeDamage(float damage)
     {
-        
         hp -= damage;
 
         if (hp <= 0)
