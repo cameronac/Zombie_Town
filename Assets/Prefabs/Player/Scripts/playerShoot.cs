@@ -384,7 +384,7 @@ public class playerShoot : MonoBehaviour
 
     IEnumerator pistolReload()
     {
-        AudioManager.instance.CreateSoundAtPosition(pistol_reload_audio, transform.position);
+        AudioManager.instance.CreateSoundWithParent(pistol_reload_audio, transform.position, transform);
 
         isReloading = true;
         yield return new WaitForSeconds(pReloadTime);
@@ -408,7 +408,7 @@ public class playerShoot : MonoBehaviour
     IEnumerator shotgunReload()
     {
 
-        AudioManager.instance.CreateSoundAtPosition(shotgun_reload_audio, transform.position);
+        AudioManager.instance.CreateSoundWithParent(shotgun_reload_audio, transform.position, transform);
 
         isReloading = true;
         yield return new WaitForSeconds(sReloadTime);
