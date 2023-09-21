@@ -266,6 +266,7 @@ public class enemyAI : MonoBehaviour, IDamage
             currentHP -= damage;
 
             if (currentHP > 0) {
+                AudioManager.instance.CreateSoundAtPosition(damaged_audio[Random.Range(0, damaged_audio.Length)], transform.position, .75f, "zombie");
                 if (playerInRange)
                 {
                     isPlayerSeen = true;
