@@ -38,7 +38,8 @@ public class playerState : MonoBehaviour, IPickup, IDamage
     public static playerState instance;
 
     private Vector3 startPosition;
-    
+    private Vector3 lastRespawnPosition;
+
     [SerializeField] public int medCount;
     public List<int> KeyItems = new List<int>();
     [SerializeField] public List<string> destroyItems = new List<string>();
@@ -269,7 +270,9 @@ public class playerState : MonoBehaviour, IPickup, IDamage
             health = healthMax;
             gameManager.instance.SetHealth(1);
 
-        } else {
+        }
+        else
+        {
             transform.position = startPosition;
         }
 
