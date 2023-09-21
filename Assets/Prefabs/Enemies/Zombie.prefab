@@ -2624,6 +2624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damaged_audio:
   - {fileID: 8300000, guid: b771cd0787c16e64e8e8ba11c3c83734, type: 3}
+  - {fileID: 8300000, guid: 7bf8c43abf2186c4ea3251f440daa3de, type: 3}
   growl_audio:
   - {fileID: 8300000, guid: ceb2474913e8b5e40b17213af473d784, type: 3}
   - {fileID: 8300000, guid: ebb96c703224744479e6294bd49515d9, type: 3}
