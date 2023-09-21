@@ -70,7 +70,7 @@ public class enemyAI : MonoBehaviour, IDamage
         float agentVel = 0;
         if (enemyMob.velocity.magnitude > 0)
         {
-            agentVel = enemyMob.velocity.magnitude / 2.25f;
+            agentVel = enemyMob.velocity.magnitude / 3f;
         }
 
         anim.SetFloat("speed", Mathf.Lerp(anim.GetFloat("speed"), agentVel, Time.deltaTime * animChangeSpeed));
@@ -96,7 +96,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
             case STATE.chase:
                 enemyMob.speed = chaseSpeed;
-                enemyMob.stoppingDistance = 2.25f;
+                enemyMob.stoppingDistance = 2f;
                 ChasePlayer();
                 break;
 
@@ -173,7 +173,10 @@ public class enemyAI : MonoBehaviour, IDamage
                 break;
             }
         }
+    }
 
+    public void EndOfAttackAnimation()
+    {
         canAttack = true;
     }
     //-------------------------------------------
@@ -300,7 +303,6 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
     //---------------------------------
-
 
     //IEnumerators--------------------
     private IEnumerator Death()
