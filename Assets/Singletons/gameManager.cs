@@ -186,8 +186,16 @@ public class gameManager : MonoBehaviour
 
         if (inDeathArea)
         {
-            alpha = Mathf.MoveTowards(alpha, 1, Time.deltaTime * 0.25f);
-            deathAreaImage.color = new Color(0, 0, 0, alpha);  
+            float a_spd = 0.25f;
+
+            if (deathAreaImage.color.a > 0.5f)
+            {
+                a_spd = .125f;
+            }
+
+            alpha = Mathf.MoveTowards(alpha, 1, Time.deltaTime * a_spd);
+            deathAreaImage.color = new Color(0, 0, 0, alpha); 
+            
         } else {
             alpha = Mathf.MoveTowards(alpha, 0, Time.deltaTime * 0.25f);
             deathAreaImage.color = new Color(0, 0, 0, alpha);
