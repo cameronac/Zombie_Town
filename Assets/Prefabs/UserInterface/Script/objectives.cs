@@ -13,6 +13,7 @@ public class Objective : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             gameManager.instance.updateObjective(currentObjective);
+            playerState.instance.destroyItems.Add(gameObject.name);
             Destroy(gameObject);
         }
     }

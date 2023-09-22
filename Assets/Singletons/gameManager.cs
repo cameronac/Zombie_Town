@@ -307,6 +307,7 @@ public class gameManager : MonoBehaviour
                 for (int i = 0; i < data.KeyItems.Count; i++)
                 {
                     playerScript.KeyItems.Add(data.KeyItems[i]);
+                    updateMainObjective(data.KeyItems[i]);
                 }
             }
         }

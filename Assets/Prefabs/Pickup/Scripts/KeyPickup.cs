@@ -11,26 +11,27 @@ public class PickKeyPickup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (ID == 1)
+        if(other.tag == "Player")
         {
-            gameManager.instance.updateObjective(txt);
-        }
+            if (ID == 1)
+            {
+                gameManager.instance.updateObjective(txt);
+            }
 
-        if (isCarPart)
-        {
-            playerState.instance.numCarParts++;
-            gameManager.instance.updateMainObjective(ID);
-        }
-        else if (other.gameObject.TryGetComponent(out IPickup isPickup))
-        {
-            isPickup.PickupKeyItem(ID);
-        }
+            if (isCarPart)
+            {
+                playerState.instance.numCarParts++;
+                gameManager.instance.updateMainObjective(ID);
+                playerState.instance.PickupKeyItem(ID);
+            }
+        
 
-        if (playerState.instance.numCarParts < 4) {
-            gameManager.instance.updateObjective(txt);
-        }
+            //if (playerState.instance.numCarParts < 4) {
+            //    gameManager.instance.updateObjective(txt);
+            //}
 
-        playerState.instance.destroyItems.Add(gameObject.name);
-        Destroy(gameObject);
+            playerState.instance.destroyItems.Add(gameObject.name);
+            Destroy(gameObject);
+        }
     }
 }
