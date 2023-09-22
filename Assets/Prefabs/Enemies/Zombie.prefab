@@ -2645,7 +2645,7 @@ MonoBehaviour:
   anim: {fileID: 5833092434406318353}
   triggerSphere: {fileID: 7096552409578803856}
   currentHP: 15
-  damage: 15
+  damage: 7
   patrolSpeed: 3
   chaseSpeed: 5
   animChangeSpeed: 5

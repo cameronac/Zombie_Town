@@ -6034,31 +6034,34 @@ MonoBehaviour:
   shotgun_dry_fire_audio: {fileID: 8300000, guid: 9fa8a994653b0e34688200ba9acbba7e, type: 3}
   knife_hit_audio: {fileID: 8300000, guid: 3b43a40572671f941b7fbefa01279e28, type: 3}
   knife_air_audio: {fileID: 8300000, guid: 81de4d1ab0111394889b341d00313540, type: 3}
+  med_audio: {fileID: 0}
   magazine_size: 12
-  ammo: 24
   recoil: 1.5
   pDamage: 4
   pReloadTime: 1.5
   pFirerate: 0.1
   PistolHold: {fileID: 9183198825076807019}
-  magazine: 0
   sMagazine_size: 4
-  sAmmo: 16
   sRecoil: 10
   sDamage: 4
   sReloadTime: 1.5
   sFirerate: 1.5
   ShotgunHold: {fileID: 6166041201115747188}
-  sMagazine: 0
+  maxDamageMultiplier: 2
+  minDistance: 5
   knifeDistance: 1.2
   swingRate: 0.5
-  kDamage: 4
+  kDamage: 3
   knifeAnim: {fileID: 6319982839841258298}
+  MedsHold: {fileID: 0}
   cCameraControl: {fileID: 5927856832972024196}
   particleSystem: {fileID: 4884260328061603862}
   muzzleFlash: {fileID: 3385947368330630756}
   healRate: 2
   sgSpread: {fileID: 5003107657127817158, guid: 8499c54ba794c4e419fed3e677dc5195, type: 3}
+  isShooting: 0
+  isReloading: 0
+  isAiming: 0
 --- !u!114 &9082521953619214354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6086,11 +6089,17 @@ MonoBehaviour:
   ShotgunHold: {fileID: 6086315120702484579}
   KnifeHold: {fileID: 7804573679757423253}
   MedsHold: {fileID: 6393870086037597223}
+  pAmmo: 24
+  pMagazine: 0
+  sAmmo: 16
+  sMagazine: 0
   flash_light: {fileID: 6841461993096794865}
   has_pistol: 0
   has_shotgun: 0
+  pShoot: {fileID: 0}
   medCount: 0
   KeyItems: 
+  destroyItems: []
   numCarParts: 0
   currItem: 2
 --- !u!1 &7258869622631564244

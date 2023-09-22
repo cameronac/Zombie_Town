@@ -28,7 +28,6 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] SphereCollider triggerSphere;
     
-
     [Header("----- Enemy Stats -----")]
     [Range(1, 20)][SerializeField] public float currentHP = 15;
     [Range(1, 20)][SerializeField] public float damage;
