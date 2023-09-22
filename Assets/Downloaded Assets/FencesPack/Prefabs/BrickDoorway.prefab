@@ -106,46 +106,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0973462, y: 4.225232, z: 1.885891}
   m_Center: {x: -0.11797961, y: -1.3661387, z: -0.9727936}
---- !u!1 &1050086971562967519
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3419048081112326352}
-  - component: {fileID: 8350618931570291766}
-  m_Layer: 0
-  m_Name: Offmesh Link (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3419048081112326352
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050086971562967519}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -0.497, y: -2.2042615, z: 0.06}
-  m_LocalScale: {x: 0.9999999, y: 1, z: 0.9999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4409914653125861461}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8350618931570291766
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050086971562967519}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5081425286336923527
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +207,7 @@ GameObject:
   - component: {fileID: 1566042042222418120}
   - component: {fileID: 8983582813676444759}
   - component: {fileID: 4618380726725717518}
-  - component: {fileID: 9036627814871061365}
+  - component: {fileID: 6523983086107506883}
   m_Layer: 0
   m_Name: BrickDoorway
   m_TagString: Untagged
@@ -269,8 +229,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1303102048774904234}
-  - {fileID: 6726332941392583799}
-  - {fileID: 3419048081112326352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4524210291610528560
@@ -451,8 +409,8 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.33375603, y: 3.2259583, z: 0.92942524}
   m_Center: {x: 0.0102925, y: 0.3311215, z: 2.17}
---- !u!191 &9036627814871061365
-OffMeshLink:
+--- !u!208 &6523983086107506883
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -460,51 +418,10 @@ OffMeshLink:
   m_GameObject: {fileID: 6042725910561529719}
   m_Enabled: 1
   serializedVersion: 3
-  m_AreaIndex: 0
-  m_AgentTypeID: 0
-  m_Start: {fileID: 6726332941392583799}
-  m_End: {fileID: 3419048081112326352}
-  m_CostOverride: -1
-  m_BiDirectional: 1
-  m_Activated: 1
-  m_AutoUpdatePositions: 0
---- !u!1 &6113787437530359540
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6726332941392583799}
-  - component: {fileID: 4374334857593117316}
-  m_Layer: 0
-  m_Name: Offmesh Link
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6726332941392583799
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6113787437530359540}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 1.018, y: -2.2042615, z: 0.12}
-  m_LocalScale: {x: 0.9999999, y: 1, z: 0.9999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4409914653125861461}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4374334857593117316
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6113787437530359540}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shape: 1
+  m_Extents: {x: 0.3, y: 2.5, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -3.5}
+  m_TimeToStationary: 0.5

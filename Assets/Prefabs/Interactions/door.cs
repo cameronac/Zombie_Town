@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class door : MonoBehaviour, IInteract
 {
@@ -54,6 +56,7 @@ public class door : MonoBehaviour, IInteract
 
         startRotation = transform.rotation;
         boxCollider = GetComponent<BoxCollider>();
+        
     }
 
     // Update is called once per frame
