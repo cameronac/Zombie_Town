@@ -33754,10 +33754,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.641449, y: 1.5176244, z: 1.280182}
+  m_Center: {x: -0.10386658, y: 0.2588122, z: -0.1400909}
 --- !u!23 &924555232
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -78631,6 +78631,22 @@ PrefabInstance:
     - target: {fileID: 2534945115895825902, guid: 5530895374a08254e8f65215c1e1b580, type: 3}
       propertyPath: m_Center.z
       value: 5.506027
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903656358964762252, guid: 5530895374a08254e8f65215c1e1b580, type: 3}
+      propertyPath: m_Size.x
+      value: 11.026947
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903656358964762252, guid: 5530895374a08254e8f65215c1e1b580, type: 3}
+      propertyPath: m_Size.z
+      value: 9.163223
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903656358964762252, guid: 5530895374a08254e8f65215c1e1b580, type: 3}
+      propertyPath: m_Center.x
+      value: -0.03138733
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903656358964762252, guid: 5530895374a08254e8f65215c1e1b580, type: 3}
+      propertyPath: m_Center.z
+      value: -0.058387756
       objectReference: {fileID: 0}
     - target: {fileID: 7420881708910024793, guid: 5530895374a08254e8f65215c1e1b580, type: 3}
       propertyPath: m_Name
