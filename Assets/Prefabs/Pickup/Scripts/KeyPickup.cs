@@ -22,8 +22,9 @@ public class PickKeyPickup : MonoBehaviour
             {
                 playerState.instance.numCarParts++;
                 gameManager.instance.updateMainObjective(ID);
-                playerState.instance.PickupKeyItem(ID);
             }
+
+            playerState.instance.PickupKeyItem(ID);
         
 
             //if (playerState.instance.numCarParts < 4) {
