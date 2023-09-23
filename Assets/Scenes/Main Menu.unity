@@ -202,7 +202,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630297666857058674, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933470179085386407, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933470179085386407, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2933470179085386407, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3719749098786792448, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_IsOn
@@ -263,6 +275,18 @@ PrefabInstance:
     - target: {fileID: 4683358561034294860, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514746748964744931, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514746748964744931, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514746748964744931, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5569589314001412299, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_AnchorMax.x
@@ -382,12 +406,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9166381880971091607, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8733689770669692672, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
     - {fileID: 5271923536389532612, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2256477946329282489, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
+    - {fileID: 4946469194514352013, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 417357640174185867, guid: a1843b069c771ea43a3245d647b8fd77, type: 3}
       insertIndex: -1
