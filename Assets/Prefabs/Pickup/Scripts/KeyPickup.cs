@@ -13,10 +13,8 @@ public class PickKeyPickup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            if (ID == 1)
-            {
-                gameManager.instance.updateObjective(txt);
-            }
+
+            gameManager.instance.updateObjective(txt);
 
             if (isCarPart)
             {
