@@ -20,6 +20,11 @@ public class door : MonoBehaviour, IInteract
 
     public void buttonPressed()
     {
+        if(playerState.instance.has_key(keyID))
+        {
+            isLocked = false;
+        }
+
         if (!isLocked) 
         {
             isOpen = !isOpen;
@@ -33,10 +38,6 @@ public class door : MonoBehaviour, IInteract
             {
                 rotateOther = false;
             }
-        }
-        else if(playerState.instance.has_key(keyID))
-        {
-            isLocked = false;
         }
         else
         {
